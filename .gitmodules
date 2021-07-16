@@ -1,6 +1,6 @@
 [submodule "client"]
-  path = client
-  url = 'https://github.com/EffectDoplera/project-mue/client.git'
+	path = client
+	url = https://github.com/EffectDoplera/project-mue/client.git
 [submodule "server"]
-  path = server
-  url = 'https://github.com/EffectDoplera/project-mue/server.git'
+	path = server
+	url = https://github.com/EffectDoplera/project-mue/server.git
