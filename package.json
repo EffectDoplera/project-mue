@@ -5,9 +5,15 @@
   },
   "version": "1.0.0",
   "devDependencies": {
+    "husky": "^7.0.1",
     "lerna": "^4.0.0"
   },
   "workspaces": [
-   "packages/*"
-  ]
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents"
+    }
+  }
 }
