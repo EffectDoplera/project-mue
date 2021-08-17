@@ -1,7 +1,13 @@
 {
-  "name": "project-mue",
+  "private": true,
+  "scripts": {
+    "bootstarp": "lerna bootstrap"
+  },
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "Mikhail Danshin <effectdopler0@gmail.com>",
-  "license": "MIT"
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+   "packages/*"
+  ]
 }
