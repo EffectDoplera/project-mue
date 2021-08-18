@@ -1,13 +1,22 @@
 {
   "private": true,
   "scripts": {
-    "bootstarp": "lerna bootstrap"
+    "bootstarp": "lerna bootstrap",
+    "start": "lerna run start --parallel",
+    "build": "lerna run build --parallel"
   },
   "version": "1.0.0",
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "husky": "^7.0.1",
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.2"
   },
   "workspaces": [
-   "packages/*"
-  ]
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents"
+    }
+  }
 }
