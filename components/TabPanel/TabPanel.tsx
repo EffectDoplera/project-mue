@@ -7,5 +7,5 @@ interface ITabPanelProps {
 }
 
 export const TabPanel: FC<ITabPanelProps> = ({ children, value, index }) => {
-  return <Box role='tabpanel'>{value === index && <Box>{children}</Box>}</Box>
+  return <Box role="tabpanel">{value === index && <Box>{children}</Box>}</Box>
 }

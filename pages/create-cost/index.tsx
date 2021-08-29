@@ -1,12 +1,5 @@
 import MainLayout from '@/layouts/MainLayout'
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from '@material-ui/core'
+import { Box, Button, Grid, Paper, TextField, Typography } from '@material-ui/core'
 import React from 'react'
 import { useFormik } from 'formik'
 
@@ -31,40 +24,24 @@ const CreateCost = () => {
   })
   return (
     <MainLayout>
-      <Grid
-        container
-        alignItems='center'
-        justifyContent='center'
-        direction='column'
-      >
+      <Grid container alignItems="center" justifyContent="center" direction="column">
         <Paper>
           <Box p={4}>
-            <Grid
-              container
-              alignItems='center'
-              justifyContent='center'
-              direction='column'
-            >
+            <Grid container alignItems="center" justifyContent="center" direction="column">
               <Grid item>
-                <Typography variant='h3'>New Consumption</Typography>
+                <Typography variant="h3">New Consumption</Typography>
               </Grid>
 
               <Grid item>
-                <form
-                  noValidate
-                  autoComplete='off'
-                  onSubmit={formik.handleSubmit}
-                >
+                <form noValidate autoComplete="off" onSubmit={formik.handleSubmit}>
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <TextField
-                        label='Name'
-                        id='name'
-                        name='name'
+                        label="Name"
+                        id="name"
+                        name="name"
                         value={formik.values.name}
-                        error={
-                          formik.touched.name && Boolean(formik.errors.name)
-                        }
+                        error={formik.touched.name && Boolean(formik.errors.name)}
                         onChange={formik.handleChange}
                         fullWidth
                       />
@@ -72,29 +49,25 @@ const CreateCost = () => {
 
                     <Grid item xs={12}>
                       <TextField
-                        label='Amount'
-                        id='value'
-                        name='value'
+                        label="Amount"
+                        id="value"
+                        name="value"
                         value={formik.values.value}
                         onChange={formik.handleChange}
-                        error={
-                          formik.touched.value && Boolean(formik.errors.value)
-                        }
+                        error={formik.touched.value && Boolean(formik.errors.value)}
                         fullWidth
                       />
                     </Grid>
 
                     <Grid item xs={12}>
                       <TextField
-                        label='When'
-                        id='date'
-                        name='date'
+                        label="When"
+                        id="date"
+                        name="date"
                         value={formik.values.date}
                         onChange={formik.handleChange}
-                        error={
-                          formik.touched.date && Boolean(formik.errors.date)
-                        }
-                        type='date'
+                        error={formik.touched.date && Boolean(formik.errors.date)}
+                        type="date"
                         InputLabelProps={{ shrink: true }}
                         fullWidth
                       />
@@ -102,26 +75,18 @@ const CreateCost = () => {
 
                     <Grid item xs={12}>
                       <TextField
-                        label='Category'
-                        id='category'
-                        name='category'
+                        label="Category"
+                        id="category"
+                        name="category"
                         value={formik.values.category}
                         onChange={formik.handleChange}
-                        error={
-                          formik.touched.category &&
-                          Boolean(formik.errors.category)
-                        }
+                        error={formik.touched.category && Boolean(formik.errors.category)}
                         fullWidth
                       />
                     </Grid>
 
                     <Grid item xs={12}>
-                      <Button
-                        type='submit'
-                        fullWidth
-                        color='primary'
-                        variant='contained'
-                      >
+                      <Button type="submit" fullWidth color="primary" variant="contained">
                         Send
                       </Button>
                     </Grid>

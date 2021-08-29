@@ -7,7 +7,7 @@ export const TransactionActionItem = () => {
   return (
     <Box p={1}>
       <Grid container>
-        <Grid item xs={1} container justifyContent='center' alignItems='center'>
+        <Grid item xs={1} container justifyContent="center" alignItems="center">
           <ControlPointIcon />
         </Grid>
         <Grid item xs={11}>

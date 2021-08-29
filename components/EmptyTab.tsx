@@ -9,7 +9,7 @@ interface EmptyTabProps {
 
 const EmptyTab: FC<EmptyTabProps> = ({ month, transactionType }) => {
   return (
-    <Grid container alignItems='center' justifyContent='center'>
+    <Grid container alignItems="center" justifyContent="center">
       <Box p={3}>
         В {month} у вас не было {transactionType}
       </Box>

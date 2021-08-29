@@ -45,38 +45,27 @@ export default function Navbar() {
   return (
     <div>
       <CssBaseline />
-      <AppBar position='fixed'>
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            onClick={handleDrawerOpen}
-            edge='start'
-          >
+          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start">
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' noWrap>
+          <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant='persistent' anchor='left' open={open}>
+      <Drawer variant="persistent" anchor="left" open={open}>
         <div>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
         <Divider />
         <List>
           {menuItems.map(({ text, href }, index) => (
             <ListItem button key={href} onClick={() => router.push(href)}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
