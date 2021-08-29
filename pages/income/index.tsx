@@ -33,10 +33,10 @@ const Incomes = () => {
 
   return (
     <MainLayout>
-      <Grid container justifyContent='center'>
+      <Grid container justifyContent="center">
         <Card style={{ width: 900 }}>
           <Box p={3}>
-            <Grid container justifyContent='space-between'>
+            <Grid container justifyContent="space-between">
               <h1>Доход</h1>
               <Button onClick={() => router.push('/')}>Главная</Button>
             </Grid>

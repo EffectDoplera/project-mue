@@ -1,10 +1,4 @@
-import {
-  MoneyCard,
-  TabBar,
-  TabPanel,
-  TransactionActions,
-  Transactions,
-} from '@/components/index'
+import { MoneyCard, TabBar, TabPanel, TransactionActions, Transactions } from '@/components/index'
 import MainLayout from '@/layouts/MainLayout'
 import { Card, CardActions, CardContent, Grid, Paper } from '@material-ui/core'
 import React, { FC, useState } from 'react'
@@ -14,8 +8,7 @@ import { Char } from '@/components/Char/Char'
 const BasicTabs: FC = () => {
   const [tabValue, setTabValue] = useState(0)
 
-  const handleChange = (event: object, newValue: number) =>
-    setTabValue(newValue)
+  const handleChange = (event: object, newValue: number) => setTabValue(newValue)
 
   const transactionNames = Object.values(TransactionsType)
 
@@ -32,11 +25,7 @@ const BasicTabs: FC = () => {
         </Grid>
         <Grid item xs={12}>
           <Paper>
-            <TabBar
-              currentTab={tabValue}
-              changeTab={handleChange}
-              tabNames={transactionNames}
-            />
+            <TabBar currentTab={tabValue} changeTab={handleChange} tabNames={transactionNames} />
           </Paper>
           <Paper>
             {transactionNames.map((item, index) => (

@@ -9,13 +9,7 @@ interface ITabBarProps {
 
 const TabBar: FC<ITabBarProps> = ({ tabNames, currentTab, changeTab }) => {
   return (
-    <Tabs
-      value={currentTab}
-      onChange={changeTab}
-      centered
-      variant='fullWidth'
-      indicatorColor='primary'
-    >
+    <Tabs value={currentTab} onChange={changeTab} centered variant="fullWidth" indicatorColor="primary">
       {tabNames.map((tabName, index) => (
         <Tab label={tabName} key={index} />
       ))}

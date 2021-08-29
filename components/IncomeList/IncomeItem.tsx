@@ -1,13 +1,4 @@
-import {
-  Card,
-  Grid,
-  Chip,
-  TableRow,
-  TableCell,
-  Button,
-  ButtonGroup,
-  IconButton,
-} from '@material-ui/core'
+import { Card, Grid, Chip, TableRow, TableCell, Button, ButtonGroup, IconButton } from '@material-ui/core'
 import { Delete, Edit } from '@material-ui/icons'
 import React, { FC } from 'react'
 import { IIncome } from '../../types/income'
@@ -20,7 +11,7 @@ const IncomeItem: FC<IncomeItemProps> = ({ income }) => {
   return (
     <TableRow>
       <TableCell>
-        <Chip label={income.category} color='primary' />
+        <Chip label={income.category} color="primary" />
       </TableCell>
       <TableCell>{income.value}</TableCell>
       <TableCell>{income.currency}</TableCell>
@@ -28,10 +19,10 @@ const IncomeItem: FC<IncomeItemProps> = ({ income }) => {
       <TableCell>
         <ButtonGroup disableElevation>
           <IconButton>
-            <Edit color='action' />
+            <Edit color="action" />
           </IconButton>
           <IconButton>
-            <Delete color='error' />
+            <Delete color="error" />
           </IconButton>
         </ButtonGroup>
       </TableCell>

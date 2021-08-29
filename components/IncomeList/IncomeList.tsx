@@ -1,12 +1,4 @@
-import {
-  Paper,
-  TableContainer,
-  TableHead,
-  Table,
-  TableRow,
-  TableCell,
-  TableBody,
-} from '@material-ui/core'
+import { Paper, TableContainer, TableHead, Table, TableRow, TableCell, TableBody } from '@material-ui/core'
 import React, { FC } from 'react'
 import { IIncome } from '../../types/income'
 import IncomeItem from './IncomeItem'
