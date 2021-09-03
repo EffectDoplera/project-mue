@@ -5,8 +5,11 @@ import { TransactionActionItem } from './TransactionActionItem'
 
 export const TransactionActions = () => {
   const router = useRouter()
+
+  const navigateToCreateCost = () => router.push('/create-cost')
+
   return (
-    <Button fullWidth onClick={() => router.push('/create-cost')}>
+    <Button fullWidth onClick={navigateToCreateCost}>
       <TransactionActionItem />
     </Button>
   )

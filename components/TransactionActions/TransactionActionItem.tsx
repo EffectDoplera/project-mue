@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@material-ui/core'
+import { Box, Grid, Typography } from '@material-ui/core'
 import ControlPointIcon from '@material-ui/icons/ControlPoint'
 
 import React from 'react'

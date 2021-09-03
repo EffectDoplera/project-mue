@@ -1,14 +1,20 @@
-import { MoneyCard, TabBar, TabPanel, TransactionActions, Transactions } from '@/components/index'
-import MainLayout from '@/layouts/MainLayout'
+import { MoneyCard, TabBar, TabPanel, TransactionActions, Transactions } from 'components'
+import { MainLayout } from 'layouts'
 import { Card, CardActions, CardContent, Grid, Paper } from '@material-ui/core'
 import React, { FC, useState } from 'react'
-import { TransactionsType } from '@/enums/index'
-import { Char } from '@/components/Char/Char'
+import { TransactionsType } from 'enums'
+import { Char } from 'components/Char/Char'
+import { useRouter } from 'next/dist/client/router'
 
 const BasicTabs: FC = () => {
-  const [tabValue, setTabValue] = useState(0)
+  const [tabValue] = useState(0)
+  const router = useRouter()
 
-  const handleChange = (event: object, newValue: number) => setTabValue(newValue)
+  const transactionKeys = Object.keys(TransactionsType)
+
+  const handleChange = (event: object, newValue: number) => {
+    router.push(`/financial-analysis/${transactionKeys[newValue].toLocaleLowerCase()}`)
+  }
 
   const transactionNames = Object.values(TransactionsType)
 

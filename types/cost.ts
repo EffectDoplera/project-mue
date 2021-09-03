@@ -1,4 +1,4 @@
-import { CostCategory } from '@/enums/category'
+import { CostCategory } from 'enums'
 
 export interface ICost {
   _id: number

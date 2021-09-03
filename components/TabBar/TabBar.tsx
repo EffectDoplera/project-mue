@@ -1,5 +1,5 @@
 import { Tab, Tabs } from '@material-ui/core'
-import React, { useState, FC } from 'react'
+import React, { FC } from 'react'
 
 interface ITabBarProps {
   tabNames: string[]
