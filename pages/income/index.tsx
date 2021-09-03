@@ -1,30 +1,31 @@
 import { Box, Button, Card, Grid } from '@material-ui/core'
+import IncomeList from 'components/IncomeList/IncomeList'
+import { IncomeCategory } from 'enums'
+import { MainLayout } from 'layouts'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import IncomeList from '../../components/IncomeList/IncomeList'
-import MainLayout from '../../layouts/MainLayout'
-import { IIncome } from '../../types/income'
+import { IIncome } from 'types'
 
 const Incomes = () => {
   const router = useRouter()
   const incomes: IIncome[] = [
     {
       _id: '1',
-      category: 'Зарплата',
+      category: IncomeCategory.SALARY,
       value: 10000,
       currency: 'RUB',
       comment: '',
     },
     {
       _id: '2',
-      category: 'Зарплата',
+      category: IncomeCategory.SALARY,
       value: 20000,
       currency: 'RUB',
       comment: '',
     },
     {
       _id: '3',
-      category: 'Зарплата',
+      category: IncomeCategory.SALARY,
       value: 30000,
       currency: 'RUB',
       comment: '',

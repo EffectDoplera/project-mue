@@ -1,4 +1,4 @@
-import { CostCategory } from '@/enums/category'
+import { CostCategory } from 'enums'
 import { Box } from '@material-ui/core'
 import React from 'react'
 import { TransactionItem } from './TransactionItem'
@@ -24,8 +24,8 @@ const transactions = [
 export const Transactions = () => {
   return (
     <Box>
-      {transactions.map((item, index) => (
-        <TransactionItem key={index} {...item} />
+      {transactions.map((transaction) => (
+        <TransactionItem key={transaction.category} {...transaction} />
       ))}
     </Box>
   )

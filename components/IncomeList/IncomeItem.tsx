@@ -1,7 +1,7 @@
-import { Card, Grid, Chip, TableRow, TableCell, Button, ButtonGroup, IconButton } from '@material-ui/core'
+import { ButtonGroup, Chip, IconButton, TableCell, TableRow } from '@material-ui/core'
 import { Delete, Edit } from '@material-ui/icons'
 import React, { FC } from 'react'
-import { IIncome } from '../../types/income'
+import { IIncome } from 'types'
 
 interface IncomeItemProps {
   income: IIncome

@@ -1,7 +1,7 @@
-import { CostCategory, IncomeCategory } from '@/enums/category'
-import { Avatar, Box, Grid, Typography } from '@material-ui/core'
+import { CostCategory } from 'enums/category'
+import { Grid, Typography } from '@material-ui/core'
 import React, { FC } from 'react'
-import { getTransactionIcon } from './Transaction.helpers'
+import TransactionIcon from './TransactionIcon'
 
 interface ITransactionItemProps {
   category: CostCategory
@@ -10,31 +10,22 @@ interface ITransactionItemProps {
 }
 
 export const TransactionItem: FC<ITransactionItemProps> = ({ category, value, currency }) => {
-  const TransactionIcon = getTransactionIcon(category)
   return (
-    <Box p={1}>
-      <Grid container>
-        <Grid item xs={1} container justifyContent="center" alignItems="center">
-          <Avatar>
-            <TransactionIcon />
-          </Avatar>
-        </Grid>
+    <Grid container spacing={2} justifyContent="center" alignItems="center">
+      <Grid item xs={1}>
+        <TransactionIcon category={category} />
+      </Grid>
 
-        <Grid item xs={11}>
-          <Box>
-            <Grid container direction="column">
-              <Grid item>
-                <Typography>{category}</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h6">
-                  {value} {currency}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
+      <Grid item container direction="column" xs={11}>
+        <Grid item>
+          <Typography>{category}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="h6">
+            {value} {currency}
+          </Typography>
         </Grid>
       </Grid>
-    </Box>
+    </Grid>
   )
 }
