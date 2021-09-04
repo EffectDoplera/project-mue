@@ -1,5 +1,5 @@
 import { CostCategory } from 'enums'
-import { Avatar } from '@material-ui/core'
+import { Avatar } from '@mui/material'
 import { FC, memo } from 'react'
 import { getTransactionIcon } from './Transaction.helpers'
 

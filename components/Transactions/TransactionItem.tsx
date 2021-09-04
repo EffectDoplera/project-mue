@@ -1,5 +1,5 @@
 import { CostCategory } from 'enums/category'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@mui/material'
 import React, { FC } from 'react'
 import TransactionIcon from './TransactionIcon'
 

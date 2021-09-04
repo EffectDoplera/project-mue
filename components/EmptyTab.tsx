@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Months, TransactionsType } from '../enums'
-import { Box, Grid } from '@material-ui/core'
+import { Box, Grid } from '@mui/material'
 
 interface EmptyTabProps {
   month: Months

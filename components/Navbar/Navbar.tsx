@@ -4,7 +4,7 @@ import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 import {
   Drawer,
   CssBaseline,
@@ -17,8 +17,8 @@ import {
   ListItemText,
   ListItem,
   List,
-} from '@material-ui/core'
-import { useTheme } from '@material-ui/core/styles'
+} from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { useRouter } from 'next/dist/client/router'
 import { ROUTES } from 'router'
 
@@ -42,17 +42,17 @@ export default function Navbar() {
       <CssBaseline />
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start">
+          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start" size="large">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Project Mue
+            {process.env.NEXT_PUBLIC_APP_NAME}
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>
         <div>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} size="large">
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>

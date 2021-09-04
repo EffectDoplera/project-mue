@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { TransactionActionItem } from './TransactionActionItem'

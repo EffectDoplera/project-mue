@@ -1,4 +1,4 @@
-import { Box, Button, Card, Grid } from '@material-ui/core'
+import { Box, Button, Card, Grid } from '@mui/material'
 import IncomeList from 'components/IncomeList/IncomeList'
 import { IncomeCategory } from 'enums'
 import { MainLayout } from 'layouts'

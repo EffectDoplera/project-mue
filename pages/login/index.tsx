@@ -1,11 +1,10 @@
-import SuccessButton from '../../components/ui/Buttons/SuccessButton'
+import { Box, Grid, Paper, TextField, Typography, Button } from '@mui/material'
+import { useAuth } from 'context/auth/authContext'
 import { useFormik } from 'formik'
-import { AuthLayout } from '../../layouts'
-import { Box, Grid, Paper, TextField, Typography } from '@material-ui/core'
+import { AuthLayout } from 'layouts'
 import { NextPage } from 'next'
-import { useRouter } from 'next/dist/client/router'
-import { useAuth } from '../../context/auth/authContext'
-import { PageRoutes } from '../../router'
+import { useRouter } from 'next/router'
+import { PageRoutes } from 'router'
 
 interface IFormFields {
   email: string
@@ -18,7 +17,7 @@ const Login: NextPage = () => {
 
   const signIn = async ({ email, password }: IFormFields) => {
     await login(email, password)
-    await router.push(PageRoutes.MAIN)
+    router.push(PageRoutes.MAIN)
   }
 
   const formik = useFormik<IFormFields>({
@@ -64,9 +63,9 @@ const Login: NextPage = () => {
                     />
                   </Grid>
                   <Grid item xs>
-                    <SuccessButton fullWidth variant="contained" type="submit">
+                    <Button fullWidth variant="contained" type="submit" color="success">
                       Sign in
-                    </SuccessButton>
+                    </Button>
                   </Grid>
                 </Grid>
               </Grid>

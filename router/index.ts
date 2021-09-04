@@ -1,5 +1,5 @@
-import SvgIcon from '@material-ui/core/SvgIcon/SvgIcon'
-import { Dashboard, Person, CreditCard } from '@material-ui/icons'
+import SvgIcon from '@mui/material/SvgIcon'
+import { Dashboard, Person, CreditCard } from '@mui/icons-material'
 
 export enum PageRoutes {
   MAIN = '/',

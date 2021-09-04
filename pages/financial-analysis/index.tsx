@@ -1,6 +1,6 @@
 import { MoneyCard, TabBar, TabPanel, TransactionActions, Transactions } from 'components'
 import { MainLayout } from 'layouts'
-import { Card, CardActions, CardContent, Grid, Paper } from '@material-ui/core'
+import { Card, CardActions, CardContent, Grid, Paper } from '@mui/material'
 import React, { FC, useState } from 'react'
 import { TransactionsType } from 'enums'
 import { Char } from 'components/Char/Char'
