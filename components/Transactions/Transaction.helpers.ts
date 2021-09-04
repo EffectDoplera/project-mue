@@ -1,7 +1,7 @@
 import { CostCategory } from 'enums'
-import { SvgIconTypeMap } from '@material-ui/core'
-import { OverridableComponent } from '@material-ui/core/OverridableComponent'
-import { BeachAccess, Commute, CreditCard, FitnessCenter, Home, Lens, Loyalty, Power } from '@material-ui/icons'
+import { SvgIconTypeMap } from '@mui/material'
+import { OverridableComponent } from '@mui/material/OverridableComponent'
+import { BeachAccess, Commute, CreditCard, FitnessCenter, Home, Lens, Loyalty, Power } from '@mui/icons-material'
 
 type IconElement = OverridableComponent<SvgIconTypeMap<{}, 'svg'>>
 

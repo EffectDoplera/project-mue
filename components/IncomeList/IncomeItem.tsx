@@ -1,5 +1,5 @@
-import { ButtonGroup, Chip, IconButton, TableCell, TableRow } from '@material-ui/core'
-import { Delete, Edit } from '@material-ui/icons'
+import { ButtonGroup, Chip, IconButton, TableCell, TableRow } from '@mui/material'
+import { Delete, Edit } from '@mui/icons-material'
 import React, { FC } from 'react'
 import { IIncome } from 'types'
 
@@ -18,10 +18,10 @@ const IncomeItem: FC<IncomeItemProps> = ({ income }) => {
       <TableCell>{income.comment}</TableCell>
       <TableCell>
         <ButtonGroup disableElevation>
-          <IconButton>
+          <IconButton size="large">
             <Edit color="action" />
           </IconButton>
-          <IconButton>
+          <IconButton size="large">
             <Delete color="error" />
           </IconButton>
         </ButtonGroup>

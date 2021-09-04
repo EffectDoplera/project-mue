@@ -1,5 +1,5 @@
 import { MainLayout } from 'layouts'
-import { Box, Button, Grid, Paper, TextField, Typography } from '@material-ui/core'
+import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 
 interface IFormFields {

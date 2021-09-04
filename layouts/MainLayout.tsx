@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Navbar from '../components/Navbar/Navbar'
-import { Container } from '@material-ui/core'
+import { Container } from '@mui/material'
 
 const MainLayout: FC = ({ children }) => {
   return (
