@@ -1,4 +1,4 @@
-import { CostCategory } from 'src/enums'
+import { CostCategory } from 'enums'
 import { SvgIconTypeMap } from '@mui/material'
 import { OverridableComponent } from '@mui/material/OverridableComponent'
 import { BeachAccess, Commute, CreditCard, FitnessCenter, Home, Lens, Loyalty, Power } from '@mui/icons-material'
