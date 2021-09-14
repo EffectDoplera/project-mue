@@ -1,3 +1,16 @@
-import { BaseDomain } from '../common/baseDomain'
+import { BaseDomain } from 'core/domain/common/baseDomain'
 
-export abstract class LoginUser extends BaseDomain {}
+export interface LoginUser extends BaseDomain {
+  /**
+   * user id
+   */
+ id: string
+
+  /**
+   * user email
+   */
+  email: string
+  password: string
+  fullName: string
+  avatar: string
+}
