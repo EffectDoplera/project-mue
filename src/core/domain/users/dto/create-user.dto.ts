@@ -1,6 +1,6 @@
-import { BaseDomain } from 'src/core/domain/common/baseDomain'
+import { BaseDomain } from 'core/domain/common/baseDomain'
 
-export interface CreateUserDto extends BaseDomain {
+export interface CrateUserDto extends BaseDomain {
   readonly id: string
   readonly email: string | null
   readonly fullName: string | null

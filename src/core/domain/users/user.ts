@@ -1,14 +1,8 @@
-import { ExpenseCategory, IncomeCategory } from 'src/core/domain/category'
-import { BaseDomain } from 'src/core/domain/common'
+import { BaseDomain } from 'core/domain/common/baseDomain'
 
-export interface UserModel extends BaseDomain {
+export interface User extends BaseDomain {
   readonly id: string
   readonly email: string | null
   readonly fullName: string | null
   readonly avatar: string | null
-}
-
-export interface User extends UserModel {
-  readonly incomeCategories: IncomeCategory[]
-  readonly expenseCategories: ExpenseCategory[]
 }
