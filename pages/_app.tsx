@@ -4,7 +4,7 @@ import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles
 import CssBaseline from '@mui/material/CssBaseline'
 import theme from '../theme'
 import { AppProps } from 'next/app'
-import { AuthProvider } from '../context/auth/authContext'
+import { AuthProvider } from 'src/contexts/auth/authContext'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

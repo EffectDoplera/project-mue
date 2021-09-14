@@ -1,36 +1,39 @@
+import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
+import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
+import { User } from 'core/domain/users/user'
 import { LoginUser } from '../../domain/authorize/loginUser'
-
-// TODO: implementation
-type UserRegisterModel = any
-type RegisterUserResult = any
-type UserClaim = any
 
 /**
  * Authentication service interface
  */
 export interface IAuthorizeService {
   /**
-   * Login the user
+   * SignIn user
    */
-  login: (email: string, password: string) => Promise<LoginUser | null>
+  readonly signIn: (signInDto: SigninDto) => Promise<User | null>
 
+  /**
+   * SignUp user
+   */
+  readonly signUp: (signUpDto: SignupDto) => Promise<User | null>
+
+  /**
+   *  Logs out the user
+   */
+  readonly logout: () => Promise<void>
+
+  /**
+   * Get auth user uid
+   */
+  readonly getUid: () => Promise<string>
+  
   /**
    * Whether user is loged in or not
    */
-  isLoggedin: () => boolean
-
-  /**
-   * Logs out the user
-   */
-  logout: () => void
-
-  /**
-   * Register new user
-   */
-  registerUser: (user: UserRegisterModel) => Promise<RegisterUserResult>
+  // isLoggedin: () => boolean
 
   /**
    * On user authorization changed event
    */
-  onAuthStateChanged: (callBack: (user: UserClaim) => void) => any
+  // onAuthStateChanged: (callBack: (user: UserClaim) => void) => any
 }
