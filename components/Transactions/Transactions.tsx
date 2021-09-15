@@ -1,32 +1,18 @@
 import { CostCategory } from 'enums'
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, Stack } from '@mui/material'
+import React, { FC } from 'react'
 import { TransactionItem } from './TransactionItem'
 
-const transactions = [
-  {
-    category: CostCategory.CASH,
-    value: 3000,
-    currency: 'рублей',
-  },
-  {
-    category: CostCategory.VOCATION,
-    value: 5000,
-    currency: 'рублей',
-  },
-  {
-    category: CostCategory.UTILITIES,
-    value: 500,
-    currency: 'рублей',
-  },
-]
+interface TransactionsProps {
+  transactions: any[]
+}
 
-export const Transactions = () => {
+export const Transactions: FC<TransactionsProps> = ({ transactions }) => {
   return (
-    <Box>
+    <Stack spacing={1}>
       {transactions.map((transaction) => (
         <TransactionItem key={transaction.category} {...transaction} />
       ))}
-    </Box>
+    </Stack>
   )
 }

@@ -5,6 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline'
 import theme from '../theme'
 import { AppProps } from 'next/app'
 import { AuthProvider } from 'src/contexts/auth/authContext'
+import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -22,14 +24,16 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <title>Project Mue</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <AuthProvider>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </StyledEngineProvider>
-      </AuthProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <AuthProvider>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </AuthProvider>
+      </LocalizationProvider>
     </>
   )
 }

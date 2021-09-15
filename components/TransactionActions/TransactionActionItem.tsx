@@ -1,19 +1,16 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
+import { FC } from 'react'
 
-import React from 'react'
+interface TransactionActionItemProps {
+  label: string
+}
 
-export const TransactionActionItem = () => {
+export const TransactionActionItem: FC<TransactionActionItemProps> = ({ label }) => {
   return (
-    <Box p={1}>
-      <Grid container>
-        <Grid item xs={1} container justifyContent="center" alignItems="center">
-          <ControlPointIcon />
-        </Grid>
-        <Grid item xs={11}>
-          <Typography>Внести расход</Typography>
-        </Grid>
-      </Grid>
-    </Box>
+    <Stack direction="row" spacing={1}>
+      <ControlPointIcon />
+      <Typography>{label}</Typography>
+    </Stack>
   )
 }
