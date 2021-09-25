@@ -34,8 +34,8 @@ export const AuthorizeService: IAuthorizeService = class {
       const createdUser: User = {
         id: user.uid,
         email: user.email,
-        avatar: '',
-        fullName: '',
+        avatar: user.photoURL,
+        fullName: user.displayName,
       }
 
       await UsersService.create(createdUser)
@@ -56,7 +56,7 @@ export const AuthorizeService: IAuthorizeService = class {
 
   public static async getUid(): Promise<string> {
     try {
-      return firebaseAuth?.currentUser?.getIdToken() ?? ''
+      return firebaseAuth?.currentUser?.uid ?? ''
     } catch (e) {
       throw e
     }

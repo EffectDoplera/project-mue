@@ -1,3 +1,8 @@
+export enum CategoryType {
+  INCOME = 'INCOME',
+  EXPENSES = 'EXPENSES',
+}
+
 export enum CostCategory {
   HOUSE_RENT = 'Аренда жилья',
   UTILITIES = 'Коммунальные услуги',

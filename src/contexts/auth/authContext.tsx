@@ -64,12 +64,12 @@ export const AuthProvider: FC = ({ children }) => {
 
   const signIn = async (userData: SigninDto): Promise<void> => {
     let authUser: UserModel | null
-    
+
     if (!localStorage.getItem('user')) {
       authUser = await AuthorizeService.signIn(userData)
       localStorage.setItem('user', JSON.stringify(authUser))
     }
-    
+
     authUser = JSON.parse(localStorage.getItem('user') ?? '')
 
     dispatch({

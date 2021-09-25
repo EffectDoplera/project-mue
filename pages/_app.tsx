@@ -5,6 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline'
 import theme from '../theme'
 import { AppProps } from 'next/app'
 import { AuthProvider } from 'src/contexts/auth/authContext'
+import { Provider } from 'react-redux'
+import { store } from 'src/store/store'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -23,12 +25,14 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <AuthProvider>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </StyledEngineProvider>
+        <Provider store={store}>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </Provider>
       </AuthProvider>
     </>
   )
