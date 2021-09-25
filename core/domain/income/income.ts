@@ -1,6 +1,7 @@
-import { BaseDomain } from 'core/domain/common/baseDomain'
+import { BaseDomain } from "core/domain/common/baseDomain";
 
-export interface CreateIncomeDto extends BaseDomain {
+export interface Income extends BaseDomain {
+  readonly id: string
   readonly name: string
   readonly value: string
   readonly currency: string

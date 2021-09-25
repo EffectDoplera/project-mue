@@ -1,7 +1,6 @@
 import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
 import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
 import { User } from 'core/domain/users/user'
-import { LoginUser } from 'core/domain/authorize/loginUser'
 
 /**
  * Authentication service interface
