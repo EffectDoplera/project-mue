@@ -1,26 +1,30 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import { Autocomplete, Button, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { CreateIncomeDto } from 'src/core/domain/income'
+import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material'
+import { CreateIncomeDto } from 'core/domain/income'
+import { format } from 'date-fns'
+import { IncomeCategory } from 'enums'
 import { useFormik } from 'formik'
-import { useRouter } from 'next/dist/client/router'
-import { FC, memo } from 'react'
-import { PageRoutes } from 'src/router'
+import { memo, FC } from 'react'
 import { INITIAL_VALUES } from 'src/forms/CreateIncomeForm/CreateIncomeFormConfig'
-import { useAppDispatch, useAppSelector } from 'src/hooks'
-import { currencies } from 'src/mocks'
-import { createIncomeByUserId, selectIncomeOptions } from 'src/modules/Income/incomeSlice'
+import { useAppDispatch } from 'src/hooks'
+import { createIncome } from 'src/modules/Income/incomeSlice'
 
-const CreateIncomeForm: FC = () => {
+interface CreateIncomeFormProps {
+  categories: {
+    value: IncomeCategory
+    label: IncomeCategory
+  }[]
+  currencies: {
+    value: string
+    label: string
+  }[]
+}
+
+const CreateIncomeForm: FC<CreateIncomeFormProps> = ({ categories, currencies }) => {
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
-  const incomeCategories = useAppSelector(selectIncomeOptions)
-
-  const createIncomeHandler = async (values: CreateIncomeDto) => {
-    dispatch(createIncomeByUserId(values))
-    await router.push(PageRoutes.FINANCIAL_ANALYSIS)
-  }
+  const createIncomeHandler = (values: CreateIncomeDto) => dispatch(createIncome(values))
 
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
@@ -77,22 +81,22 @@ const CreateIncomeForm: FC = () => {
         />
       </LocalizationProvider>
 
-      <Autocomplete
-        disablePortal
+      <TextField
+        select
+        label="Category"
         id="category"
-        options={incomeCategories}
+        name="category"
+        value={formik.values.category}
+        onChange={formik.handleChange}
+        error={formik.touched.category && Boolean(formik.errors.category)}
         fullWidth
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Category"
-            name="category"
-            onSelect={formik.handleChange}
-            value={formik.values.category}
-            error={formik.touched.category && Boolean(formik.errors.category)}
-          />
-        )}
-      />
+      >
+        {categories.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
 
       <Button type="submit" fullWidth color="primary" variant="contained">
         Send

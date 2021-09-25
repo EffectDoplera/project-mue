@@ -4,7 +4,7 @@ export interface LoginUser extends BaseDomain {
   /**
    * user id
    */
- id: string
+  id: string
 
   /**
    * user email

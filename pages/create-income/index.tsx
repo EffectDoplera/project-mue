@@ -1,17 +1,51 @@
-import { Paper, Stack } from '@mui/material'
-import { MainLayout } from 'src/layouts'
-import { NextPage } from 'next'
-import { FC } from 'react'
+import { Grid, Paper } from '@mui/material'
+import { IncomeCategory } from 'enums'
+import { MainLayout } from 'layouts'
+import { CreateIncomeCategoryForm } from 'src/forms/CreateIncomeCategoryForm'
 import { CreateIncomeForm } from 'src/forms/CreateIncomeForm'
 
-const CreateIncome: FC<NextPage> = () => {
+const currencies = [
+  {
+    value: 'USD',
+    label: '$',
+  },
+  {
+    value: 'EUR',
+    label: '€',
+  },
+  {
+    value: 'RUB',
+    label: 'RUB',
+  },
+]
+
+const categories = [
+  {
+    value: IncomeCategory.SALARY,
+    label: IncomeCategory.SALARY,
+  },
+  {
+    value: IncomeCategory.ADVANCE,
+    label: IncomeCategory.ADVANCE,
+  },
+  {
+    value: IncomeCategory.OTHER,
+    label: IncomeCategory.OTHER,
+  },
+]
+
+const CreateIncome = () => {
   return (
     <MainLayout>
-      <Stack alignItems="center" justifyContent="center" direction="column" gap={2}>
+      <Grid container alignItems="center" justifyContent="center" direction="column" gap={2}>
         <Paper>
-          <CreateIncomeForm />
+          <CreateIncomeForm categories={categories} currencies={currencies} />
         </Paper>
-      </Stack>
+
+        <Paper>
+          <CreateIncomeCategoryForm />
+        </Paper>
+      </Grid>
     </MainLayout>
   )
 }

@@ -1,4 +1,4 @@
-import { BaseDomain } from 'core/domain/common/baseDomain'
+import { BaseDomain } from 'core/domain/common'
 
 export interface User extends BaseDomain {
   readonly id: string

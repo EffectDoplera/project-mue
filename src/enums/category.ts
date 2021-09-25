@@ -1,6 +1,6 @@
 export enum CategoryType {
   INCOME = 'INCOME',
-  EXPENSE = 'EXPENSE',
+  EXPENSES = 'EXPENSES',
 }
 
 export enum CostCategory {

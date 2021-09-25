@@ -1,5 +1,5 @@
-import { getDocs, collection, addDoc, CollectionReference } from 'firebase/firestore'
-import { CrateUserDto } from 'core/domain/users/dto/create-user.dto'
+import { getDocs, collection, setDoc, doc, CollectionReference, DocumentReference } from 'firebase/firestore'
+import { CreateUserDto } from 'core/domain/users/dto/create-user.dto'
 import { User } from 'core/domain/users/user'
 import { IUsersService } from 'core/services/users/UsersService'
 import { firebaseDB } from 'firebaseInstance/firebaseClient'
@@ -7,9 +7,9 @@ import { firebaseDB } from 'firebaseInstance/firebaseClient'
 export const UsersService: IUsersService = class {
   private static usersCollection = collection(firebaseDB, 'users') as CollectionReference<User>
 
-  public static async create(user: CrateUserDto): Promise<User> {
+  public static async create(user: CreateUserDto): Promise<User> {
     try {
-      await addDoc<User>(this.usersCollection, user)
+      await setDoc<User>(doc(this.usersCollection, user.id) as DocumentReference<User>, user)
 
       return user
     } catch (e) {

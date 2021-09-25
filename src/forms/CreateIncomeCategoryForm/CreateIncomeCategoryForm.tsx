@@ -1,8 +1,8 @@
 import { Button, Stack, TextField, Typography } from '@mui/material'
-import { IncomeCategoryService } from 'src/data/services'
+import { IncomeCategoryService } from 'data/services'
 import { useFormik } from 'formik'
 import { memo, FC } from 'react'
-import { FORM_TITLE, INITIAL_VALUES } from 'src/forms/CreateIncomeCategoryForm/CreateIncomeCategoryFormConfig'
+import { INITIAL_VALUES } from 'src/forms/CreateIncomeCategoryForm/CreateIncomeCategoryFormConfig'
 
 interface CreateIncomeCategoryFormProps {}
 
@@ -16,7 +16,7 @@ const CreateIncomeCategoryForm: FC<CreateIncomeCategoryFormProps> = ({}) => {
 
   return (
     <Stack p={2} spacing={2} component="form" onSubmit={formik.handleSubmit} width={600} alignItems="center">
-      <Typography variant="h3">{FORM_TITLE}</Typography>
+      <Typography variant="h3">New Income Category</Typography>
 
       <TextField
         label="Name"

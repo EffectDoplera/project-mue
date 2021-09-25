@@ -1,6 +1,6 @@
-import { BaseDomain } from "core/domain/common/baseDomain";
+import { BaseDomain } from 'core/domain/common/baseDomain'
 
-export interface SignupDto extends BaseDomain{
+export interface SignupDto extends BaseDomain {
   readonly email: string
   readonly password: string
 }
