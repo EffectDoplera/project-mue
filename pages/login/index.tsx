@@ -1,9 +1,7 @@
 import { Button, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { AuthLayout } from 'layouts'
+import { AuthLayout } from 'src/layouts'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { PageRoutes } from 'router'
 import { useAuth } from 'src/hooks'
 
 interface IFormFields {
@@ -12,20 +10,14 @@ interface IFormFields {
 }
 
 const Login: NextPage = () => {
-  const router = useRouter()
-  const { signIn } = useAuth()
-
-  const signInHandler = async (userData: IFormFields) => {
-    await signIn(userData)
-    router.push(PageRoutes.MAIN)
-  }
+  const { signIn, signUp } = useAuth()
 
   const formik = useFormik<IFormFields>({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: signInHandler,
+    onSubmit: signIn,
   })
 
   return (

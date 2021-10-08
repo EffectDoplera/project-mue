@@ -1,0 +1,5 @@
+export type { IAuthorizeService } from 'src/core/services/authorize/AuthorizeService'
+export type { ICategoryServiceBuilder } from 'src/core/services/category/CategoriesServiceBuilder'
+export type { ICategoryService as ICategoriesService } from 'src/core/services/category/CategoryService'
+export type { IIncomeService } from 'src/core/services/income/IncomeService'
+export type { IUsersService } from 'src/core/services/users/UsersService'

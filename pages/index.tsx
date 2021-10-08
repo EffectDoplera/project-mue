@@ -1,9 +1,9 @@
-import { MainLayout } from 'layouts'
+import { MainLayout } from 'src/layouts'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useAuth } from 'src/hooks'
-import { PageRoutes } from '../router'
+import { PageRoutes } from '../src/router'
 
 const Home: NextPage = () => {
   const { user, isAuthenticated } = useAuth()
