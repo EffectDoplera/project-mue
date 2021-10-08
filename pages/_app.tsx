@@ -4,7 +4,7 @@ import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { FC } from 'react'
 import { wrapper } from 'src/store/store'
-import theme from '../theme'
+import theme from 'src/theme'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

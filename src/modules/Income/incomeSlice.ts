@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
-import { Income } from 'core/domain/income'
-import { CreateIncomeDto } from 'core/domain/income/dto/create-income.dto'
-import { IncomeService } from 'data/services/income/IncomeService'
-import { IncomeCategory } from 'enums'
+import { Income } from 'src/core/domain/income'
+import { CreateIncomeDto } from 'src/core/domain/income/dto/create-income.dto'
+import { IncomeService } from 'src/data/services/income/IncomeService'
+import { IncomeCategory } from 'src/enums'
 import { incomeCategories } from 'src/mocks'
 import { RootState } from 'src/store/store'
 

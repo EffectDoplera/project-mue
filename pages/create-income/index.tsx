@@ -1,5 +1,5 @@
 import { Paper, Stack } from '@mui/material'
-import { MainLayout } from 'layouts'
+import { MainLayout } from 'src/layouts'
 import { NextPage } from 'next'
 import { FC } from 'react'
 import { CreateIncomeForm } from 'src/forms/CreateIncomeForm'

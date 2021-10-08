@@ -1,5 +1,5 @@
 import { Button, Stack, TextField, Typography } from '@mui/material'
-import { IncomeCategoryService } from 'data/services'
+import { IncomeCategoryService } from 'src/data/services'
 import { useFormik } from 'formik'
 import { memo, FC } from 'react'
 import { FORM_TITLE, INITIAL_VALUES } from 'src/forms/CreateIncomeCategoryForm/CreateIncomeCategoryFormConfig'

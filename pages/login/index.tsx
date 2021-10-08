@@ -1,6 +1,6 @@
 import { Button, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { AuthLayout } from 'layouts'
+import { AuthLayout } from 'src/layouts'
 import { NextPage } from 'next'
 import { useAuth } from 'src/hooks'
 
