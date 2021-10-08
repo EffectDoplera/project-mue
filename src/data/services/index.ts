@@ -1,0 +1,5 @@
+export { AuthorizeService } from 'src/data/services/authorize/AuthorizeService'
+export { ExpensesCategoryService } from 'src/data/services/category/ExpensesCategoryService'
+export { IncomeCategoryService } from 'src/data/services/category/IncomeCategoryService'
+export { IncomeService } from 'src/data/services/income/IncomeService'
+export { UsersService } from 'src/data/services/users/UsersService'

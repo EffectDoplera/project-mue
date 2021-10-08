@@ -1,10 +1,10 @@
-import { FC } from 'react'
-import Head from 'next/head'
-import { ThemeProvider } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import theme from '../theme'
+import CssBaseline from '@mui/material/CssBaseline'
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
-import { AuthProvider } from '../context/auth/authContext'
+import Head from 'next/head'
+import { FC } from 'react'
+import { wrapper } from 'src/store/store'
+import theme from 'src/theme'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   /*
@@ -17,14 +17,14 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <title>Project Mue</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <AuthProvider>
+      <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
-      </AuthProvider>
+      </StyledEngineProvider>
     </>
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

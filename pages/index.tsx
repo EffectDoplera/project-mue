@@ -1,35 +1,27 @@
-import { MainLayout } from 'layouts'
+import { MainLayout } from 'src/layouts'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useAuth } from '../context/auth/authContext'
-import { PageRoutes } from '../router'
+import { useAuth } from 'src/hooks'
+import { PageRoutes } from '../src/router'
 
 const Home: NextPage = () => {
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!user) {
+    if (!isAuthenticated) {
       router.push(PageRoutes.LOGIN)
     }
-  }, [router, user])
+  }, [router, isAuthenticated])
 
   return (
     <MainLayout>
       <div>Главная страница</div>
-      <div>{user?.uid}</div>
+      <div>{user?.id}</div>
       <div>{user?.email}</div>
-      <div>{user?.providerId}</div>
     </MainLayout>
   )
 }
 
 export default Home
-
-// export async function getServerSideProps(context) {
-//   try {
-//     const cookies = nookies.get(context)
-//     const {uid, email} = cookies.token
-//   }
-// }

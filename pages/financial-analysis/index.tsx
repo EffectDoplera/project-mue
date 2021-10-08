@@ -1,22 +1,31 @@
-import { MoneyCard, TabBar, TabPanel, TransactionActions, Transactions } from 'components'
-import { MainLayout } from 'layouts'
-import { Card, CardActions, CardContent, Grid, Paper } from '@material-ui/core'
-import React, { FC, useState } from 'react'
-import { TransactionsType } from 'enums'
-import { Char } from 'components/Char/Char'
-import { useRouter } from 'next/dist/client/router'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import { Box, Grid, Paper, Stack, Tab } from '@mui/material'
+import { Expense, Income, MoneyCard, TransactionActions } from 'src/components'
+import { Char } from 'src/components/Char/Char'
+import { TransactionsType } from 'src/enums'
+import { MainLayout } from 'src/layouts'
+import { NextPage } from 'next'
+import React, { useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from 'src/hooks'
+import { getIncomeByUserId, selectIncomes } from 'src/modules/Income/incomeSlice'
 
-const BasicTabs: FC = () => {
-  const [tabValue] = useState(0)
-  const router = useRouter()
+const FinancialAnalysis: NextPage = () => {
+  const dispatch = useAppDispatch()
+  const { incomes } = useAppSelector(selectIncomes)
 
-  const transactionKeys = Object.keys(TransactionsType)
+  useEffect(() => {
+    if (!incomes.length) {
+      dispatch(getIncomeByUserId())
+    }
+  }, [dispatch, incomes])
 
-  const handleChange = (event: object, newValue: number) => {
-    router.push(`/financial-analysis/${transactionKeys[newValue].toLocaleLowerCase()}`)
-  }
+  const [tabValue, setTabValue] = useState(TransactionsType.INCOME)
 
-  const transactionNames = Object.values(TransactionsType)
+  // const handleChange = (event: object, newValue: number) => {
+  //   router.push(`/financial-analysis/${transactionKeys[newValue].toLocaleLowerCase()}`)
+  // }
+
+  const handleChange = (event: React.SyntheticEvent, newValue: TransactionsType) => setTabValue(newValue)
 
   return (
     <MainLayout>
@@ -30,27 +39,38 @@ const BasicTabs: FC = () => {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper>
-            <TabBar currentTab={tabValue} changeTab={handleChange} tabNames={transactionNames} />
-          </Paper>
-          <Paper>
-            {transactionNames.map((item, index) => (
-              <TabPanel key={index} value={tabValue} index={index}>
-                <Card>
-                  <CardContent>
-                    <Transactions />
-                  </CardContent>
-                  <CardActions>
-                    <TransactionActions />
-                  </CardActions>
-                </Card>
-              </TabPanel>
-            ))}
-          </Paper>
+          <Box sx={{ width: '100%', typography: 'body1' }}>
+            <TabContext value={tabValue}>
+              <Stack spacing={2}>
+                <Paper>
+                  <TabList onChange={handleChange} aria-label="lab API tabs example" centered variant="fullWidth">
+                    <Tab label={TransactionsType.INCOME} value={TransactionsType.INCOME} />
+                    <Tab label={TransactionsType.COST} value={TransactionsType.COST} />
+                  </TabList>
+                </Paper>
+                <Paper>
+                  <TabPanel value={TransactionsType.INCOME}>
+                    <Income />
+                  </TabPanel>
+                  <TabPanel value={TransactionsType.COST}>
+                    <Expense />
+                  </TabPanel>
+                </Paper>
+                <Paper>
+                  <TabPanel value={TransactionsType.INCOME}>
+                    <TransactionActions type={TransactionsType.INCOME} />
+                  </TabPanel>
+                  <TabPanel value={TransactionsType.COST}>
+                    <TransactionActions type={TransactionsType.COST} />
+                  </TabPanel>
+                </Paper>
+              </Stack>
+            </TabContext>
+          </Box>
         </Grid>
       </Grid>
     </MainLayout>
   )
 }
 
-export default BasicTabs
+export default FinancialAnalysis

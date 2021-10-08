@@ -1,10 +1,10 @@
-import { Box, Button, Card, Grid } from '@material-ui/core'
-import IncomeList from 'components/IncomeList/IncomeList'
-import { IncomeCategory } from 'enums'
-import { MainLayout } from 'layouts'
+import { Box, Button, Card, Grid } from '@mui/material'
+import IncomeList from 'src/components/IncomeList/IncomeList'
+import { IncomeCategory } from 'src/enums'
+import { MainLayout } from 'src/layouts'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { IIncome } from 'types'
+import { IIncome } from 'src/types'
 
 const Incomes = () => {
   const router = useRouter()
