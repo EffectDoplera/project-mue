@@ -1,7 +1,7 @@
-import { CostCategory } from 'enums'
+import { CostCategory } from 'src/enums'
 import { Avatar } from '@mui/material'
 import { FC, memo } from 'react'
-import { getTransactionIcon } from './Transaction.helpers'
+import { getTransactionIcon } from 'src/components/Transactions/Transaction.helpers'
 
 interface TransactionIconProps {
   category: CostCategory

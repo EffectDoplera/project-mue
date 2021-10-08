@@ -1,5 +1,0 @@
-export type { IAuthorizeService } from './authorize/AuthorizeService'
-export type { ICategoryServiceBuilder } from './category/CategoriesServiceBuilder'
-export type { ICategoryService as ICategoriesService } from './category/CategoryService'
-export type { IIncomeService } from './income/IncomeService'
-export type { IUsersService } from './users/UsersService'
