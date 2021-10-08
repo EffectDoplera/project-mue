@@ -1,15 +1,10 @@
 import CssBaseline from '@mui/material/CssBaseline'
-import { StyledEngineProvider, Theme, ThemeProvider } from '@mui/material/styles'
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { FC } from 'react'
 import { wrapper } from 'src/store/store'
 import theme from 'src/theme'
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   /*
