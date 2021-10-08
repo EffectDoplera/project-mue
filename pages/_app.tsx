@@ -1,12 +1,10 @@
-import { FC } from 'react'
-import Head from 'next/head'
-import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import theme from '../theme'
+import { StyledEngineProvider, Theme, ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
-import { AuthProvider } from 'src/contexts/auth/authContext'
-import { Provider } from 'react-redux'
-import { store } from 'src/store/store'
+import Head from 'next/head'
+import { FC } from 'react'
+import { wrapper } from 'src/store/store'
+import theme from '../theme'
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -24,18 +22,14 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <title>Project Mue</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <AuthProvider>
-        <Provider store={store}>
-          <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </Provider>
-      </AuthProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </StyledEngineProvider>
     </>
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

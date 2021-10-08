@@ -1,21 +1,11 @@
 import { Transactions } from 'components/Transactions/Transactions'
-import { IncomeCategory } from 'enums'
+import { useAppSelector } from 'src/hooks'
+import { selectIncomes } from 'src/modules/Income/incomeSlice'
 
 const Income = () => {
-  const income = [
-    {
-      category: IncomeCategory.SALARY,
-      value: 30000,
-      currency: 'рублей',
-    },
-    {
-      category: IncomeCategory.SPORT_COMPENSATION,
-      value: 1000,
-      currency: 'рублей',
-    },
-  ]
+  const { incomes } = useAppSelector(selectIncomes)
 
-  return <Transactions transactions={income} />
+  return <Transactions transactions={incomes} />
 }
 
 export default Income

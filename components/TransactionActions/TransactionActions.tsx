@@ -1,23 +1,18 @@
 import { Button } from '@mui/material'
 import { TransactionsType } from 'enums'
 import { useRouter } from 'next/dist/client/router'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { TransactionActionItem } from './TransactionActionItem'
+import Link from 'next/link'
 
 interface TransactionActionsProps {
-  label: string
+  type: TransactionsType
 }
 
-export const TransactionActions: FC<TransactionActionsProps> = ({ label }) => {
-  const router = useRouter()
-
-  const navigateToCreateCost = () => router.push('/create-cost')
-
-  const navigateToCreateIncome = () => router.push('/create-income')
-
-  return (
-    <Button fullWidth onClick={label === TransactionsType.COST ? navigateToCreateCost : navigateToCreateIncome}>
-      <TransactionActionItem label={label} />
+export const TransactionActions: FC<TransactionActionsProps> = ({ type }) => (
+  <Link href={type === TransactionsType.COST ? '/create-cost' : '/create-income'} passHref>
+    <Button fullWidth>
+      <TransactionActionItem type={type} />
     </Button>
-  )
-}
+  </Link>
+)

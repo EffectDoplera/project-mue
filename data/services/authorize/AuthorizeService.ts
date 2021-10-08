@@ -1,27 +1,27 @@
 import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
 import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
-import { UsersService } from 'data/services/users/UsersService'
-import { User } from 'core/domain/users/user'
+import { User, UserModel } from 'core/domain/users'
 import { IAuthorizeService } from 'core/services/authorize/AuthorizeService'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth'
+import { UsersService } from 'data/services/users/UsersService'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { firebaseAuth } from 'firebaseInstance/firebaseClient'
 
 /**
  * Authorize service
  */
 export const AuthorizeService: IAuthorizeService = class {
-  public static async signIn({ email, password }: SigninDto): Promise<User | null> {
+  public static async signIn({ email, password }: SigninDto): Promise<UserModel | null> {
     try {
-      const { user } = await signInWithEmailAndPassword(firebaseAuth, email, password)
+      const {
+        user: { uid, displayName, photoURL, email: signInEmail },
+      } = await signInWithEmailAndPassword(firebaseAuth, email, password)
 
-      const loginedUser: User = {
-        id: user.uid,
-        email: user.email,
-        avatar: user.photoURL,
-        fullName: user.displayName,
+      return {
+        id: uid,
+        email: signInEmail,
+        avatar: photoURL,
+        fullName: displayName,
       }
-
-      return loginedUser
     } catch (e) {
       throw e
     }
@@ -29,18 +29,16 @@ export const AuthorizeService: IAuthorizeService = class {
 
   public static async signUp({ email, password }: SignupDto): Promise<User | null> {
     try {
-      const { user } = await createUserWithEmailAndPassword(firebaseAuth, email, password)
+      const {
+        user: { uid, displayName, photoURL, email: signUpEmail },
+      } = await createUserWithEmailAndPassword(firebaseAuth, email, password)
 
-      const createdUser: User = {
-        id: user.uid,
-        email: user.email,
-        avatar: user.photoURL,
-        fullName: user.displayName,
-      }
-
-      await UsersService.create(createdUser)
-
-      return createdUser
+      return await UsersService.create({
+        id: uid,
+        email: signUpEmail,
+        fullName: displayName,
+        avatar: photoURL,
+      })
     } catch (e) {
       throw e
     }
@@ -54,11 +52,7 @@ export const AuthorizeService: IAuthorizeService = class {
     }
   }
 
-  public static async getUid(): Promise<string> {
-    try {
-      return firebaseAuth?.currentUser?.uid ?? ''
-    } catch (e) {
-      throw e
-    }
+  public static getUid(): string {
+    return firebaseAuth?.currentUser?.uid ?? ''
   }
 }

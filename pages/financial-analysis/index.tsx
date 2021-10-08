@@ -1,20 +1,25 @@
-import { MoneyCard, TabBar, TransactionActions, Transactions, Income, Expense } from 'components'
-import { MainLayout } from 'layouts'
-import { Box, Card, CardActions, CardContent, Grid, Paper, Stack, Tab } from '@mui/material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
-import React, { FC, useState } from 'react'
-import { TransactionsType } from 'enums'
+import { Box, Grid, Paper, Stack, Tab } from '@mui/material'
+import { Expense, Income, MoneyCard, TransactionActions } from 'components'
 import { Char } from 'components/Char/Char'
-import { useRouter } from 'next/dist/client/router'
-import { indexedDBLocalPersistence } from '@firebase/auth'
-import { TransactionActionItem } from 'components/TransactionActions/TransactionActionItem'
-import IncomeActionButton from 'components/Income/IncomeActionButton'
+import { TransactionsType } from 'enums'
+import { MainLayout } from 'layouts'
+import { NextPage } from 'next'
+import React, { useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from 'src/hooks'
+import { getIncomeByUserId, selectIncomes } from 'src/modules/Income/incomeSlice'
 
-const BasicTabs: FC = () => {
+const FinancialAnalysis: NextPage = () => {
+  const dispatch = useAppDispatch()
+  const { incomes } = useAppSelector(selectIncomes)
+
+  useEffect(() => {
+    if (!incomes.length) {
+      dispatch(getIncomeByUserId())
+    }
+  }, [dispatch, incomes])
+
   const [tabValue, setTabValue] = useState(TransactionsType.INCOME)
-  const router = useRouter()
-
-  const transactionKeys = Object.keys(TransactionsType)
 
   // const handleChange = (event: object, newValue: number) => {
   //   router.push(`/financial-analysis/${transactionKeys[newValue].toLocaleLowerCase()}`)
@@ -53,10 +58,10 @@ const BasicTabs: FC = () => {
                 </Paper>
                 <Paper>
                   <TabPanel value={TransactionsType.INCOME}>
-                    <IncomeActionButton />
+                    <TransactionActions type={TransactionsType.INCOME} />
                   </TabPanel>
                   <TabPanel value={TransactionsType.COST}>
-                    <TransactionActions label="Внести расходы" />
+                    <TransactionActions type={TransactionsType.COST} />
                   </TabPanel>
                 </Paper>
               </Stack>
@@ -68,4 +73,4 @@ const BasicTabs: FC = () => {
   )
 }
 
-export default BasicTabs
+export default FinancialAnalysis

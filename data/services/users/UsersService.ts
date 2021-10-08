@@ -1,39 +1,22 @@
-import { getDocs, collection, setDoc, doc, CollectionReference, DocumentReference } from 'firebase/firestore'
 import { CreateUserDto } from 'core/domain/users/dto/create-user.dto'
-import { User } from 'core/domain/users/user'
+import { User, UserModel } from 'core/domain/users/user'
 import { IUsersService } from 'core/services/users/UsersService'
+import { collection, CollectionReference, doc, DocumentReference, setDoc } from 'firebase/firestore'
 import { firebaseDB } from 'firebaseInstance/firebaseClient'
 
 export const UsersService: IUsersService = class {
-  private static usersCollection = collection(firebaseDB, 'users') as CollectionReference<User>
+  private static usersCollection = collection(firebaseDB, 'users') as CollectionReference<UserModel>
 
   public static async create(user: CreateUserDto): Promise<User> {
     try {
-      await setDoc<User>(doc(this.usersCollection, user.id) as DocumentReference<User>, user)
+      await setDoc<UserModel>(doc(this.usersCollection, user.id) as DocumentReference<UserModel>, user)
 
-      return user
+      // await IncomeCategoryService.setDefaultByUserId(user.id)
+      // await ExpensesCategoryService.setDefaultByUserId(user.id)
+
+      return { ...user, expenseCategories: [], incomeCategories: [] }
     } catch (e) {
       throw e
     }
   }
-
-  public static async getAll(): Promise<User[]> {
-    try {
-      const userShapshot = await getDocs<User>(this.usersCollection)
-      const usersList = userShapshot.docs.map((userDoc) => userDoc.data())
-
-      return usersList
-    } catch (e) {
-      throw e
-    }
-  }
-
-  // public static async getByEmail(email: string): Promise<User> {
-  //   const c = collection(firebaseDB, "users")
-  //   const q = query<User>(c, where("email", "==", email));
-  //   const querySnapshot = await getDocs(q);
-  //   const [userRef]: User[] = querySnapshot.docs
-  //
-  //   return userRef
-  // }
 }

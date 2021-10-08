@@ -1,26 +1,12 @@
 import { Transactions } from 'components'
-import { CostCategory } from 'enums'
+import { useAppSelector } from 'src/hooks'
+import { expense as mockExpense } from 'src/mocks'
+import { selectExpense } from 'src/modules/expense/expenseSlice'
 
 const Expense = () => {
-  const expense = [
-    {
-      category: CostCategory.CASH,
-      value: 3000,
-      currency: 'рублей',
-    },
-    {
-      category: CostCategory.VOCATION,
-      value: 5000,
-      currency: 'рублей',
-    },
-    {
-      category: CostCategory.UTILITIES,
-      value: 500,
-      currency: 'рублей',
-    },
-  ]
+  const { expense } = useAppSelector(selectExpense)
 
-  return <Transactions transactions={expense} />
+  return <Transactions transactions={[...expense, ...mockExpense]} />
 }
 
 export default Expense

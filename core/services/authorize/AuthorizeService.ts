@@ -1,6 +1,6 @@
 import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
 import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
-import { User } from 'core/domain/users/user'
+import { UserModel } from 'core/domain/users/user'
 
 /**
  * Authentication service interface
@@ -9,12 +9,12 @@ export interface IAuthorizeService {
   /**
    * SignIn user
    */
-  readonly signIn: (signInDto: SigninDto) => Promise<User | null>
+  readonly signIn: (signInDto: SigninDto) => Promise<UserModel | null>
 
   /**
    * SignUp user
    */
-  readonly signUp: (signUpDto: SignupDto) => Promise<User | null>
+  readonly signUp: (signUpDto: SignupDto) => Promise<UserModel | null>
 
   /**
    *  Logs out the user
@@ -24,7 +24,7 @@ export interface IAuthorizeService {
   /**
    * Get auth user uid
    */
-  readonly getUid: () => Promise<string>
+  readonly getUid: () => string
 
   /**
    * Whether user is loged in or not
