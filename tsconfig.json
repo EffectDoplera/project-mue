@@ -20,7 +20,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "ESNext",
-    "baseUrl": ".",
+    "baseUrl": "./src"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

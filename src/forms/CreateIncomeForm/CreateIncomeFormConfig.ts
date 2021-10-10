@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { IncomeCategory } from 'src/enums'
+import { IncomeCategory } from 'enums'
 
 interface CreateIncomeFormFields {
   name: string

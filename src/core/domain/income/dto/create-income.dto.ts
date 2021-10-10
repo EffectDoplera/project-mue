@@ -1,4 +1,4 @@
-import { BaseDomain } from 'src/core/domain/common/baseDomain'
+import { BaseDomain } from 'core/domain/common/baseDomain'
 
 export interface CreateIncomeDto extends BaseDomain {
   readonly name: string

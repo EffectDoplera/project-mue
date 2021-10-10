@@ -1,4 +1,4 @@
-import { IncomeCategory } from 'src/enums'
+import { IncomeCategory } from 'enums'
 
 export interface IIncome {
   _id: string

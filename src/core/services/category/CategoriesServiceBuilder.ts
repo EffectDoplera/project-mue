@@ -1,4 +1,4 @@
-import { Category, CreateCategoryDto } from 'src/core/domain/category'
+import { Category, CreateCategoryDto } from 'core/domain/category'
 
 export interface ICategoryServiceBuilder {
   create(createCategoryDto: CreateCategoryDto): Promise<Category>

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
-import { SigninDto, SignupDto } from 'src/core/domain/authorize'
-import { UserModel } from 'src/core/domain/users'
-import { AuthorizeService } from 'src/data/services'
+import { SigninDto, SignupDto } from 'core/domain/authorize'
+import { UserModel } from 'core/domain/users'
+import { AuthorizeService } from 'data/services'
 import { RootState } from './store'
 
 type AuthState = {

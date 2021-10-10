@@ -1,10 +1,10 @@
-import { IIncomeService } from 'src/core/services/income/IncomeService'
-import { CreateIncomeDto } from 'src/core/domain/income/dto/create-income.dto'
-import { AuthorizeService } from 'src/data/services/authorize/AuthorizeService'
+import { IIncomeService } from 'core/services/income/IncomeService'
+import { CreateIncomeDto } from 'core/domain/income/dto/create-income.dto'
+import { AuthorizeService } from 'data/services/authorize/AuthorizeService'
 import { addDoc, collection, CollectionReference, getDocs } from 'firebase/firestore'
-import { firebaseDB } from 'src/firebaseInstance/firebaseClient'
-import { Income } from 'src/core/domain/income/income'
-import { convertSnapshotToArray } from 'src/api/firebaseDataApi'
+import { firebaseDB } from 'firebaseInstance/firebaseClient'
+import { Income } from 'core/domain/income/income'
+import { convertSnapshotToArray } from 'api/firebaseDataApi'
 
 export const IncomeService: IIncomeService = class {
   private static incomeCollection = collection(firebaseDB, 'income') as CollectionReference<Income>

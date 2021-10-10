@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
-import { TransactionsType } from 'src/enums'
+import { TransactionsType } from 'enums'
 import { FC } from 'react'
 
 interface TransactionActionItemProps {

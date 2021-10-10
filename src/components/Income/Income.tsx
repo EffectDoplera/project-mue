@@ -1,6 +1,6 @@
-import { Transactions } from 'src/components/Transactions/Transactions'
-import { useAppSelector } from 'src/hooks'
-import { selectIncomes } from 'src/modules/Income/incomeSlice'
+import { Transactions } from 'components/Transactions/Transactions'
+import { useAppSelector } from 'hooks'
+import { selectIncomes } from 'modules/Income/incomeSlice'
 
 const Income = () => {
   const { incomes } = useAppSelector(selectIncomes)

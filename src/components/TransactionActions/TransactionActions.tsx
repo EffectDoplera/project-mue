@@ -1,9 +1,8 @@
 import { Button } from '@mui/material'
-import { TransactionsType } from 'src/enums'
-import { useRouter } from 'next/dist/client/router'
-import { FC } from 'react'
-import { TransactionActionItem } from 'src/components/TransactionActions/TransactionActionItem'
+import { TransactionActionItem } from 'components/TransactionActions/TransactionActionItem'
+import { TransactionsType } from 'enums'
 import Link from 'next/link'
+import { FC } from 'react'
 
 interface TransactionActionsProps {
   type: TransactionsType

@@ -1,10 +1,9 @@
-import { SigninDto, SignupDto } from 'src/core/domain/authorize'
+import { SigninDto, SignupDto } from 'core/domain/authorize'
+import { useAppDispatch } from 'hooks/useAppDispatch'
+import { useAppSelector } from 'hooks/useAppSelector'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { PageRoutes } from 'src/router'
-import { useAppDispatch } from 'src/hooks/useAppDispatch'
-import { useAppSelector } from 'src/hooks/useAppSelector'
-import { selectAuthState, signIn, signUp } from 'src/store/authSlice'
+import { PageRoutes } from 'router'
+import { selectAuthState, signIn, signUp } from 'store/authSlice'
 
 export const useAuth = () => {
   const router = useRouter()

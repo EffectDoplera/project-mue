@@ -1,10 +1,10 @@
-import { SigninDto } from 'src/core/domain/authorize/dto/signin.dto'
-import { SignupDto } from 'src/core/domain/authorize/dto/signup.dto'
-import { User, UserModel } from 'src/core/domain/users'
-import { IAuthorizeService } from 'src/core/services/authorize/AuthorizeService'
-import { UsersService } from 'src/data/services/users/UsersService'
+import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
+import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
+import { User, UserModel } from 'core/domain/users'
+import { IAuthorizeService } from 'core/services/authorize/AuthorizeService'
+import { UsersService } from 'data/services/users/UsersService'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { firebaseAuth } from 'src/firebaseInstance/firebaseClient'
+import { firebaseAuth } from 'firebaseInstance/firebaseClient'
 
 /**
  * Authorize service

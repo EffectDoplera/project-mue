@@ -1,7 +1,7 @@
 import { ButtonGroup, Chip, IconButton, TableCell, TableRow } from '@mui/material'
 import { Delete, Edit } from '@mui/icons-material'
 import React, { FC } from 'react'
-import { IIncome } from 'src/types'
+import { IIncome } from 'types'
 
 interface IncomeItemProps {
   income: IIncome

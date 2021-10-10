@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from 'src/store/store'
+import { RootState } from 'store/store'
 
 export type GlobalState = {
   isLoading: boolean
