@@ -1,5 +1,5 @@
-import { User } from 'src/core/domain/users'
-import { CreateUserDto } from 'src/core/domain/users/dto/create-user.dto'
+import { User } from 'core/domain/users'
+import { CreateUserDto } from 'core/domain/users/dto/create-user.dto'
 
 export interface IUsersService {
   readonly create: (createUserDto: CreateUserDto) => Promise<User>

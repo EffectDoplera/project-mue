@@ -1,7 +1,7 @@
-import { CostCategory } from 'src/enums/category'
-import { Grid, Stack, Typography } from '@mui/material'
-import React, { FC } from 'react'
-import TransactionIcon from 'src/components/Transactions/TransactionIcon'
+import { Stack, Typography } from '@mui/material'
+import TransactionIcon from 'components/Transactions/TransactionIcon'
+import { CostCategory } from 'enums/category'
+import { FC } from 'react'
 
 interface ITransactionItemProps {
   category: CostCategory

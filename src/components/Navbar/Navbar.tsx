@@ -20,7 +20,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useRouter } from 'next/dist/client/router'
-import { ROUTES } from 'src/router'
+import { ROUTES } from 'router'
 
 export default function Navbar() {
   const theme = useTheme()

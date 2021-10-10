@@ -3,8 +3,8 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { FC } from 'react'
-import { wrapper } from 'src/store/store'
-import theme from 'src/theme'
+import { wrapper } from 'store/store'
+import theme from 'theme'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   /*

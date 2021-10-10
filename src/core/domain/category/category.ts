@@ -1,4 +1,4 @@
-import { BaseDomain } from 'src/core/domain/common'
+import { BaseDomain } from 'core/domain/common'
 
 export interface Category extends BaseDomain {
   readonly id: string

@@ -1,8 +1,8 @@
-import { CreateUserDto } from 'src/core/domain/users/dto/create-user.dto'
-import { User, UserModel } from 'src/core/domain/users/user'
-import { IUsersService } from 'src/core/services/users/UsersService'
+import { CreateUserDto } from 'core/domain/users/dto/create-user.dto'
+import { User, UserModel } from 'core/domain/users/user'
+import { IUsersService } from 'core/services/users/UsersService'
 import { collection, CollectionReference, doc, DocumentReference, setDoc } from 'firebase/firestore'
-import { firebaseDB } from 'src/firebaseInstance/firebaseClient'
+import { firebaseDB } from 'firebaseInstance/firebaseClient'
 
 export const UsersService: IUsersService = class {
   private static usersCollection = collection(firebaseDB, 'users') as CollectionReference<UserModel>

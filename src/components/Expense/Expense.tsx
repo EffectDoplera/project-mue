@@ -1,7 +1,7 @@
-import { Transactions } from 'src/components/index'
-import { useAppSelector } from 'src/hooks'
-import { expense as mockExpense } from 'src/mocks'
-import { selectExpense } from 'src/modules/expense/expenseSlice'
+import { Transactions } from 'components/index'
+import { useAppSelector } from 'hooks'
+import { expense as mockExpense } from 'mocks'
+import { selectExpense } from 'modules/expense/expenseSlice'
 
 const Expense = () => {
   const { expense } = useAppSelector(selectExpense)

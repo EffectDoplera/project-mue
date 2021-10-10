@@ -1,7 +1,7 @@
 import React from 'react'
 import ServerStyleSheets from '@mui/styles/ServerStyleSheets'
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
-import theme from 'src/theme'
+import theme from 'theme'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

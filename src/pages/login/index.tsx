@@ -1,8 +1,8 @@
 import { Button, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { AuthLayout } from 'src/layouts'
+import { useAuth } from 'hooks'
+import { AuthLayout } from 'layouts'
 import { NextPage } from 'next'
-import { useAuth } from 'src/hooks'
 
 interface IFormFields {
   email: string
@@ -10,7 +10,7 @@ interface IFormFields {
 }
 
 const Login: NextPage = () => {
-  const { signIn, signUp } = useAuth()
+  const { signIn } = useAuth()
 
   const formik = useFormik<IFormFields>({
     initialValues: {

@@ -1,5 +1,5 @@
-import { ExpenseCategory, IncomeCategory } from 'src/core/domain/category'
-import { BaseDomain } from 'src/core/domain/common'
+import { ExpenseCategory, IncomeCategory } from 'core/domain/category'
+import { BaseDomain } from 'core/domain/common'
 
 export interface UserModel extends BaseDomain {
   readonly id: string
