@@ -4,6 +4,7 @@ import { Dashboard, Person, CreditCard } from '@mui/icons-material'
 export enum PageRoutes {
   MAIN = '/',
   LOGIN = '/login',
+  SIGN_UP = '/signup',
   FINANCIAL_ANALYSIS = '/financial-analysis',
 }
 

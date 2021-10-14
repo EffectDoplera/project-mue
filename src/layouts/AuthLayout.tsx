@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   },
   container: {
-    paddingTop: '30vh',
+    paddingTop: '20vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

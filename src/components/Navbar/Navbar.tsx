@@ -1,3 +1,4 @@
+import { useAuth } from 'hooks'
 import { useState } from 'react'
 import {
   BlurOn,
@@ -20,12 +21,14 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useRouter } from 'next/dist/client/router'
-import { ROUTES } from 'router'
+import { PageRoutes, ROUTES } from 'router'
+import Link from 'next/link'
 
 export default function Navbar() {
   const theme = useTheme()
   const router = useRouter()
   const [open, setOpen] = useState(false)
+  const { logout } = useAuth()
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -70,6 +73,10 @@ export default function Navbar() {
             )
           })}
         </List>
+        <Divider />
+        <IconButton onClick={logout}>
+          <BlurOn />
+        </IconButton>
       </Drawer>
     </div>
   )

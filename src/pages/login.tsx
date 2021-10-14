@@ -1,8 +1,10 @@
-import { Button, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import { useAuth } from 'hooks'
 import { AuthLayout } from 'layouts'
 import { NextPage } from 'next'
+import Link from 'next/link'
+import { PageRoutes } from 'router'
 
 interface IFormFields {
   email: string
@@ -22,9 +24,9 @@ const Login: NextPage = () => {
 
   return (
     <AuthLayout>
-      <Grid container item xs justifyContent="center" direction="column" alignItems="center" spacing={2}>
+      <Stack spacing={3} minWidth="400px">
         <Paper component="form" onSubmit={formik.handleSubmit}>
-          <Stack spacing={3} p={2} width="400px" alignItems="center">
+          <Stack spacing={3} p={2} alignItems="center">
             <Typography>Sign in to Project Mue</Typography>
             <TextField
               autoComplete="username"
@@ -52,7 +54,13 @@ const Login: NextPage = () => {
             </Button>
           </Stack>
         </Paper>
-      </Grid>
+
+        <Paper sx={{ p: 2 }}>
+          <Typography variant={'body2'} noWrap>
+            New to {process.env.NEXT_PUBLIC_APP_NAME}? <Link href={PageRoutes.SIGN_UP}>Create an account.</Link>
+          </Typography>
+        </Paper>
+      </Stack>
     </AuthLayout>
   )
 }

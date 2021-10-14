@@ -37,6 +37,8 @@ export const IncomeService: IIncomeService = class {
       const userIncomeCollection = collection(firebaseDB, `users/${uuid}/incomes`) as CollectionReference<Income>
       const incomeSnapshot = await getDocs(userIncomeCollection)
 
+      console.log(convertSnapshotToArray(incomeSnapshot))
+
       return convertSnapshotToArray(incomeSnapshot)
     } catch (e) {
       throw e

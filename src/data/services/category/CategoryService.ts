@@ -80,7 +80,7 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
     }
   }
 
-  public async setDefaultByUserId(userId: string): Promise<void> {
+  public async setDefaultByUserId(userId: string): Promise<Category[]> {
     try {
       const defaultCategories = await this.getDefault()
 
@@ -90,6 +90,8 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
           categories: defaultCategories,
         },
       )
+
+      return defaultCategories
     } catch (e) {
       throw e
     }
