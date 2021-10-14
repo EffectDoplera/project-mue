@@ -17,7 +17,7 @@ const FinancialAnalysis: NextPage = () => {
     if (!incomes.length) {
       dispatch(getIncomeByUserId())
     }
-  }, [dispatch, incomes])
+  }, [])
 
   const [tabValue, setTabValue] = useState(TransactionsType.INCOME)
 

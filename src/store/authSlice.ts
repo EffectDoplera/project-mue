@@ -32,7 +32,8 @@ export const signUp = createAsyncThunk('signUp', async (userData: SignupDto) => 
 })
 
 export const logout = createAsyncThunk('logout', async () => {
-  return await AuthorizeService.logout()
+  localStorage.removeItem('user')
+  await AuthorizeService.logout()
 })
 
 export const authSlice = createSlice({

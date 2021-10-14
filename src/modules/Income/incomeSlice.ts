@@ -40,7 +40,7 @@ export const incomeSlice = createSlice({
         state.incomes.push(payload)
       })
       .addCase(getIncomeByUserId.fulfilled, (state, { payload }) => {
-        state.incomes = [...payload]
+        state.incomes = payload
       })
   },
 })
