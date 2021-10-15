@@ -1,4 +1,4 @@
-import { CostCategory, IncomeCategory } from 'src/enums'
+import { CostCategory, IncomeCategory } from 'enums'
 
 export const currencies = [
   {

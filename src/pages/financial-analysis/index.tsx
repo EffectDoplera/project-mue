@@ -1,13 +1,13 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Grid, Paper, Stack, Tab } from '@mui/material'
-import { Expense, Income, MoneyCard, TransactionActions } from 'src/components'
-import { Char } from 'src/components/Char/Char'
-import { TransactionsType } from 'src/enums'
-import { MainLayout } from 'src/layouts'
+import { Expense, Income, MoneyCard, TransactionActions } from 'components'
+import { Char } from 'components/Char/Char'
+import { TransactionsType } from 'enums'
+import { MainLayout } from 'layouts'
 import { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'src/hooks'
-import { getIncomeByUserId, selectIncomes } from 'src/modules/Income/incomeSlice'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { getIncomeByUserId, selectIncomes } from 'modules/Income/incomeSlice'
 
 const FinancialAnalysis: NextPage = () => {
   const dispatch = useAppDispatch()
@@ -17,7 +17,7 @@ const FinancialAnalysis: NextPage = () => {
     if (!incomes.length) {
       dispatch(getIncomeByUserId())
     }
-  }, [dispatch, incomes])
+  }, [])
 
   const [tabValue, setTabValue] = useState(TransactionsType.INCOME)
 

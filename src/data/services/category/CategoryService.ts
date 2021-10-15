@@ -1,9 +1,9 @@
 import { arrayUnion, collection, CollectionReference, doc, getDoc, setDoc } from 'firebase/firestore'
-import { Category, CreateCategoryDto } from 'src/core/domain/category'
-import { ICategoryServiceBuilder } from 'src/core/services/category/CategoriesServiceBuilder'
-import { AuthorizeService } from 'src/data/services/authorize/AuthorizeService'
-import { CategoryType } from 'src/enums'
-import { firebaseDB } from 'src/firebaseInstance/firebaseClient'
+import { Category, CreateCategoryDto } from 'core/domain/category'
+import { ICategoryServiceBuilder } from 'core/services/category/CategoriesServiceBuilder'
+import { AuthorizeService } from 'data/services/authorize/AuthorizeService'
+import { CategoryType } from 'enums'
+import { firebaseDB } from 'firebaseInstance/firebaseClient'
 
 export class CategoryServiceBuilder implements ICategoryServiceBuilder {
   constructor(private type: CategoryType) {
@@ -80,7 +80,7 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
     }
   }
 
-  public async setDefaultByUserId(userId: string): Promise<void> {
+  public async setDefaultByUserId(userId: string): Promise<Category[]> {
     try {
       const defaultCategories = await this.getDefault()
 
@@ -90,6 +90,8 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
           categories: defaultCategories,
         },
       )
+
+      return defaultCategories
     } catch (e) {
       throw e
     }

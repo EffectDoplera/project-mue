@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
-import expenseReducer from 'src/modules/expense/expenseSlice'
-import incomeReducer from 'src/modules/Income/incomeSlice'
-import authReducer from 'src/store/authSlice'
-import globalReducer from 'src/store/globalSlice'
+import expenseReducer from 'modules/expense/expenseSlice'
+import incomeReducer from 'modules/Income/incomeSlice'
+import authReducer from 'store/authSlice'
+import globalReducer from 'store/globalSlice'
 
 export const store = configureStore({
   reducer: {

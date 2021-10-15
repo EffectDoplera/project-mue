@@ -1,1 +1,1 @@
-export { BaseDomain } from 'src/core/domain/common/baseDomain'
+export { BaseDomain } from 'core/domain/common/baseDomain'

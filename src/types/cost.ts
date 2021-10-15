@@ -1,4 +1,4 @@
-import { CostCategory } from 'src/enums'
+import { CostCategory } from 'enums'
 
 export interface ICost {
   _id: number

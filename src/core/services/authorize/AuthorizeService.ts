@@ -1,6 +1,6 @@
-import { SigninDto } from 'src/core/domain/authorize/dto/signin.dto'
-import { SignupDto } from 'src/core/domain/authorize/dto/signup.dto'
-import { UserModel } from 'src/core/domain/users/user'
+import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
+import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
+import { UserModel } from 'core/domain/users/user'
 
 /**
  * Authentication service interface

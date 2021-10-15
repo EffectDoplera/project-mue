@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { CircularProgress, Container } from '@mui/material'
 
 import makeStyles from '@mui/styles/makeStyles'
-import { useAppSelector } from 'src/hooks'
-import { selectIsLoading } from 'src/store/globalSlice'
+import { useAppSelector } from 'hooks'
+import { selectIsLoading } from 'store/globalSlice'
 
 const useStyles = makeStyles({
   root: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   },
   container: {
-    paddingTop: '30vh',
+    paddingTop: '20vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

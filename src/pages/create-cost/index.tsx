@@ -1,4 +1,4 @@
-import { MainLayout } from 'src/layouts'
+import { MainLayout } from 'layouts'
 import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 

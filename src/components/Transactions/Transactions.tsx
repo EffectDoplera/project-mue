@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
-import TransactionIcon from 'src/components/Transactions/TransactionIcon'
+import TransactionIcon from 'components/Transactions/TransactionIcon'
 import { FC } from 'react'
 
 interface TransactionsProps {

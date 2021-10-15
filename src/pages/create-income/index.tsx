@@ -1,8 +1,8 @@
 import { Paper, Stack } from '@mui/material'
-import { MainLayout } from 'src/layouts'
+import { MainLayout } from 'layouts'
 import { NextPage } from 'next'
 import { FC } from 'react'
-import { CreateIncomeForm } from 'src/forms/CreateIncomeForm'
+import { CreateIncomeForm } from 'forms/CreateIncomeForm'
 
 const CreateIncome: FC<NextPage> = () => {
   return (

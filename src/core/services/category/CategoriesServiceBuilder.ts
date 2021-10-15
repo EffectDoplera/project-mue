@@ -1,9 +1,9 @@
-import { Category, CreateCategoryDto } from 'src/core/domain/category'
+import { Category, CreateCategoryDto } from 'core/domain/category'
 
 export interface ICategoryServiceBuilder {
-  create(createCategoryDto: CreateCategoryDto): Promise<Category>
+  readonly create: (createCategoryDto: CreateCategoryDto) => Promise<Category>
 
-  // getAll(): Promise<Category[]>
+  readonly setDefaultByUserId: (userId: string) => Promise<Category[]>
 
-  getDefault(): Promise<Category[]>
+  readonly getDefault: () => Promise<Category[]>
 }

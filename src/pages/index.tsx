@@ -1,19 +1,21 @@
-import { MainLayout } from 'src/layouts'
+import { useAppSelector, useAuth } from 'hooks'
+import { MainLayout } from 'layouts'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useAuth } from 'src/hooks'
-import { PageRoutes } from '../src/router'
+import { PageRoutes } from 'router'
+import { selectIsLoading } from 'store/globalSlice'
 
 const Home: NextPage = () => {
   const { user, isAuthenticated } = useAuth()
   const router = useRouter()
+  const isLoading = useAppSelector(selectIsLoading)
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push(PageRoutes.LOGIN)
+    if (!isAuthenticated && !isLoading) {
+      router.push(PageRoutes.LOGIN).then(() => ({}))
     }
-  }, [router, isAuthenticated])
+  }, [])
 
   return (
     <MainLayout>

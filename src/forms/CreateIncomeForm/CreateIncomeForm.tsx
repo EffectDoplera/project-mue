@@ -1,15 +1,15 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import { Autocomplete, Button, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { CreateIncomeDto } from 'src/core/domain/income'
+import { CreateIncomeDto } from 'core/domain/income'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/dist/client/router'
 import { FC, memo } from 'react'
-import { PageRoutes } from 'src/router'
-import { INITIAL_VALUES } from 'src/forms/CreateIncomeForm/CreateIncomeFormConfig'
-import { useAppDispatch, useAppSelector } from 'src/hooks'
-import { currencies } from 'src/mocks'
-import { createIncomeByUserId, selectIncomeOptions } from 'src/modules/Income/incomeSlice'
+import { PageRoutes } from 'router'
+import { INITIAL_VALUES } from 'forms/CreateIncomeForm/CreateIncomeFormConfig'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { currencies } from 'mocks'
+import { createIncomeByUserId, selectIncomeOptions } from 'modules/Income/incomeSlice'
 
 const CreateIncomeForm: FC = () => {
   const dispatch = useAppDispatch()

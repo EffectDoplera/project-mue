@@ -1,2 +1,2 @@
-export { default as AuthLayout } from 'src/layouts/AuthLayout'
-export { default as MainLayout } from 'src/layouts/MainLayout'
+export { default as AuthLayout } from 'layouts/AuthLayout'
+export { default as MainLayout } from 'layouts/MainLayout'
