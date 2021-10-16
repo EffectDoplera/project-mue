@@ -48,6 +48,21 @@ export const incomeSlice = createSlice({
 export const selectIncomes = (state: RootState): IncomeState => state.income
 export const selectIncomeCategories = (state: RootState) => state.income.incomeCategories
 
+export const selectSquashedByCategoryIncomes = createSelector(selectIncomes, ({ incomes }) => {
+  return incomes.reduce<Income[]>((acc, income) => {
+    const foundIncomeIndex = acc.findIndex(({ category }) => income.category === category)
+    if (foundIncomeIndex !== -1) {
+      const [dropped] = acc.splice(foundIncomeIndex, 1)
+
+      acc.push({ ...dropped, value: dropped.value + income.value })
+    } else {
+      acc.push(income)
+    }
+
+    return acc
+  }, [])
+})
+
 export const selectIncomeOptions = createSelector(selectIncomeCategories, (incomeCategories) => {
   return incomeCategories.map((category) => ({
     value: category,
