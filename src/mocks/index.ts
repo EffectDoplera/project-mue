@@ -1,3 +1,4 @@
+import { Expense } from 'core/domain'
 import { CostCategory, IncomeCategory } from 'enums'
 
 export const currencies = [
@@ -30,20 +31,29 @@ export const income = [
   },
 ]
 
-export const expense = [
+export const expense: Expense[] = [
   {
     category: CostCategory.CASH,
     value: 3000,
-    currency: 'рублей',
+    _id: '1',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
   {
     category: CostCategory.VOCATION,
     value: 5000,
-    currency: 'рублей',
+    _id: '2',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
   {
     category: CostCategory.UTILITIES,
     value: 500,
-    currency: 'рублей',
+    _id: '3',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
 ]

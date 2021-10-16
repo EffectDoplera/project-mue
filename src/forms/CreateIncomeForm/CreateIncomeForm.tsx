@@ -1,15 +1,14 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import { Autocomplete, Button, MenuItem, Stack, TextField, Typography } from '@mui/material'
-import { CreateIncomeDto } from 'core/domain/income'
+import { Autocomplete, Button, Stack, TextField, Typography } from '@mui/material'
+import { CreateIncomeDto } from 'core/domain'
 import { useFormik } from 'formik'
-import { useRouter } from 'next/dist/client/router'
-import { FC, memo } from 'react'
-import { PageRoutes } from 'router'
 import { INITIAL_VALUES } from 'forms/CreateIncomeForm/CreateIncomeFormConfig'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { currencies } from 'mocks'
-import { createIncomeByUserId, selectIncomeOptions } from 'modules/Income/incomeSlice'
+import { createForCurrentUser, selectIncomeOptions } from 'modules/Income/incomeSlice'
+import { useRouter } from 'next/dist/client/router'
+import { FC } from 'react'
+import { PageRoutes } from 'router'
 
 const CreateIncomeForm: FC = () => {
   const dispatch = useAppDispatch()
@@ -18,7 +17,7 @@ const CreateIncomeForm: FC = () => {
   const incomeCategories = useAppSelector(selectIncomeOptions)
 
   const createIncomeHandler = async (values: CreateIncomeDto) => {
-    dispatch(createIncomeByUserId(values))
+    dispatch(createForCurrentUser(values))
     await router.push(PageRoutes.FINANCIAL_ANALYSIS)
   }
 
@@ -35,8 +34,8 @@ const CreateIncomeForm: FC = () => {
         label="Name"
         id="name"
         name="name"
-        value={formik.values.name}
-        error={formik.touched.name && Boolean(formik.errors.name)}
+        value={formik.values.title}
+        error={formik.touched.title && Boolean(formik.errors.title)}
         onChange={formik.handleChange}
         fullWidth
       />
@@ -45,28 +44,12 @@ const CreateIncomeForm: FC = () => {
         label="Amount"
         id="value"
         name="value"
+        type="number"
         value={formik.values.value}
         onChange={formik.handleChange}
         error={formik.touched.value && Boolean(formik.errors.value)}
         fullWidth
       />
-
-      <TextField
-        select
-        label="Currency"
-        id="currency"
-        name="currency"
-        value={formik.values.currency}
-        onChange={formik.handleChange}
-        error={formik.touched.currency && Boolean(formik.errors.currency)}
-        fullWidth
-      >
-        {currencies.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
 
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
@@ -101,4 +84,4 @@ const CreateIncomeForm: FC = () => {
   )
 }
 
-export default memo(CreateIncomeForm)
+export default CreateIncomeForm

@@ -1,18 +1,13 @@
-import { format } from 'date-fns'
+import { CreateIncomeDto } from 'core/domain/income'
+import { format, formatISO } from 'date-fns'
 import { IncomeCategory } from 'enums'
 
-interface CreateIncomeFormFields {
-  name: string
-  value: string
-  currency: string
-  date: Date
-  category: IncomeCategory
-}
+type CreateIncomeFormFields = CreateIncomeDto
 
 export const INITIAL_VALUES: CreateIncomeFormFields = {
-  name: `Зарплата за ${format(new Date(), 'MMMM')}`,
-  value: '1000',
-  currency: 'RUB',
-  date: new Date(),
+  title: `Зарплата за ${format(Date.now(), 'MMMM')}`,
+  value: 1000,
+  date: formatISO(Date.now()),
   category: IncomeCategory.SALARY,
+  comment: '',
 }

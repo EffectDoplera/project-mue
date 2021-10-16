@@ -4,11 +4,11 @@ import { FC, memo } from 'react'
 import { getTransactionIcon } from 'components/Transactions/Transaction.helpers'
 
 interface TransactionIconProps {
-  category: CostCategory
+  category: CostCategory | string
 }
 
 const TransactionIcon: FC<TransactionIconProps> = ({ category }) => {
-  const TransactionIcon = getTransactionIcon(category)
+  const TransactionIcon = getTransactionIcon(category as CostCategory)
 
   return (
     <Avatar>

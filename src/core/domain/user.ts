@@ -1,8 +1,10 @@
-import { ExpenseCategory, IncomeCategory } from 'core/domain/category'
-import { BaseDomain } from 'core/domain/common'
+import { BaseDomain } from 'core/domain/_common'
+import { ExpenseCategory } from 'core/domain/expenseCategory'
+import { IncomeCategory } from 'core/domain/incomeCategory'
+
+export type CreateUserDto = Omit<UserModel, '_id'>
 
 export interface UserModel extends BaseDomain {
-  readonly id: string
   readonly email: string | null
   readonly fullName: string | null
   readonly avatar: string | null

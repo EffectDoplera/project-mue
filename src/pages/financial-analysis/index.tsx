@@ -7,23 +7,21 @@ import { MainLayout } from 'layouts'
 import { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { getIncomeByUserId, selectIncomes } from 'modules/Income/incomeSlice'
+import { getIncomeByUserId, selectIncomes, selectSquashedByCategoryIncomes } from 'modules/Income/incomeSlice'
+import { selectIsLoading } from 'store/globalSlice'
 
 const FinancialAnalysis: NextPage = () => {
   const dispatch = useAppDispatch()
-  const { incomes } = useAppSelector(selectIncomes)
+  const incomes = useAppSelector(selectSquashedByCategoryIncomes)
+  const isLoading = useAppSelector(selectIsLoading)
 
   useEffect(() => {
-    if (!incomes.length) {
+    if (!incomes.length && !isLoading) {
       dispatch(getIncomeByUserId())
     }
-  }, [])
+  }, [dispatch, isLoading, incomes])
 
   const [tabValue, setTabValue] = useState(TransactionsType.INCOME)
-
-  // const handleChange = (event: object, newValue: number) => {
-  //   router.push(`/financial-analysis/${transactionKeys[newValue].toLocaleLowerCase()}`)
-  // }
 
   const handleChange = (event: React.SyntheticEvent, newValue: TransactionsType) => setTabValue(newValue)
 

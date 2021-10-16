@@ -1,23 +1,21 @@
-import { SigninDto } from 'core/domain/authorize/dto/signin.dto'
-import { SignupDto } from 'core/domain/authorize/dto/signup.dto'
-import { User, UserModel } from 'core/domain/users'
-import { IAuthorizeService } from 'core/services/authorize/AuthorizeService'
-import { UsersService } from 'data/services/users/UsersService'
+import { SigningDto, SignupDto, User, UserModel } from 'core/domain'
+import { AuthorizeService } from 'core/services'
+import { UserService } from 'data/services'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { firebaseAuth } from 'firebaseInstance/firebaseClient'
 
 /**
  * Authorize service
  */
-export const AuthorizeService: IAuthorizeService = class {
-  public static async signIn({ email, password }: SigninDto): Promise<UserModel | null> {
+export class AuthorizeServiceImpl extends AuthorizeService {
+  public static async signIn({ email, password }: SigningDto): Promise<UserModel | null> {
     try {
       const {
         user: { uid, displayName, photoURL, email: signInEmail },
       } = await signInWithEmailAndPassword(firebaseAuth, email, password)
 
       return {
-        id: uid,
+        _id: uid,
         email: signInEmail,
         avatar: photoURL,
         fullName: displayName,
@@ -33,12 +31,14 @@ export const AuthorizeService: IAuthorizeService = class {
         user: { uid, displayName, photoURL, email: signUpEmail },
       } = await createUserWithEmailAndPassword(firebaseAuth, email, password)
 
-      return await UsersService.create({
-        id: uid,
-        email: signUpEmail,
-        fullName: displayName,
-        avatar: photoURL,
-      })
+      return await UserService.create(
+        {
+          email: signUpEmail,
+          fullName: displayName,
+          avatar: photoURL,
+        },
+        uid,
+      )
     } catch (e) {
       throw e
     }

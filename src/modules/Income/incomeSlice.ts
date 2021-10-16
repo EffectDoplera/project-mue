@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
-import { Income } from 'core/domain/income'
-import { CreateIncomeDto } from 'core/domain/income/dto/create-income.dto'
-import { IncomeService } from 'data/services/income/IncomeService'
+import { CreateIncomeDto, Income } from 'core/domain'
+import { IncomeService } from 'data/services'
 import { IncomeCategory } from 'enums'
 import { incomeCategories } from 'mocks'
 import { RootState } from 'store/store'
@@ -21,11 +20,11 @@ export const createIncome = createAsyncThunk('create', async (createIncome: Crea
   return await IncomeService.create(createIncome)
 })
 
-export const createIncomeByUserId = createAsyncThunk('createByUser', async (createIncome: CreateIncomeDto) => {
-  return await IncomeService.createByUserId(createIncome)
+export const createForCurrentUser = createAsyncThunk('createByUser', async (createIncome: CreateIncomeDto) => {
+  return await IncomeService.createForCurrentUser(createIncome)
 })
 
-export const getIncomeByUserId = createAsyncThunk('getByUserId', async () => await IncomeService.getByUserId())
+export const getIncomeByUserId = createAsyncThunk('getByUserId', async () => await IncomeService.getAllForCurrentUser())
 
 export const incomeSlice = createSlice({
   name: 'income',
@@ -36,7 +35,7 @@ export const incomeSlice = createSlice({
       .addCase(createIncome.fulfilled, (state, { payload }) => {
         state.incomes.push(payload)
       })
-      .addCase(createIncomeByUserId.fulfilled, (state, { payload }) => {
+      .addCase(createForCurrentUser.fulfilled, (state, { payload }) => {
         state.incomes.push(payload)
       })
       .addCase(getIncomeByUserId.fulfilled, (state, { payload }) => {
