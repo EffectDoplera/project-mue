@@ -1,10 +1,10 @@
 import { ButtonGroup, Chip, IconButton, TableCell, TableRow } from '@mui/material'
 import { Delete, Edit } from '@mui/icons-material'
+import { Income } from 'core/domain'
 import React, { FC } from 'react'
-import { IIncome } from 'types'
 
 interface IncomeItemProps {
-  income: IIncome
+  income: Income
 }
 
 const IncomeItem: FC<IncomeItemProps> = ({ income }) => {
@@ -14,7 +14,7 @@ const IncomeItem: FC<IncomeItemProps> = ({ income }) => {
         <Chip label={income.category} color="primary" />
       </TableCell>
       <TableCell>{income.value}</TableCell>
-      <TableCell>{income.currency}</TableCell>
+      <TableCell>{'RUB'}</TableCell>
       <TableCell>{income.comment}</TableCell>
       <TableCell>
         <ButtonGroup disableElevation>

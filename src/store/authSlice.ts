@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
-import { SigninDto, SignupDto } from 'core/domain/authorize'
-import { UserModel } from 'core/domain/users'
+import { SigningDto, SignupDto, UserModel } from 'core/domain'
 import { AuthorizeService } from 'data/services'
 import { RootState } from './store'
 
@@ -14,7 +13,7 @@ const initialState: AuthState = {
   user: null,
 }
 
-export const signIn = createAsyncThunk('sigIn', async (userData: SigninDto) => {
+export const signIn = createAsyncThunk('sigIn', async (userData: SigningDto) => {
   let authUser: UserModel | null
 
   if (!localStorage.getItem('user')) {

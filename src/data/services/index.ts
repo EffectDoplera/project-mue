@@ -1,5 +1,5 @@
-export { AuthorizeService } from 'data/services/authorize/AuthorizeService'
 export { ExpensesCategoryService } from 'data/services/category/ExpensesCategoryService'
 export { IncomeCategoryService } from 'data/services/category/IncomeCategoryService'
-export { IncomeService } from 'data/services/income/IncomeService'
-export { UsersService } from 'data/services/users/UsersService'
+export { IncomeServiceImpl as IncomeService } from './IncomeService'
+export { UserServiceImpl as UserService } from './UserService'
+export { AuthorizeServiceImpl as AuthorizeService } from './AuthorizeService'

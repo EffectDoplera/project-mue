@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { Income } from 'core/domain/income'
-import { CreateIncomeDto } from 'core/domain/income/dto/create-income.dto'
-import { IncomeService } from 'data/services/income/IncomeService'
+import { CreateIncomeDto, Income } from 'core/domain'
+import { IncomeServiceImpl } from 'data/services/IncomeService'
 import { RootState } from 'store/store'
 
 export type ExpenseState = {
@@ -13,7 +12,7 @@ const initialState: ExpenseState = {
 }
 
 export const createExpense = createAsyncThunk('create', async (createExpense: CreateIncomeDto) => {
-  return await IncomeService.create(createExpense)
+  return await IncomeServiceImpl.create(createExpense)
 })
 
 export const expenseSlice = createSlice({

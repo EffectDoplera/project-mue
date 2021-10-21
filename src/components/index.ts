@@ -1,7 +1,5 @@
-export { default as EmptyTab } from 'components/EmptyTab'
 export { MoneyCard } from 'components/MoneyCard'
-export { default as Navbar } from 'components/Navbar/Navbar'
-export { default as TabBar } from 'components/TabBar/TabBar'
+export { default as IncomesModal } from 'components/IncomesModal'
 export { TabPanel } from 'components/TabPanel/TabPanel'
 export { Transactions } from 'components/Transactions/Transactions'
 export { TransactionActions } from 'components/TransactionActions/TransactionActions'

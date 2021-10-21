@@ -1,8 +1,8 @@
 import { arrayUnion, collection, CollectionReference, doc, getDoc, setDoc } from 'firebase/firestore'
-import { Category, CreateCategoryDto } from 'core/domain/category'
+import { Category, CreateCategoryDto } from 'core/domain/_category/category'
 import { ICategoryServiceBuilder } from 'core/services/category/CategoriesServiceBuilder'
-import { AuthorizeService } from 'data/services/authorize/AuthorizeService'
-import { CategoryType } from 'enums'
+import { AuthorizeService } from 'data/services'
+import { CategoryType } from 'core/enums'
 import { firebaseDB } from 'firebaseInstance/firebaseClient'
 
 export class CategoryServiceBuilder implements ICategoryServiceBuilder {
@@ -25,7 +25,7 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
 
       await setDoc(doc(this.categoryCollection, uuid), { categories: arrayUnion(createCategoryDto) }, { merge: true })
 
-      return { name: createCategoryDto, id: uuid }
+      return { name: createCategoryDto.name, _id: uuid }
     } catch (e) {
       throw e
     }
@@ -41,7 +41,7 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
         { merge: true },
       )
 
-      return { name: createCategoryDto, id: uuid }
+      return { name: createCategoryDto.name, _id: uuid }
     } catch (e) {
       throw e
     }

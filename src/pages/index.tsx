@@ -15,12 +15,12 @@ const Home: NextPage = () => {
     if (!isAuthenticated && !isLoading) {
       router.push(PageRoutes.LOGIN).then(() => ({}))
     }
-  }, [])
+  }, [isAuthenticated, isLoading, router])
 
   return (
     <MainLayout>
       <div>Главная страница</div>
-      <div>{user?.id}</div>
+      <div>{user?._id}</div>
       <div>{user?.email}</div>
     </MainLayout>
   )

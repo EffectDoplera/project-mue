@@ -1,4 +1,4 @@
-import { SigninDto, SignupDto } from 'core/domain/authorize'
+import { SigningDto, SignupDto } from 'core/domain'
 import { useAppDispatch } from 'hooks/useAppDispatch'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { useRouter } from 'next/router'
@@ -15,7 +15,7 @@ export const useAuth = () => {
     void (async () => await router.prefetch(PageRoutes.MAIN))()
   }, [router])
 
-  const signInHandler = async (data: SigninDto) => {
+  const signInHandler = async (data: SigningDto) => {
     dispatch(signIn(data))
     await router.push(PageRoutes.MAIN)
   }
