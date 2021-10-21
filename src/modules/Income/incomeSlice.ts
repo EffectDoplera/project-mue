@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { CreateIncomeDto, Income } from 'core/domain'
 import { IncomeService } from 'data/services'
-import { IncomeCategory } from 'enums'
+import { IncomeCategory } from 'core/enums'
 import { incomeCategories } from 'mocks'
 import { RootState } from 'store/store'
+import { convertCategoryName } from 'utils/helpers/category'
 
 export type IncomeState = {
   incomes: Income[]
@@ -61,6 +62,10 @@ export const selectSquashedByCategoryIncomes = createSelector(selectIncomes, ({ 
     return acc
   }, [])
 })
+
+export const selectIncomesSum = createSelector(selectIncomes, ({ incomes }) =>
+  incomes.reduce((acc, income) => acc + income.value, 0),
+)
 
 export const selectIncomeOptions = createSelector(selectIncomeCategories, (incomeCategories) => {
   return incomeCategories.map((category) => ({

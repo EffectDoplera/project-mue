@@ -1,7 +1,7 @@
 import { Box, Button, Card, Grid } from '@mui/material'
 import IncomeList from 'components/IncomeList/IncomeList'
 import { Income } from 'core/domain'
-import { IncomeCategory } from 'enums'
+import { IncomeCategory } from 'core/enums'
 import { MainLayout } from 'layouts'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'

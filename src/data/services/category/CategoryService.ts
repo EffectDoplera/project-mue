@@ -2,7 +2,7 @@ import { arrayUnion, collection, CollectionReference, doc, getDoc, setDoc } from
 import { Category, CreateCategoryDto } from 'core/domain/_category/category'
 import { ICategoryServiceBuilder } from 'core/services/category/CategoriesServiceBuilder'
 import { AuthorizeService } from 'data/services'
-import { CategoryType } from 'enums'
+import { CategoryType } from 'core/enums'
 import { firebaseDB } from 'firebaseInstance/firebaseClient'
 
 export class CategoryServiceBuilder implements ICategoryServiceBuilder {

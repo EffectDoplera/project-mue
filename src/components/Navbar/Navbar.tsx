@@ -1,28 +1,27 @@
-import { useAuth } from 'hooks'
-import { useState } from 'react'
 import {
   BlurOn,
-  Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
+  Logout as LogoutIcon,
+  Menu as MenuIcon,
 } from '@mui/icons-material'
 import {
-  Drawer,
-  CssBaseline,
-  Typography,
-  IconButton,
   AppBar,
   Divider,
-  Toolbar,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
   ListItemIcon,
   ListItemText,
-  ListItem,
-  List,
+  Toolbar,
+  Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import { useAuth } from 'hooks'
 import { useRouter } from 'next/dist/client/router'
-import { PageRoutes, ROUTES } from 'router'
-import Link from 'next/link'
+import { useState } from 'react'
+import { ROUTES } from 'router'
 
 export default function Navbar() {
   const theme = useTheme()
@@ -41,9 +40,8 @@ export default function Navbar() {
   const navigateTo = (href: string) => () => router.push(href)
 
   return (
-    <div>
-      <CssBaseline />
-      <AppBar position="fixed">
+    <>
+      <AppBar position="static">
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start" size="large">
             <MenuIcon />
@@ -72,12 +70,15 @@ export default function Navbar() {
               </ListItem>
             )
           })}
+          <Divider />
+          <ListItem button onClick={logout}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary={'logout'} />
+          </ListItem>
         </List>
-        <Divider />
-        <IconButton onClick={logout}>
-          <BlurOn />
-        </IconButton>
       </Drawer>
-    </div>
+    </>
   )
 }

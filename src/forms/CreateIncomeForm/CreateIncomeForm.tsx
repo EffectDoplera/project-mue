@@ -1,6 +1,6 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import { Autocomplete, Button, Stack, TextField, Typography } from '@mui/material'
+import { Autocomplete, Button, Stack, TextField, Typography, InputAdornment } from '@mui/material'
 import { CreateIncomeDto } from 'core/domain'
 import { useFormik } from 'formik'
 import { INITIAL_VALUES } from 'forms/CreateIncomeForm/CreateIncomeFormConfig'
@@ -49,6 +49,9 @@ const CreateIncomeForm: FC = () => {
         onChange={formik.handleChange}
         error={formik.touched.value && Boolean(formik.errors.value)}
         fullWidth
+        InputProps={{
+          startAdornment: <InputAdornment position="start">₽</InputAdornment>,
+        }}
       />
 
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -75,6 +78,16 @@ const CreateIncomeForm: FC = () => {
             error={formik.touched.category && Boolean(formik.errors.category)}
           />
         )}
+      />
+
+      <TextField
+        label="Comment"
+        id="comment"
+        name="comment"
+        value={formik.values.comment}
+        error={formik.touched.comment && Boolean(formik.errors.comment)}
+        onChange={formik.handleChange}
+        fullWidth
       />
 
       <Button type="submit" fullWidth color="primary" variant="contained">

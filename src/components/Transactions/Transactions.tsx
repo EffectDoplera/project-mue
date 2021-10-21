@@ -7,22 +7,28 @@ interface TransactionsProps {
   transactions: Income[] | Expense[]
 }
 
-export const Transactions: FC<TransactionsProps> = ({ transactions }) => (
-  <List dense>
-    {transactions.map(({ category, value }) => (
-      <ListItem key={category}>
-        <ListItemAvatar>
-          <TransactionIcon category={category} />
-        </ListItemAvatar>
-        <ListItemText
-          primary={category}
-          secondary={
-            <Typography variant="h6">
-              {value} {'RUB'}
-            </Typography>
-          }
-        />
-      </ListItem>
-    ))}
-  </List>
-)
+export const Transactions: FC<TransactionsProps> = ({ transactions }) => {
+  if (!transactions.length) {
+    return <Typography variant="h6">This list is still empty</Typography>
+  }
+
+  return (
+    <List dense>
+      {transactions.map(({ category, value, _id }) => (
+        <ListItem key={_id}>
+          <ListItemAvatar>
+            <TransactionIcon category={category} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={category}
+            secondary={
+              <Typography variant="h6">
+                {value} {'RUB'}
+              </Typography>
+            }
+          />
+        </ListItem>
+      ))}
+    </List>
+  )
+}
