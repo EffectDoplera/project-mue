@@ -1,10 +1,10 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Income } from 'core/domain'
 import React, { FC } from 'react'
-import { IIncome } from 'types'
 import IncomeItem from 'components/IncomeList/IncomeItem'
 
 interface IIncomeListProps {
-  incomes: IIncome[]
+  incomes: Income[]
 }
 
 const IncomeList: FC<IIncomeListProps> = ({ incomes }) => {

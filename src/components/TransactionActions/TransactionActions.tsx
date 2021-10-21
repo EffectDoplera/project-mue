@@ -1,15 +1,15 @@
 import { Button } from '@mui/material'
 import { TransactionActionItem } from 'components/TransactionActions/TransactionActionItem'
-import { TransactionsType } from 'enums'
+import { CategoryType } from 'core/enums'
 import Link from 'next/link'
 import { FC } from 'react'
 
 interface TransactionActionsProps {
-  type: TransactionsType
+  type: CategoryType
 }
 
 export const TransactionActions: FC<TransactionActionsProps> = ({ type }) => (
-  <Link href={type === TransactionsType.COST ? '/create-cost' : '/create-income'} passHref>
+  <Link href={type === CategoryType.EXPENSE ? '/create-cost' : '/create-income'} passHref>
     <Button fullWidth>
       <TransactionActionItem type={type} />
     </Button>

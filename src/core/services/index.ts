@@ -1,5 +1,4 @@
-export type { IAuthorizeService } from 'core/services/authorize/AuthorizeService'
 export type { ICategoryServiceBuilder } from 'core/services/category/CategoriesServiceBuilder'
-export type { ICategoryService as ICategoriesService } from 'core/services/category/CategoryService'
-export type { IIncomeService } from 'core/services/income/IncomeService'
-export type { IUsersService } from 'core/services/users/UsersService'
+export * from './IncomeService'
+export * from './AuthorizeService'
+export * from 'core/services/UserService'

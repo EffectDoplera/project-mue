@@ -1,5 +1,7 @@
 .next
 .idea
+.vercel
+.github
 
 node_modules
 next-env.d.ts

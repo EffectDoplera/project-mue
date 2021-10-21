@@ -1,49 +1,50 @@
-import { CostCategory, IncomeCategory } from 'enums'
+import { Expense, Income } from 'core/domain'
+import { ExpenseCategory, IncomeCategory } from 'core/enums'
 
-export const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'RUB',
-    label: 'RUB',
-  },
-]
+export const incomeCategories: IncomeCategory[] = [IncomeCategory.SALARY, IncomeCategory.ADVANCE, IncomeCategory.OTHER]
 
-export const incomeCategories = [IncomeCategory.SALARY, IncomeCategory.ADVANCE, IncomeCategory.OTHER]
-
-export const income = [
+export const income: Income[] = [
   {
     category: IncomeCategory.SALARY,
     value: 30000,
-    currency: 'рублей',
+    _id: '1',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
   {
     category: IncomeCategory.SPORT_COMPENSATION,
     value: 1000,
-    currency: 'рублей',
+    _id: '2',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
 ]
 
-export const expense = [
+export const expense: Expense[] = [
   {
-    category: CostCategory.CASH,
+    category: ExpenseCategory.CASH,
     value: 3000,
-    currency: 'рублей',
+    _id: '1',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
   {
-    category: CostCategory.VOCATION,
+    category: ExpenseCategory.VOCATION,
     value: 5000,
-    currency: 'рублей',
+    _id: '2',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
   {
-    category: CostCategory.UTILITIES,
+    category: ExpenseCategory.UTILITIES,
     value: 500,
-    currency: 'рублей',
+    _id: '3',
+    comment: '',
+    title: 'Наличные',
+    date: Date.now().toLocaleString(),
   },
 ]
