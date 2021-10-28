@@ -34,7 +34,15 @@ const FinancialAnalysis: NextPage = () => {
         </Grid>
 
         <Grid item xs={12} md={8} lg={8}>
-          <Paper style={{ width: '100%', minHeight: 400, height: '100%' }}>
+          <Paper
+            style={{
+              width: '100%',
+              minHeight: 400,
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Char />
           </Paper>
         </Grid>

@@ -1,35 +1,23 @@
+import { Paper } from '@mui/material'
+import { useAppSelector } from 'hooks'
+import { selectSquashedByCategoryIncomesForChar } from 'modules/Income/incomeSlice'
 import React from 'react'
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts'
 
 export const Char = () => {
-  const data = [
-    {
-      subject: 'Отпуск',
-      A: 120,
-      B: 110,
-      fullMark: 150,
-    },
-    {
-      subject: 'Выдача наличных',
-      A: 98,
-      B: 130,
-      fullMark: 150,
-    },
-    {
-      subject: 'Коммунальные услуги',
-      A: 86,
-      B: 130,
-      fullMark: 150,
-    },
-  ]
+  const incomes = useAppSelector(selectSquashedByCategoryIncomesForChar)
 
-  return (
+  return incomes.length < 3 ? (
+    <Paper variant="outlined" style={{ width: 300, backgroundColor: 'yellowgreen', textAlign: 'center' }}>
+      {`There are too few categories to display the expense graph. Enter a few more ${3 - incomes.length}`}
+    </Paper>
+  ) : (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-        <PolarGrid />
-        <PolarAngleAxis dataKey="subject" />
+      <RadarChart data={incomes}>
+        <PolarGrid gridType="circle" />
+        <PolarAngleAxis dataKey="transactionName" />
         <PolarRadiusAxis />
-        <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+        <Radar name="Expense" dataKey="A" stroke="#556cd6" fill="#556cd6" fillOpacity={0.8} />
       </RadarChart>
     </ResponsiveContainer>
   )

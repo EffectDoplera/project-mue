@@ -11,7 +11,7 @@ export const TransactionActionItem: FC<TransactionActionItemProps> = ({ type }) 
   return (
     <Stack direction="row" spacing={1}>
       <ControlPointIcon />
-      <Typography>{`Внести ${type}`}</Typography>
+      <Typography>{`Add ${type}`}</Typography>
     </Stack>
   )
 }

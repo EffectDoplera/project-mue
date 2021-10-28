@@ -15,7 +15,7 @@ export const MoneyCard = () => {
             <Typography variant="h4">
               {incomesSum} {'₽'}
             </Typography>
-            <Typography color="textSecondary">{`Прогноз на месяц ${Math.ceil(
+            <Typography color="textSecondary">{`Monthly expense forecast ${Math.ceil(
               Math.random() * incomesSum + incomesSum,
             )} ₽`}</Typography>
           </Grid>

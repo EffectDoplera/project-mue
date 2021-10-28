@@ -63,6 +63,10 @@ export const selectSquashedByCategoryIncomes = createSelector(selectIncomes, ({ 
   }, [])
 })
 
+export const selectSquashedByCategoryIncomesForChar = createSelector(selectSquashedByCategoryIncomes, (incomes) =>
+  incomes.map(({ value, category }) => ({ transactionName: category, A: value })),
+)
+
 export const selectIncomesSum = createSelector(selectIncomes, ({ incomes }) =>
   incomes.reduce((acc, income) => acc + income.value, 0),
 )
