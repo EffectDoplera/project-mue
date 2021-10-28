@@ -22,7 +22,7 @@ const IncomesModal: FC<IncomesModalProps> = ({ open, setOpen }) => {
   const handleClose = () => setOpen(false)
 
   return (
-    <div>
+    <>
       <Button fullWidth onClick={handleOpen}>
         <TransactionActionItem type={CategoryType.INCOME} />
       </Button>
@@ -38,7 +38,7 @@ const IncomesModal: FC<IncomesModalProps> = ({ open, setOpen }) => {
           </Paper>
         </Stack>
       </Modal>
-    </div>
+    </>
   )
 }
 

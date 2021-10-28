@@ -27,7 +27,14 @@ const CreateIncomeForm: FC = () => {
   })
 
   return (
-    <Stack p={2} spacing={2} component="form" onSubmit={formik.handleSubmit} width={600} alignItems="center">
+    <Stack
+      p={2}
+      spacing={2}
+      component="form"
+      onSubmit={formik.handleSubmit}
+      width={{ xs: 300, sm: 500 }}
+      alignItems="center"
+    >
       <Typography variant="h3">New Income</Typography>
 
       <TextField
