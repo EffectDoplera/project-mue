@@ -1,9 +1,11 @@
+import { useTabContext } from '@mui/lab'
 import { Card, CardContent, Grid, Paper, Typography } from '@mui/material'
 import { useAppSelector } from 'hooks'
 import { selectIncomesSum } from 'modules/Income/incomeSlice'
 import React from 'react'
 
 export const MoneyCard = () => {
+  const tabCtx = useTabContext()
   const incomesSum = useAppSelector(selectIncomesSum)
   const FEATURE = false
 
@@ -15,7 +17,7 @@ export const MoneyCard = () => {
             <Typography variant="h4">
               {incomesSum} {'₽'}
             </Typography>
-            <Typography color="textSecondary">{`Monthly expense forecast ${Math.ceil(
+            <Typography color="textSecondary">{`Monthly ${tabCtx?.value?.toLowerCase()} forecast ${Math.ceil(
               Math.random() * incomesSum + incomesSum,
             )} ₽`}</Typography>
           </Grid>

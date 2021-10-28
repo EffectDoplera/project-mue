@@ -37,29 +37,30 @@ const Dashboard: NextPage = () => {
 
   const handleChange = (event: React.SyntheticEvent, newValue: CategoryType) => setTabValue(newValue)
 
+  // TODO: вынести изменения  типа транзакции в контекст и получать данные в компонентах через хук
   return (
     <MainLayout>
-      <Grid container spacing={3} paddingTop={3}>
-        <Grid item xs={12}>
-          <MoneyCard />
-        </Grid>
+      <TabContext value={tabValue}>
+        <Grid container spacing={3} paddingTop={3}>
+          <Grid item xs={12}>
+            <MoneyCard />
+          </Grid>
 
-        <Grid item xs={12} md={8} lg={8}>
-          <Paper
-            style={{
-              width: '100%',
-              minHeight: 400,
-              height: '100%',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Char />
-          </Paper>
-        </Grid>
+          <Grid item xs={12} md={8} lg={8}>
+            <Paper
+              style={{
+                width: '100%',
+                minHeight: 400,
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Char />
+            </Paper>
+          </Grid>
 
-        <Grid item xs={12} md={4} lg={4}>
-          <TabContext value={tabValue}>
+          <Grid item xs={12} md={4} lg={4}>
             <Stack spacing={2}>
               <Paper>
                 <TabList onChange={handleChange} centered variant="fullWidth">
@@ -84,9 +85,9 @@ const Dashboard: NextPage = () => {
                 </TabPanel>
               </Paper>
             </Stack>
-          </TabContext>
+          </Grid>
         </Grid>
-      </Grid>
+      </TabContext>
     </MainLayout>
   )
 }
