@@ -28,46 +28,44 @@ const FinancialAnalysis: NextPage = () => {
 
   return (
     <MainLayout>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} paddingTop={3}>
         <Grid item xs={12}>
           <MoneyCard />
         </Grid>
 
-        <Grid item xs={12} lg={8}>
+        <Grid item xs={12} md={8} lg={8}>
           <Paper style={{ width: '100%', minHeight: 400, height: '100%' }}>
             <Char />
           </Paper>
         </Grid>
 
-        <Grid item xs={12} lg={4}>
-          <Box sx={{ width: '100%', typography: 'body1' }}>
-            <TabContext value={tabValue}>
-              <Stack spacing={2}>
-                <Paper>
-                  <TabList onChange={handleChange} aria-label="lab API tabs example" centered variant="fullWidth">
-                    <Tab label={CategoryType.INCOME} value={CategoryType.INCOME} />
-                    <Tab label={CategoryType.EXPENSE} value={CategoryType.EXPENSE} />
-                  </TabList>
-                </Paper>
-                <Paper>
-                  <TabPanel value={CategoryType.INCOME}>
-                    <Income />
-                  </TabPanel>
-                  <TabPanel value={CategoryType.EXPENSE}>
-                    <Expense />
-                  </TabPanel>
-                </Paper>
-                <Paper>
-                  <TabPanel value={CategoryType.INCOME}>
-                    <IncomesModal open={openIncomeModal} setOpen={setOpenIncomeModal} />
-                  </TabPanel>
-                  <TabPanel value={CategoryType.EXPENSE}>
-                    <TransactionActions type={CategoryType.EXPENSE} />
-                  </TabPanel>
-                </Paper>
-              </Stack>
-            </TabContext>
-          </Box>
+        <Grid item xs={12} md={4} lg={4}>
+          <TabContext value={tabValue}>
+            <Stack spacing={2}>
+              <Paper>
+                <TabList onChange={handleChange} centered variant="fullWidth">
+                  <Tab label={CategoryType.INCOME} value={CategoryType.INCOME} />
+                  <Tab label={CategoryType.EXPENSE} value={CategoryType.EXPENSE} />
+                </TabList>
+              </Paper>
+              <Paper>
+                <TabPanel value={CategoryType.INCOME}>
+                  <Income />
+                </TabPanel>
+                <TabPanel value={CategoryType.EXPENSE}>
+                  <Expense />
+                </TabPanel>
+              </Paper>
+              <Paper>
+                <TabPanel value={CategoryType.INCOME}>
+                  <IncomesModal open={openIncomeModal} setOpen={setOpenIncomeModal} />
+                </TabPanel>
+                <TabPanel value={CategoryType.EXPENSE}>
+                  <TransactionActions type={CategoryType.EXPENSE} />
+                </TabPanel>
+              </Paper>
+            </Stack>
+          </TabContext>
         </Grid>
       </Grid>
     </MainLayout>

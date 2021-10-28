@@ -10,7 +10,7 @@ const MainLayout: FC = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Container style={{ marginTop: 50 }}>{isLoading ? <CircularProgress disableShrink /> : children}</Container>
+      <Container>{isLoading ? <CircularProgress disableShrink /> : children}</Container>
       <Box height={50} />
     </>
   )
