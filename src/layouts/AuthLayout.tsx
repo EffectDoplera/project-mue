@@ -1,9 +1,7 @@
-import { FC } from 'react'
-import { CircularProgress, Container } from '@mui/material'
+import { Container } from '@mui/material'
 
 import makeStyles from '@mui/styles/makeStyles'
-import { useAppSelector } from 'hooks'
-import { selectIsLoading } from 'store/globalSlice'
+import { FC } from 'react'
 
 const useStyles = makeStyles({
   root: {
@@ -20,12 +18,12 @@ const useStyles = makeStyles({
 
 const AuthLayout: FC = ({ children }) => {
   const styles = useStyles()
-  const isLoading = useAppSelector(selectIsLoading)
+  // const isLoading = useAppSelector(selectIsLoading)
 
   return (
     <>
       <div className={styles.root}>
-        <Container className={styles.container}>{isLoading ? <CircularProgress disableShrink /> : children}</Container>
+        <Container className={styles.container}>{children}</Container>
       </div>
     </>
   )

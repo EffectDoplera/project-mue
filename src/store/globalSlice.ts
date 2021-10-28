@@ -7,7 +7,7 @@ export type GlobalState = {
 }
 
 const initialState: GlobalState = {
-  isLoading: false,
+  isLoading: true,
   isInit: false,
 }
 

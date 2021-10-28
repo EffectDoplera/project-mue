@@ -18,7 +18,7 @@ const CreateIncomeForm: FC = () => {
 
   const createIncomeHandler = async (values: CreateIncomeDto) => {
     dispatch(createForCurrentUser(values))
-    await router.push(PageRoutes.FINANCIAL_ANALYSIS)
+    await router.push(PageRoutes.MAIN)
   }
 
   const formik = useFormik({

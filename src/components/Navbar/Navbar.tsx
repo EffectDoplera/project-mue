@@ -16,6 +16,7 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  Box,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useAuth } from 'hooks'
@@ -51,33 +52,41 @@ export default function Navbar() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="persistent" anchor="left" open={open}>
-        <div>
-          <IconButton onClick={handleDrawerClose} size="large">
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {ROUTES.map(({ text, href, icon }) => {
-            const Icon = icon ?? BlurOn
-            return (
-              <ListItem button key={href} onClick={navigateTo(href)}>
-                <ListItemIcon>
-                  <Icon />
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            )
-          })}
+      <Drawer anchor="left" open={open}>
+        <Box sx={{ width: 250 }}>
+          <div>
+            <IconButton onClick={handleDrawerClose} size="large">
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </div>
+
           <Divider />
-          <ListItem button onClick={logout}>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary={'logout'} />
-          </ListItem>
-        </List>
+
+          <List>
+            {ROUTES.map(({ text, href, icon }) => {
+              const Icon = icon ?? BlurOn
+              return (
+                <ListItem button key={href} onClick={navigateTo(href)}>
+                  <ListItemIcon>
+                    <Icon />
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              )
+            })}
+          </List>
+
+          <Divider />
+
+          <List>
+            <ListItem button onClick={logout}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Logout'} />
+            </ListItem>
+          </List>
+        </Box>
       </Drawer>
     </>
   )

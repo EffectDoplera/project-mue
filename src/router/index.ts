@@ -5,7 +5,6 @@ export enum PageRoutes {
   MAIN = '/',
   LOGIN = '/login',
   SIGN_UP = '/signup',
-  FINANCIAL_ANALYSIS = '/financial-analysis',
 }
 
 type RoutePage = {
@@ -17,17 +16,12 @@ type RoutePage = {
 export const ROUTES: RoutePage[] = [
   {
     href: PageRoutes.MAIN,
-    text: 'Главная',
+    text: 'Dashboard',
     icon: Dashboard,
   },
   {
     href: PageRoutes.LOGIN,
-    text: 'Логин',
+    text: 'Login',
     icon: Person,
-  },
-  {
-    href: PageRoutes.FINANCIAL_ANALYSIS,
-    text: 'Анализ финансов',
-    icon: CreditCard,
   },
 ]
