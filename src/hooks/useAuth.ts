@@ -1,19 +1,23 @@
-import { SigningDto, SignupDto } from 'core/domain'
+import { SigningDto, SignupDto, UserModel } from 'core/domain'
+import { useLocalStorage } from 'hooks'
 import { useAppDispatch } from 'hooks/useAppDispatch'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { PageRoutes } from 'router'
-import { logout, selectAuthState, signIn, signUp } from 'store/authSlice'
+import { logout, selectAuthState, setStorageUser, signIn, signUp } from 'store/authSlice'
 
 export const useAuth = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const authState = useAppSelector(selectAuthState)
+  const [storageUser] = useLocalStorage<UserModel | null>('user', null)
 
   useEffect(() => {
-    void (async () => await router.prefetch(PageRoutes.MAIN))()
-  }, [router])
+    if (storageUser) {
+      dispatch(setStorageUser(storageUser))
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const signInHandler = async (data: SigningDto) => {
     dispatch(signIn(data))
@@ -32,6 +36,7 @@ export const useAuth = () => {
 
   return {
     ...authState,
+    ...storageUser,
     signIn: signInHandler,
     signUp: signUpHandler,
     logout: logoutHandler,

@@ -1,29 +1,26 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import { Autocomplete, Button, Stack, TextField, Typography, InputAdornment } from '@mui/material'
-import { CreateIncomeDto } from 'core/domain'
+import { CreateExpenseDto } from 'core/domain'
 import { useFormik } from 'formik'
-import { INITIAL_VALUES } from 'forms/CreateIncomeForm/CreateIncomeFormConfig'
+import { INITIAL_VALUES } from './CreateExpense.config'
 import { useAppDispatch, useAppSelector } from 'hooks'
-import { createForCurrentUser, selectIncomeOptions } from 'store/incomeSlice'
-import { useRouter } from 'next/dist/client/router'
+import { createForCurrentUser, selectExpenseCategories } from 'store/expenseSlice'
 import { FC } from 'react'
-import { PageRoutes } from 'router'
 
-const CreateIncomeForm: FC = () => {
+const CreateExpenseForm: FC<{ onFinish: () => void }> = ({ onFinish }) => {
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
-  const incomeCategories = useAppSelector(selectIncomeOptions)
+  const expenseCategories = useAppSelector(selectExpenseCategories)
 
-  const createIncomeHandler = async (values: CreateIncomeDto) => {
+  const createExpenseHandler = async (values: CreateExpenseDto) => {
     dispatch(createForCurrentUser(values))
-    await router.push(PageRoutes.MAIN)
+    onFinish()
   }
 
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
-    onSubmit: createIncomeHandler,
+    onSubmit: createExpenseHandler,
   })
 
   return (
@@ -35,12 +32,12 @@ const CreateIncomeForm: FC = () => {
       width={{ xs: 300, sm: 500 }}
       alignItems="center"
     >
-      <Typography variant="h3">New Income</Typography>
+      <Typography variant="h3">New Expense</Typography>
 
       <TextField
-        label="Name"
-        id="name"
-        name="name"
+        label="Title"
+        id="title"
+        name="title"
         value={formik.values.title}
         error={formik.touched.title && Boolean(formik.errors.title)}
         onChange={formik.handleChange}
@@ -73,7 +70,7 @@ const CreateIncomeForm: FC = () => {
       <Autocomplete
         disablePortal
         id="category"
-        options={incomeCategories}
+        options={expenseCategories}
         fullWidth
         renderInput={(params) => (
           <TextField
@@ -104,4 +101,4 @@ const CreateIncomeForm: FC = () => {
   )
 }
 
-export default CreateIncomeForm
+export default CreateExpenseForm

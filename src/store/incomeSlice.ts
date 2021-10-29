@@ -4,7 +4,6 @@ import { IncomeService } from 'data/services'
 import { IncomeCategory } from 'core/enums'
 import { incomeCategories } from 'mocks'
 import { RootState } from 'store/store'
-import { convertCategoryName } from 'utils/helpers/category'
 
 export type IncomeState = {
   incomes: Income[]
