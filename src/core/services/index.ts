@@ -1,4 +1,5 @@
 export type { ICategoryServiceBuilder } from 'core/services/category/CategoriesServiceBuilder'
 export * from './IncomeService'
+export * from './ExpenseService'
 export * from './AuthorizeService'
-export * from 'core/services/UserService'
+export * from './UserService'

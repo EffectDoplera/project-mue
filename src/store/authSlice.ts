@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { SigningDto, SignupDto, UserModel } from 'core/domain'
 import { AuthorizeService } from 'data/services'
 import { RootState } from './store'
@@ -35,10 +35,16 @@ export const logout = createAsyncThunk('logout', async () => {
   await AuthorizeService.logout()
 })
 
+export const setStorageUser = createAsyncThunk('setStorageUser', (userData: UserModel) => {
+  return userData
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setStorageUser: (state, action: PayloadAction<AuthState>) => action.payload,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signIn.fulfilled, (state, action) => {
@@ -52,6 +58,10 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = null
         state.isAuthenticated = false
+      })
+      .addCase(setStorageUser.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.isAuthenticated = true
       })
   },
 })

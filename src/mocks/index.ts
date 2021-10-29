@@ -2,6 +2,14 @@ import { Expense, Income } from 'core/domain'
 import { ExpenseCategory, IncomeCategory } from 'core/enums'
 
 export const incomeCategories: IncomeCategory[] = [IncomeCategory.SALARY, IncomeCategory.ADVANCE, IncomeCategory.OTHER]
+export const expenseCategories: ExpenseCategory[] = [
+  ExpenseCategory.CASH,
+  ExpenseCategory.SPORT,
+  ExpenseCategory.TRANSPORT,
+  ExpenseCategory.HOUSE_RENT,
+  ExpenseCategory.CLOTHES,
+  ExpenseCategory.VOCATION,
+]
 
 export const income: Income[] = [
   {

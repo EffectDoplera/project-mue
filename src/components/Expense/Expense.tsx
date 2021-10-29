@@ -1,12 +1,11 @@
 import { Transactions } from 'components/index'
 import { useAppSelector } from 'hooks'
-import { expense as mockExpense } from 'mocks'
-import { selectExpense } from 'modules/expense/expenseSlice'
+import { selectSquashedByCategoryExpense } from 'store/expenseSlice'
 
 const Expense = () => {
-  const { expense } = useAppSelector(selectExpense)
+  const expenses = useAppSelector(selectSquashedByCategoryExpense)
 
-  return <Transactions transactions={[...expense, ...mockExpense]} />
+  return <Transactions transactions={expenses} />
 }
 
 export default Expense

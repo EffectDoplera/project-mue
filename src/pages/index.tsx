@@ -1,11 +1,12 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Grid, Paper, Stack, Tab } from '@mui/material'
-import { Expense, Income, IncomesModal, MoneyCard, TransactionActions } from 'components'
+import { Expense, Income, IncomesModal, MoneyCard, ExpensesModal } from 'components'
 import { Char } from 'components/Char/Char'
 import { CategoryType } from 'core/enums'
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks'
 import { MainLayout } from 'layouts'
-import { getIncomeByUserId, selectSquashedByCategoryIncomes } from 'modules/Income/incomeSlice'
+import { getExpenseByUserId, selectSquashedByCategoryExpense } from 'store/expenseSlice'
+import { getIncomeByUserId, selectSquashedByCategoryIncomes } from 'store/incomeSlice'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -16,9 +17,10 @@ const Dashboard: NextPage = () => {
   const { isAuthenticated } = useAuth()
   const router = useRouter()
 
-  const [openIncomeModal, setOpenIncomeModal] = useState(false)
+  const [isOpenTransactionModal, setIsOpenTransactionModal] = useState(false)
   const dispatch = useAppDispatch()
   const incomes = useAppSelector(selectSquashedByCategoryIncomes)
+  const expenses = useAppSelector(selectSquashedByCategoryExpense)
   const isLoading = useAppSelector(selectIsLoading)
 
   useEffect(() => {
@@ -31,7 +33,11 @@ const Dashboard: NextPage = () => {
     if (!incomes.length && !isLoading) {
       dispatch(getIncomeByUserId())
     }
-  }, [dispatch, isLoading, incomes])
+
+    if (!expenses.length && !isLoading) {
+      dispatch(getExpenseByUserId())
+    }
+  }, [dispatch, isLoading, incomes, expenses])
 
   const [tabValue, setTabValue] = useState(CategoryType.INCOME)
 
@@ -78,10 +84,10 @@ const Dashboard: NextPage = () => {
               </Paper>
               <Paper>
                 <TabPanel value={CategoryType.INCOME}>
-                  <IncomesModal open={openIncomeModal} setOpen={setOpenIncomeModal} />
+                  <IncomesModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
                 </TabPanel>
                 <TabPanel value={CategoryType.EXPENSE}>
-                  <TransactionActions type={CategoryType.EXPENSE} />
+                  <ExpensesModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
                 </TabPanel>
               </Paper>
             </Stack>

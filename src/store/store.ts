@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
-import expenseReducer from 'modules/expense/expenseSlice'
-import incomeReducer from 'modules/Income/incomeSlice'
+import expenseReducer from 'store/expenseSlice'
+import incomeReducer from 'store/incomeSlice'
 import authReducer from 'store/authSlice'
 import globalReducer from 'store/globalSlice'
 

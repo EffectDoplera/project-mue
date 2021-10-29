@@ -1,19 +1,27 @@
+import { useTabContext } from '@mui/lab'
 import { Paper } from '@mui/material'
+import { CategoryType } from 'core/enums'
 import { useAppSelector } from 'hooks'
-import { selectSquashedByCategoryIncomesForChar } from 'modules/Income/incomeSlice'
 import React from 'react'
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts'
+import { selectSquashedByCategoryExpensesForChar } from 'store/expenseSlice'
+import { selectSquashedByCategoryIncomesForChar } from 'store/incomeSlice'
 
 export const Char = () => {
-  const incomes = useAppSelector(selectSquashedByCategoryIncomesForChar)
+  const tabCtx = useTabContext()
+  const transactions = useAppSelector(
+    tabCtx?.value === CategoryType.INCOME
+      ? selectSquashedByCategoryIncomesForChar
+      : selectSquashedByCategoryExpensesForChar,
+  )
 
-  return incomes.length < 3 ? (
+  return transactions.length < 3 ? (
     <Paper variant="outlined" style={{ width: 300, backgroundColor: 'yellowgreen', textAlign: 'center' }}>
-      {`There are too few categories to display the expense graph. Enter a few more ${3 - incomes.length}`}
+      {`There are too few categories to display the expense graph. Enter a few more ${3 - transactions.length}`}
     </Paper>
   ) : (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart data={incomes}>
+      <RadarChart data={transactions}>
         <PolarGrid gridType="circle" />
         <PolarAngleAxis dataKey="transactionName" />
         <PolarRadiusAxis />
