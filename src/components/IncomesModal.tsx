@@ -34,7 +34,7 @@ const IncomesModal: FC<IncomesModalProps> = ({ open, setOpen }) => {
       >
         <Stack alignItems="center" justifyContent="center" direction="column" gap={2} sx={style}>
           <Paper>
-            <CreateIncomeForm />
+            <CreateIncomeForm onFinish={handleClose} />
           </Paper>
         </Stack>
       </Modal>

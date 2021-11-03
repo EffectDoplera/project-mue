@@ -1,14 +1,8 @@
-import { useTabContext } from '@mui/lab'
 import { Card, CardContent, Grid, Paper, Typography } from '@mui/material'
-import { CategoryType } from 'core/enums'
-import { useAppSelector } from 'hooks'
-import { selectExpensesSum } from 'store/expenseSlice'
-import { selectIncomesSum } from 'store/incomeSlice'
-import React from 'react'
+import { useTransactionSelector } from 'hooks'
 
 export const MoneyCard = () => {
-  const tabCtx = useTabContext()
-  const transactionSum = useAppSelector(tabCtx?.value === CategoryType.INCOME ? selectIncomesSum : selectExpensesSum)
+  const { transactionSum, transactionType } = useTransactionSelector()
   const FEATURE = false
 
   return (
@@ -19,7 +13,7 @@ export const MoneyCard = () => {
             <Typography variant="h4">
               {transactionSum} {'₽'}
             </Typography>
-            <Typography color="textSecondary">{`Monthly ${tabCtx?.value?.toLowerCase()} forecast ${Math.ceil(
+            <Typography color="textSecondary">{`Monthly ${transactionType.toLowerCase()} forecast ${Math.ceil(
               Math.random() * transactionSum + transactionSum,
             )} ₽`}</Typography>
           </Grid>

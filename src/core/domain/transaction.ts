@@ -7,3 +7,5 @@ export interface Transaction extends BaseDomain {
   readonly category: string
   readonly comment: string
 }
+
+export type CreateTransactionDto = Omit<Transaction, '_id'>

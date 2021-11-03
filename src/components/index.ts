@@ -1,7 +1,7 @@
 export { MoneyCard } from 'components/MoneyCard'
+export { Char } from 'components/Char'
 export { default as IncomesModal } from 'components/IncomesModal'
 export { default as ExpensesModal } from 'components/ExpensesModal'
-export { TabPanel } from 'components/TabPanel/TabPanel'
 export { Transactions } from 'components/Transactions/Transactions'
 export { TransactionActions } from 'components/TransactionActions/TransactionActions'
 export { default as Income } from 'components/Income/Income'

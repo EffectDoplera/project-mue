@@ -1,11 +1,10 @@
 import { Transactions } from 'components/Transactions/Transactions'
-import { useAppSelector } from 'hooks'
-import { selectIncomes, selectSquashedByCategoryIncomes } from 'store/incomeSlice'
+import { useTransactionSelector } from 'hooks'
 
 const Income = () => {
-  const incomes = useAppSelector(selectSquashedByCategoryIncomes)
+  const { transactions } = useTransactionSelector()
 
-  return <Transactions transactions={incomes} />
+  return <Transactions transactions={transactions} />
 }
 
 export default Income

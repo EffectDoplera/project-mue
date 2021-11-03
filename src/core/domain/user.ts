@@ -11,6 +11,6 @@ export interface UserModel extends BaseDomain {
 }
 
 export interface User extends UserModel {
-  readonly incomeCategories: IncomeCategory[]
-  readonly expenseCategories: ExpenseCategory[]
+  // readonly incomeCategories: IncomeCategory[]
+  // readonly expenseCategories: ExpenseCategory[]
 }

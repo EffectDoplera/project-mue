@@ -1,24 +1,20 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import { Autocomplete, Button, Stack, TextField, Typography, InputAdornment } from '@mui/material'
+import { Autocomplete, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { CreateIncomeDto } from 'core/domain'
 import { useFormik } from 'formik'
 import { INITIAL_VALUES } from 'forms/CreateIncomeForm/CreateIncomeFormConfig'
-import { useAppDispatch, useAppSelector } from 'hooks'
-import { createForCurrentUser, selectIncomeOptions } from 'store/incomeSlice'
-import { useRouter } from 'next/dist/client/router'
+import { useAppDispatch, useTransactionSelector } from 'hooks'
 import { FC } from 'react'
-import { PageRoutes } from 'router'
 
-const CreateIncomeForm: FC = () => {
+const CreateIncomeForm: FC<{ onFinish: () => void }> = ({ onFinish }) => {
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
-  const incomeCategories = useAppSelector(selectIncomeOptions)
+  const { transactionOptions: incomeCategories, createForCurrentUser } = useTransactionSelector()
 
   const createIncomeHandler = async (values: CreateIncomeDto) => {
     dispatch(createForCurrentUser(values))
-    await router.push(PageRoutes.MAIN)
+    onFinish()
   }
 
   const formik = useFormik({

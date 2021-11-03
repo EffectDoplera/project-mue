@@ -2,8 +2,9 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { FC } from 'react'
-import { wrapper } from 'store/store'
+import React, { FC } from 'react'
+import { Provider } from 'react-redux'
+import { store } from 'store/store'
 import theme from 'theme'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
@@ -17,14 +18,16 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <title>Project Mue</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </StyledEngineProvider>
+      <Provider store={store}>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </Provider>
     </>
   )
 }
 
-export default wrapper.withRedux(MyApp)
+export default MyApp

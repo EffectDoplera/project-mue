@@ -1,12 +1,8 @@
-import { TabContext, TabList, TabPanel } from '@mui/lab'
-import { Grid, Paper, Stack, Tab } from '@mui/material'
-import { Expense, Income, IncomesModal, MoneyCard, ExpensesModal } from 'components'
-import { Char } from 'components/Char/Char'
+import { TabContext } from '@mui/lab'
 import { CategoryType } from 'core/enums'
-import { useAppDispatch, useAppSelector, useAuth } from 'hooks'
+import { useAppSelector, useAuth } from 'hooks'
 import { MainLayout } from 'layouts'
-import { getExpenseByUserId, selectSquashedByCategoryExpense } from 'store/expenseSlice'
-import { getIncomeByUserId, selectSquashedByCategoryIncomes } from 'store/incomeSlice'
+import { DashboardModule } from 'modules'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -16,11 +12,6 @@ import { selectIsLoading } from 'store/globalSlice'
 const Dashboard: NextPage = () => {
   const { isAuthenticated } = useAuth()
   const router = useRouter()
-
-  const [isOpenTransactionModal, setIsOpenTransactionModal] = useState(false)
-  const dispatch = useAppDispatch()
-  const incomes = useAppSelector(selectSquashedByCategoryIncomes)
-  const expenses = useAppSelector(selectSquashedByCategoryExpense)
   const isLoading = useAppSelector(selectIsLoading)
 
   useEffect(() => {
@@ -29,70 +20,14 @@ const Dashboard: NextPage = () => {
     }
   }, [isAuthenticated, isLoading, router])
 
-  useEffect(() => {
-    if (!incomes.length && !isLoading) {
-      dispatch(getIncomeByUserId())
-    }
-
-    if (!expenses.length && !isLoading) {
-      dispatch(getExpenseByUserId())
-    }
-  }, [dispatch, isLoading, incomes, expenses])
-
   const [tabValue, setTabValue] = useState(CategoryType.INCOME)
 
   const handleChange = (event: React.SyntheticEvent, newValue: CategoryType) => setTabValue(newValue)
 
-  // TODO: вынести изменения  типа транзакции в контекст и получать данные в компонентах через хук
   return (
     <MainLayout>
       <TabContext value={tabValue}>
-        <Grid container spacing={3} paddingTop={3}>
-          <Grid item xs={12}>
-            <MoneyCard />
-          </Grid>
-
-          <Grid item xs={12} md={8} lg={8}>
-            <Paper
-              style={{
-                width: '100%',
-                minHeight: 400,
-                height: '100%',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Char />
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12} md={4} lg={4}>
-            <Stack spacing={2}>
-              <Paper>
-                <TabList onChange={handleChange} centered variant="fullWidth">
-                  <Tab label={CategoryType.INCOME} value={CategoryType.INCOME} />
-                  <Tab label={CategoryType.EXPENSE} value={CategoryType.EXPENSE} />
-                </TabList>
-              </Paper>
-              <Paper>
-                <TabPanel value={CategoryType.INCOME}>
-                  <Income />
-                </TabPanel>
-                <TabPanel value={CategoryType.EXPENSE}>
-                  <Expense />
-                </TabPanel>
-              </Paper>
-              <Paper>
-                <TabPanel value={CategoryType.INCOME}>
-                  <IncomesModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
-                </TabPanel>
-                <TabPanel value={CategoryType.EXPENSE}>
-                  <ExpensesModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
-                </TabPanel>
-              </Paper>
-            </Stack>
-          </Grid>
-        </Grid>
+        <DashboardModule changeTransactionContext={handleChange} />
       </TabContext>
     </MainLayout>
   )

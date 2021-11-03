@@ -4,14 +4,13 @@ import { Autocomplete, Button, Stack, TextField, Typography, InputAdornment } fr
 import { CreateExpenseDto } from 'core/domain'
 import { useFormik } from 'formik'
 import { INITIAL_VALUES } from './CreateExpense.config'
-import { useAppDispatch, useAppSelector } from 'hooks'
-import { createForCurrentUser, selectExpenseCategories } from 'store/expenseSlice'
+import { useAppDispatch, useTransactionSelector } from 'hooks'
 import { FC } from 'react'
 
 const CreateExpenseForm: FC<{ onFinish: () => void }> = ({ onFinish }) => {
   const dispatch = useAppDispatch()
 
-  const expenseCategories = useAppSelector(selectExpenseCategories)
+  const { transactionOptions: expenseCategories, createForCurrentUser } = useTransactionSelector()
 
   const createExpenseHandler = async (values: CreateExpenseDto) => {
     dispatch(createForCurrentUser(values))
