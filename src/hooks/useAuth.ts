@@ -6,11 +6,13 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { PageRoutes } from 'router'
 import { logout, selectAuthState, setStorageUser, signIn, signUp } from 'store/authSlice'
+import { selectIsLoading } from 'store/globalSlice'
 
 export const useAuth = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const authState = useAppSelector(selectAuthState)
+  const isLoading = useAppSelector(selectIsLoading)
   const [storageUser] = useLocalStorage<UserModel | null>('user', null)
 
   useEffect(() => {
@@ -18,6 +20,12 @@ export const useAuth = () => {
       dispatch(setStorageUser(storageUser))
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!authState.isAuthenticated && !isLoading) {
+      router.push(PageRoutes.LOGIN).then(() => ({}))
+    }
+  }, [authState.isAuthenticated]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const signInHandler = async (data: SigningDto) => {
     dispatch(signIn(data))
