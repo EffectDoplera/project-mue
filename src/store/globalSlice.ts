@@ -38,8 +38,8 @@ export const globalSlice = createSlice({
   },
 })
 
-export const selectIsInit = (state: RootState) => state.global.isInit
+export const selectIsInit = (state: RootState): boolean => state.global.isInit
 
-export const selectIsLoading = (state: RootState) => state.global.isLoading
+export const selectIsLoading = (state: RootState): boolean => state.global.isLoading
 
 export default globalSlice.reducer

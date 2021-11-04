@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import { store } from 'store/store'
 import theme from 'theme'
 
+// import '../../scripts/wdyr'
+
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   /*
    * TODO: Использовать паттерн getLayout для согласования состояния страницы при изменении различных layout'ов

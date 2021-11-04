@@ -21,6 +21,7 @@
     "@mui/material": "^5.0.0-rc.0",
     "@mui/styles": "^5.0.0-rc.0",
     "@reduxjs/toolkit": "^1.6.1",
+    "@welldone-software/why-did-you-render": "^6.2.1",
     "date-fns": "^2.23.0",
     "firebase": "^9.0.1",
     "firebase-admin": "^9.11.1",

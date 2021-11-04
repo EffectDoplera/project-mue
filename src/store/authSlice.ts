@@ -65,6 +65,5 @@ export const authSlice = createSlice({
 })
 
 export const selectAuthState = (state: RootState) => state.auth
-export const selectIsAuth = createSelector(selectAuthState, (state) => state.isAuthenticated)
 
 export default authSlice.reducer

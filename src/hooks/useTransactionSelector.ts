@@ -1,6 +1,7 @@
 import { CategoryType } from 'core/enums'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { useTransactionTabContext } from 'hooks/useTransactionTabContext'
+import { useMemo } from 'react'
 import {
   createExpense,
   createIncome,
@@ -38,16 +39,19 @@ export const useTransactionSelector = () => {
     transactionType === CategoryType.INCOME ? getAllIncomeCategories : getAllExpenseCategories
   const createForCurrentUser = transactionType === CategoryType.INCOME ? createIncome : createExpense
 
-  return {
-    transactionSum,
-    transactionType,
-    squashedByCategoryForCharTransaction,
-    squashedByCategoryTransaction,
-    transactions,
-    transactionCategories,
-    getAllTransactions,
-    getAllTransactionCategories,
-    createForCurrentUser,
-    transactionOptions,
-  }
+  return useMemo(
+    () => ({
+      transactionSum,
+      transactionType,
+      squashedByCategoryForCharTransaction,
+      squashedByCategoryTransaction,
+      transactions,
+      transactionCategories,
+      getAllTransactions,
+      getAllTransactionCategories,
+      createForCurrentUser,
+      transactionOptions,
+    }),
+    [transactionType],
+  )
 }

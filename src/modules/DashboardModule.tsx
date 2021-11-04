@@ -3,7 +3,7 @@ import { Grid, Paper, Stack, Tab } from '@mui/material'
 import { Char, TransactionModal, MoneyCard, Transactions } from 'components'
 import { CategoryType } from 'core/enums'
 import { useAppDispatch, useAppSelector, useTransactionSelector } from 'hooks'
-import { FC, memo, SyntheticEvent, useLayoutEffect, useState } from 'react'
+import { FC, memo, SyntheticEvent, useEffect, useLayoutEffect, useState } from 'react'
 import { selectIsLoading } from 'store/globalSlice'
 
 interface DashboardModuleProps {
@@ -16,7 +16,7 @@ const DashboardModule: FC<DashboardModuleProps> = ({ changeTransactionContext })
   const { transactions, getAllTransactions, transactionCategories, getAllTransactionCategories, transactionType } =
     useTransactionSelector()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!transactions.length && !isLoading) {
       dispatch(getAllTransactions())
     }
