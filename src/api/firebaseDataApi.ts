@@ -4,7 +4,8 @@ export function convertSnapshotToArray<T>(querySnapshot: QuerySnapshot<T>): T[] 
   const result: T[] = []
 
   querySnapshot.forEach((doc) => {
-    result.push(doc.data())
+    const docItem = { _id: doc.id, ...doc.data() }
+    result.push(docItem)
   })
 
   return result

@@ -1,10 +1,10 @@
 import { Button, Modal, Paper, Stack } from '@mui/material'
-import { TransactionActionItem } from 'components/TransactionActions/TransactionActionItem'
-import { CategoryType } from 'core/enums'
-import { CreateExpensesForm } from 'forms/CreateExpensesForm'
+import { TransactionAction } from 'components/TransactionAction'
+import { CreateTransactionForm } from 'forms/CreateTransactionForm'
+import { useTransactionTabContext } from 'hooks'
 import { FC, memo } from 'react'
 
-interface ExpensesModalProps {
+interface TransactionsModalProps {
   open: boolean
   setOpen: (status: boolean) => void
 }
@@ -16,7 +16,9 @@ const style = {
   transform: 'translate(-50%, -50%)',
 }
 
-const ExpensesModal: FC<ExpensesModalProps> = ({ open, setOpen }) => {
+const TransactionsModal: FC<TransactionsModalProps> = ({ open, setOpen }) => {
+  const transactionType = useTransactionTabContext()
+
   const handleOpen = () => setOpen(true)
 
   const handleClose = () => setOpen(false)
@@ -24,7 +26,7 @@ const ExpensesModal: FC<ExpensesModalProps> = ({ open, setOpen }) => {
   return (
     <>
       <Button fullWidth onClick={handleOpen}>
-        <TransactionActionItem type={CategoryType.EXPENSE} />
+        <TransactionAction type={transactionType} />
       </Button>
       <Modal
         open={open}
@@ -34,7 +36,7 @@ const ExpensesModal: FC<ExpensesModalProps> = ({ open, setOpen }) => {
       >
         <Stack alignItems="center" justifyContent="center" direction="column" gap={2} sx={style}>
           <Paper>
-            <CreateExpensesForm onFinish={handleClose} />
+            <CreateTransactionForm onFinish={handleClose} />
           </Paper>
         </Stack>
       </Modal>
@@ -42,4 +44,4 @@ const ExpensesModal: FC<ExpensesModalProps> = ({ open, setOpen }) => {
   )
 }
 
-export default memo(ExpensesModal)
+export default memo(TransactionsModal)

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useAppSelector } from 'hooks'
 import { selectIsLoading } from 'store/globalSlice'
-import Navbar from 'components/Navbar/Navbar'
+import { Navbar } from 'components'
 import { Box, CircularProgress, Container } from '@mui/material'
 
 const MainLayout: FC = ({ children }) => {

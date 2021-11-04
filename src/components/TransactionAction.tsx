@@ -7,7 +7,7 @@ interface TransactionActionItemProps {
   type: CategoryType
 }
 
-export const TransactionActionItem: FC<TransactionActionItemProps> = ({ type }) => {
+export const TransactionAction: FC<TransactionActionItemProps> = ({ type }) => {
   return (
     <Stack direction="row" spacing={1}>
       <ControlPointIcon />

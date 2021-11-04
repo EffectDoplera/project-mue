@@ -1,13 +1,11 @@
 import { List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import TransactionIcon from 'components/Transactions/TransactionIcon'
-import { Expense, Income } from 'core/domain'
+import { useTransactionSelector } from 'hooks'
 import { FC } from 'react'
 
-interface TransactionsProps {
-  transactions: Income[] | Expense[]
-}
+export const Transactions: FC = () => {
+  const { transactions } = useTransactionSelector()
 
-export const Transactions: FC<TransactionsProps> = ({ transactions }) => {
   if (!transactions.length) {
     return <Typography variant="h6">This list is still empty</Typography>
   }

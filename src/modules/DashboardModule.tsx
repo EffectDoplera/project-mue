@@ -1,6 +1,6 @@
 import { TabList, TabPanel } from '@mui/lab'
 import { Grid, Paper, Stack, Tab } from '@mui/material'
-import { Char, Expense, ExpensesModal, Income, IncomesModal, MoneyCard } from 'components'
+import { Char, TransactionModal, MoneyCard, Transactions } from 'components'
 import { CategoryType } from 'core/enums'
 import { useAppDispatch, useAppSelector, useTransactionSelector } from 'hooks'
 import { FC, memo, SyntheticEvent, useLayoutEffect, useState } from 'react'
@@ -24,6 +24,7 @@ const DashboardModule: FC<DashboardModuleProps> = ({ changeTransactionContext })
     if (!transactionCategories.length && !isLoading) {
       dispatch(getAllTransactionCategories())
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transactionType])
 
   const [isOpenTransactionModal, setIsOpenTransactionModal] = useState(false)
@@ -59,20 +60,14 @@ const DashboardModule: FC<DashboardModuleProps> = ({ changeTransactionContext })
           </Paper>
 
           <Paper>
-            <TabPanel value={CategoryType.INCOME}>
-              <Income />
-            </TabPanel>
-            <TabPanel value={CategoryType.EXPENSE}>
-              <Expense />
+            <TabPanel value={transactionType}>
+              <Transactions />
             </TabPanel>
           </Paper>
 
           <Paper>
-            <TabPanel value={CategoryType.INCOME}>
-              <IncomesModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
-            </TabPanel>
-            <TabPanel value={CategoryType.EXPENSE}>
-              <ExpensesModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
+            <TabPanel value={transactionType}>
+              <TransactionModal open={isOpenTransactionModal} setOpen={setIsOpenTransactionModal} />
             </TabPanel>
           </Paper>
         </Stack>
