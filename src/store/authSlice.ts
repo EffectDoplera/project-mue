@@ -42,9 +42,7 @@ export const setStorageUser = createAsyncThunk('setStorageUser', (userData: User
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setStorageUser: (state, action: PayloadAction<AuthState>) => action.payload,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(signIn.fulfilled, (state, action) => {
