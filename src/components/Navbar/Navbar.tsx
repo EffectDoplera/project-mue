@@ -8,7 +8,7 @@ import {
 import {
   AppBar,
   Divider,
-  Drawer,
+  SwipeableDrawer,
   IconButton,
   List,
   ListItem,
@@ -52,7 +52,7 @@ export default function Navbar() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={open}>
+      <SwipeableDrawer anchor="left" open={open} onClose={handleDrawerClose} onOpen={handleDrawerOpen}>
         <Box sx={{ width: 250 }}>
           <div>
             <IconButton onClick={handleDrawerClose} size="large">
@@ -87,7 +87,7 @@ export default function Navbar() {
             </ListItem>
           </List>
         </Box>
-      </Drawer>
+      </SwipeableDrawer>
     </>
   )
 }
