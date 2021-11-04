@@ -1,1 +1,1 @@
-export { SignUpSchema } from './schemas'
+export * from './schemas'

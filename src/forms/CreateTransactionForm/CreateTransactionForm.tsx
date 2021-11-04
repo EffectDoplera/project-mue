@@ -1,12 +1,14 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import { Autocomplete, Button, Stack, TextField, Typography, InputAdornment } from '@mui/material'
+import { Autocomplete, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { CreateTransactionDto } from 'core/domain'
+import { CategoryType } from 'core/enums'
 import { useFormik } from 'formik'
-import { capitalizeFirstChar } from 'utils/helpers'
-import { INITIAL_VALUES } from './CreateTransaction.config'
 import { useAppDispatch, useTransactionSelector } from 'hooks'
 import { FC } from 'react'
+import { capitalizeFirstChar } from 'utils/helpers'
+import { CreateTransactionSchema } from 'utils/validation'
+import { INITIAL_VALUES_EXPENSE, INITIAL_VALUES_INCOMES } from './CreateTransaction.config'
 
 interface CreateTransactionFormProps {
   onFinish: () => void
@@ -24,15 +26,19 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
 
   const getFormTitle = () => `New ${capitalizeFirstChar(transactionType)}`
 
+  const getInitialValues = () =>
+    transactionType === CategoryType.INCOME ? INITIAL_VALUES_INCOMES : INITIAL_VALUES_EXPENSE
+
   const formik = useFormik({
-    initialValues: INITIAL_VALUES,
+    initialValues: getInitialValues(),
+    validationSchema: CreateTransactionSchema,
     onSubmit: CreateTransactionHandler,
   })
 
   return (
     <Stack
       p={2}
-      spacing={2}
+      spacing={1}
       component="form"
       onSubmit={formik.handleSubmit}
       width={{ xs: 300, sm: 500 }}
@@ -46,7 +52,10 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
         name="title"
         value={formik.values.title}
         error={formik.touched.title && Boolean(formik.errors.title)}
+        helperText={formik.errors.title ?? ' '}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        required
         fullWidth
       />
 
@@ -58,7 +67,10 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
         value={formik.values.value}
         onChange={formik.handleChange}
         error={formik.touched.value && Boolean(formik.errors.value)}
+        helperText={formik.errors.value ?? ' '}
+        onBlur={formik.handleBlur}
         fullWidth
+        required
         InputProps={{
           startAdornment: <InputAdornment position="start">₽</InputAdornment>,
         }}
@@ -69,7 +81,7 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
           label="When"
           value={formik.values.date}
           onChange={formik.handleChange}
-          renderInput={(params) => <TextField fullWidth {...params} />}
+          renderInput={(params) => <TextField fullWidth required helperText={formik.errors.date ?? ' '} {...params} />}
         />
       </LocalizationProvider>
 
@@ -86,6 +98,9 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
             onSelect={formik.handleChange}
             value={formik.values.category}
             error={formik.touched.category && Boolean(formik.errors.category)}
+            helperText={formik.errors.category ?? ' '}
+            onBlur={formik.handleBlur}
+            required
           />
         )}
       />
@@ -97,6 +112,7 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
         value={formik.values.comment}
         error={formik.touched.comment && Boolean(formik.errors.comment)}
         onChange={formik.handleChange}
+        helperText={formik.errors.comment ?? ' '}
         fullWidth
       />
 
