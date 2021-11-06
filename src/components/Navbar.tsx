@@ -1,93 +1,60 @@
-import {
-  BlurOn,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  Logout as LogoutIcon,
-  Menu as MenuIcon,
-} from '@mui/icons-material'
-import {
-  AppBar,
-  Divider,
-  SwipeableDrawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Typography,
-  Box,
-} from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { AccountCircle } from '@mui/icons-material'
+import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
 import { useAuth } from 'hooks'
-import { useRouter } from 'next/dist/client/router'
-import { useState } from 'react'
-import { ROUTES } from 'router'
+import { MouseEvent, useState } from 'react'
 
 export default function Navbar() {
-  const theme = useTheme()
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const { logout } = useAuth()
+  const { isAuthenticated, logout } = useAuth()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
+  const handleMenu = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
   }
 
-  const handleDrawerClose = () => {
-    setOpen(false)
+  const handleClose = () => {
+    setAnchorEl(null)
   }
-
-  const navigateTo = (href: string) => () => router.push(href)
 
   return (
-    <>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start" size="large">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {process.env.NEXT_PUBLIC_APP_NAME}
           </Typography>
+          {isAuthenticated && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={logout}>Logout</MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
-      <SwipeableDrawer anchor="left" open={open} onClose={handleDrawerClose} onOpen={handleDrawerOpen}>
-        <Box sx={{ width: 250 }}>
-          <div>
-            <IconButton onClick={handleDrawerClose} size="large">
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </div>
-
-          <Divider />
-
-          <List>
-            {ROUTES.map(({ text, href, icon }) => {
-              const Icon = icon ?? BlurOn
-              return (
-                <ListItem button key={href} onClick={navigateTo(href)}>
-                  <ListItemIcon>
-                    <Icon />
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              )
-            })}
-          </List>
-
-          <Divider />
-
-          <List>
-            <ListItem button onClick={logout}>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Logout'} />
-            </ListItem>
-          </List>
-        </Box>
-      </SwipeableDrawer>
-    </>
+    </Box>
   )
 }
