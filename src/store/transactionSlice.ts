@@ -12,7 +12,6 @@ import { CategoryName } from 'core/domain/_category'
 import { CategoryType } from 'core/enums'
 import { ExpensesCategoryService, ExpenseService, IncomeCategoryService, IncomeService } from 'data/services'
 import { RootState } from 'store/store'
-import { log } from 'util'
 
 type TransactionState = {
   incomes: Income[]
@@ -22,9 +21,9 @@ type TransactionState = {
 }
 
 const initialState: TransactionState = {
-  incomes: [],
+  incomes: [{ category: 'MOCK', _id: '1', value: 1, date: Date.now().toLocaleString('en'), title: '' }],
   incomeCategories: [],
-  expenses: [],
+  expenses: [{ category: 'MOCK', _id: '1', value: 1, date: Date.now().toLocaleString('en'), title: '' }],
   expenseCategories: [],
 }
 

@@ -17,7 +17,7 @@ const DashboardModule: FC<DashboardModuleProps> = ({ changeTransactionContext })
     useTransactionSelector()
 
   useEffect(() => {
-    if (!transactions.length && !isLoading) {
+    if (transactions.some((el) => el.category === 'MOCK') && !isLoading) {
       dispatch(getAllTransactions())
     }
 
