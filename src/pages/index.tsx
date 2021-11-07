@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return { props: { drafts: [] } }
   }
 
-  const drafts = await prisma.post.findMany()
+  const drafts = await prisma.operation.findMany()
   return {
     props: { drafts },
   }
