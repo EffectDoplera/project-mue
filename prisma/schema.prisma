@@ -24,7 +24,7 @@ model Operation {
   title      String
   type       OperationType
   category   String
-  ammount    Decimal       @db.Money
+  amount     Decimal       @db.Money
   currency   Currency      @default(RUB)
   date       DateTime      @default(now())
   commentary String?
