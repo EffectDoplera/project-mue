@@ -2,14 +2,34 @@
 ### Do not make changes to this file directly
 
 
+enum Currency {
+  EUR
+  RUB
+  USD
+}
+
+type Mutation {
+  """Create new operation for current user"""
+  createOperation(amount: String!, category: String!, currency: Currency!, title: String!, type: OperationType!): OperationUpdateResponse
+}
+
 type Operation {
   amount: String
   category: String
-  currency: String
+  currency: Currency
   id: String
   owner: [User]
   title: String
-  type: String
+  type: OperationType
+}
+
+enum OperationType {
+  EXPENSE
+  INCOME
+}
+
+type OperationUpdateResponse {
+  operation: Operation
 }
 
 type Query {

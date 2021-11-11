@@ -1,13 +1,13 @@
 import { TabList, TabPanel } from '@mui/lab'
 import { Grid, Paper, Stack, Tab } from '@mui/material'
 import { Char, TransactionModal, MoneyCard, Transactions } from 'components'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 import { useAppDispatch, useAppSelector, useTransactionSelector } from 'hooks'
 import { FC, memo, SyntheticEvent, useEffect, useLayoutEffect, useState } from 'react'
 import { selectIsLoading } from 'store/globalSlice'
 
 interface DashboardModuleProps {
-  changeTransactionContext: (event: SyntheticEvent, newValue: CategoryType) => void
+  changeTransactionContext: (event: SyntheticEvent, newValue: OperationType) => void
 }
 
 const DashboardModule: FC<DashboardModuleProps> = ({ changeTransactionContext }) => {
@@ -54,8 +54,8 @@ const DashboardModule: FC<DashboardModuleProps> = ({ changeTransactionContext })
         <Stack spacing={2}>
           <Paper>
             <TabList onChange={changeTransactionContext} centered variant="fullWidth">
-              <Tab label={CategoryType.INCOME} value={CategoryType.INCOME} />
-              <Tab label={CategoryType.EXPENSE} value={CategoryType.EXPENSE} />
+              <Tab label={OperationType.INCOME} value={OperationType.INCOME} />
+              <Tab label={OperationType.EXPENSE} value={OperationType.EXPENSE} />
             </TabList>
           </Paper>
 

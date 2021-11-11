@@ -1,36 +1,53 @@
 import { TabContext } from '@mui/lab'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 import { MainLayout } from 'layouts'
 import { DashboardModule } from 'modules'
 import { GetServerSideProps, NextPage } from 'next'
-import { getSession, useSession } from 'next-auth/client'
+import { getSession } from 'next-auth/client'
+import { NexusGenObjects } from 'nexus-typegen'
 import React, { useCallback, useState } from 'react'
-import prisma from 'db/prisma'
+import { initializeApollo } from 'lib/apollo'
+import { gql } from 'apollo-server-micro'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const apolloClient = initializeApollo()
   const session = await getSession({ req })
+
   if (!session) {
     res.statusCode = 403
-    return { props: { drafts: [] } }
+    return { props: { operations: [] } }
   }
 
-  const drafts = await prisma.operation.findMany()
+  const { data } = await apolloClient.query({
+    query: gql`
+      query Operations {
+        operations {
+          id
+          title
+          type
+          category
+          amount
+          currency
+        }
+      }
+    `,
+  })
+
   return {
-    props: { drafts },
+    props: {
+      operations: data.operations,
+    },
   }
 }
 type Props = {
-  drafts: any[]
+  operations: NexusGenObjects['Operation'][]
 }
 
-const Dashboard: NextPage<Props> = ({ drafts }) => {
-  const [session] = useSession()
-  console.log(drafts)
-  console.log(session)
+const Dashboard: NextPage<Props> = ({ operations }) => {
+  const [tabValue, setTabValue] = useState(OperationType.INCOME)
+  console.log(operations)
 
-  const [tabValue, setTabValue] = useState(CategoryType.INCOME)
-
-  const handleChange = useCallback((event: React.SyntheticEvent, newValue: CategoryType) => setTabValue(newValue), [])
+  const handleChange = useCallback((event: React.SyntheticEvent, newValue: OperationType) => setTabValue(newValue), [])
 
   return (
     <MainLayout>

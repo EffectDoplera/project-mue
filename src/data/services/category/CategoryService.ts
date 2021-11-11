@@ -1,11 +1,11 @@
 import { Category } from 'core/domain/_category/category'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 import { ICategoryServiceBuilder } from 'core/services/category/CategoriesServiceBuilder'
 import { collection, CollectionReference, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { firebaseDB } from 'firebaseInstance/firebaseClient'
 
 export class CategoryServiceBuilder implements ICategoryServiceBuilder {
-  constructor(private readonly type: CategoryType) {
+  constructor(private readonly type: OperationType) {
     this.type = type
   }
 
@@ -32,7 +32,7 @@ export class CategoryServiceBuilder implements ICategoryServiceBuilder {
     }
   }
 
-  public async getAllByType(type: CategoryType): Promise<Category[]> {
+  public async getAllByType(type: OperationType): Promise<Category[]> {
     try {
       const q = query(this.allCategories, where('type', '==', type))
       const categorySnapshot = await getDocs(q)

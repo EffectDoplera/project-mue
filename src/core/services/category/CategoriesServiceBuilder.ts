@@ -1,14 +1,14 @@
 import { Category } from 'core/domain/_category/category'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 
 export interface ICategoryServiceBuilder {
-  // readonly create: (createCategoryDto: CreateCategoryDto) => Promise<Category>
+  // readonly create: (createCategoryDto: CreateCategoryDto) => Promise<OperationType>
 
   readonly setDefaultByUserId: (userId: string) => Promise<Category[]>
 
-  // readonly getDefault: () => Promise<Category[]>
+  // readonly getDefault: () => Promise<OperationType[]>
 
-  // readonly createForCurrentUser: (createCategoryDto: CreateCategoryDto) => Promise<Category>
+  // readonly createForCurrentUser: (createCategoryDto: CreateCategoryDto) => Promise<OperationType>
 
-  readonly getAllByType: (type: CategoryType) => Promise<Category[]>
+  readonly getAllByType: (type: OperationType) => Promise<Category[]>
 }

@@ -8,11 +8,12 @@ import { store } from 'store/store'
 import theme from 'theme'
 import { Provider as AuthProvider } from 'next-auth/client'
 import { ApolloProvider } from '@apollo/client'
-import apolloClient from 'lib/apollo'
+import { useApollo } from 'lib/apollo'
 
 // import '../../scripts/wdyr'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+  const apolloClient = useApollo()
   /*
    * TODO: Использовать паттерн getLayout для согласования состояния страницы при изменении различных layout'ов
    *  https://nextjs.org/docs/basic-features/layouts#per-page-layouts

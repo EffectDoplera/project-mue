@@ -9,7 +9,7 @@ import {
   Transaction,
 } from 'core/domain'
 import { CategoryName } from 'core/domain/_category'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 import { ExpensesCategoryService, ExpenseService, IncomeCategoryService, IncomeService } from 'data/services'
 import { RootState } from 'store/store'
 
@@ -35,7 +35,7 @@ export const getAllIncomes = createAsyncThunk('getAllIncomes', async () => await
 
 export const getAllIncomeCategories = createAsyncThunk(
   'getAllIncomeCategories',
-  async () => await IncomeCategoryService.getAllByType(CategoryType.INCOME),
+  async () => await IncomeCategoryService.getAllByType(OperationType.INCOME),
 )
 
 export const createExpense = createAsyncThunk('createExpense', async (createExpense: CreateExpenseDto) => {
@@ -49,7 +49,7 @@ export const getAllExpenses = createAsyncThunk(
 
 export const getAllExpenseCategories = createAsyncThunk(
   'getAllExpenseCategories',
-  async () => await ExpensesCategoryService.getAllByType(CategoryType.EXPENSE),
+  async () => await ExpensesCategoryService.getAllByType(OperationType.EXPENSE),
 )
 
 const transactionSlice = createSlice({
@@ -82,17 +82,17 @@ const transactionSlice = createSlice({
 const selectTransactionState = (state: RootState): TransactionState => state.transactions
 
 export const selectTransactions = (transactionName: CategoryName) => (state: RootState) => {
-  return transactionName === CategoryType.INCOME
+  return transactionName === OperationType.INCOME
     ? selectTransactionState(state).incomes
     : selectTransactionState(state).expenses
 }
 
 export const selectTransactionCategories = (transactionName: CategoryName) => (state: RootState) =>
-  transactionName === CategoryType.INCOME
+  transactionName === OperationType.INCOME
     ? selectTransactionState(state).incomeCategories
     : selectTransactionState(state).expenseCategories
 
-export const selectSquashedByCategoryTransactions = (transactionName: CategoryType) =>
+export const selectSquashedByCategoryTransactions = (transactionName: OperationType) =>
   createSelector(selectTransactions(transactionName), (transactions) => {
     return transactions.reduce<Transaction[]>((acc, transaction) => {
       const foundIncomeIndex = acc.findIndex(({ category }) => transaction.category === category)
@@ -108,17 +108,17 @@ export const selectSquashedByCategoryTransactions = (transactionName: CategoryTy
     }, [])
   })
 
-export const selectSquashedByCategoryTransactionForChar = (transactionName: CategoryType) =>
+export const selectSquashedByCategoryTransactionForChar = (transactionName: OperationType) =>
   createSelector(selectSquashedByCategoryTransactions(transactionName), (transactions) =>
     transactions.map(({ value, category }) => ({ transactionName: category, A: value })),
   )
 
-export const selectTransactionSum = (transactionName: CategoryType) =>
+export const selectTransactionSum = (transactionName: OperationType) =>
   createSelector(selectTransactions(transactionName), (transactions) =>
     transactions.reduce((acc, transaction) => acc + transaction.value, 0),
   )
 
-export const selectTransactionOptions = (transactionName: CategoryType) =>
+export const selectTransactionOptions = (transactionName: OperationType) =>
   createSelector(selectTransactionCategories(transactionName), (transactionCategories) => {
     return transactionCategories.map(({ name }) => ({
       value: name,

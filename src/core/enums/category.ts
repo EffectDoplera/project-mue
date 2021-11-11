@@ -1,6 +1,12 @@
-export enum CategoryType {
+export enum OperationType {
   INCOME = 'INCOME',
   EXPENSE = 'EXPENSE',
+}
+
+export enum Currency {
+  RUB = 'RUB',
+  USD = 'USD',
+  EUR = 'EUR',
 }
 
 export enum ExpenseCategory {

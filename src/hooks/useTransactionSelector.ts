@@ -1,4 +1,4 @@
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { useTransactionTabContext } from 'hooks/useTransactionTabContext'
 import { useMemo } from 'react'
@@ -34,10 +34,10 @@ export const useTransactionSelector = () => {
     selectSquashedByCategoryTransactionForChar(transactionType),
   )
 
-  const getAllTransactions = transactionType === CategoryType.INCOME ? getAllIncomes : getAllExpenses
+  const getAllTransactions = transactionType === OperationType.INCOME ? getAllIncomes : getAllExpenses
   const getAllTransactionCategories =
-    transactionType === CategoryType.INCOME ? getAllIncomeCategories : getAllExpenseCategories
-  const createForCurrentUser = transactionType === CategoryType.INCOME ? createIncome : createExpense
+    transactionType === OperationType.INCOME ? getAllIncomeCategories : getAllExpenseCategories
+  const createForCurrentUser = transactionType === OperationType.INCOME ? createIncome : createExpense
 
   return useMemo(
     () => ({

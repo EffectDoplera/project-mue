@@ -2,7 +2,7 @@ import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import { Autocomplete, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import { CreateTransactionDto } from 'core/domain'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 import { useFormik } from 'formik'
 import { useAppDispatch, useTransactionSelector } from 'hooks'
 import { FC } from 'react'
@@ -27,7 +27,7 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
   const getFormTitle = () => `New ${capitalizeFirstChar(transactionType)}`
 
   const getInitialValues = () =>
-    transactionType === CategoryType.INCOME ? INITIAL_VALUES_INCOMES : INITIAL_VALUES_EXPENSE
+    transactionType === OperationType.INCOME ? INITIAL_VALUES_INCOMES : INITIAL_VALUES_EXPENSE
 
   const formik = useFormik({
     initialValues: getInitialValues(),
@@ -93,7 +93,7 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Category"
+            label="OperationType"
             name="category"
             onSelect={formik.handleChange}
             value={formik.values.category}
