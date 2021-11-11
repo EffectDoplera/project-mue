@@ -6,19 +6,34 @@ async function main() {
     data: {
       email: `testemail@gmail.com`,
       name: 'test test',
-    },
-  })
-
-  await prisma.operation.createMany({
-    data: [
-      {
-        type: 'INCOME',
-        category: 'SALARY',
-        title: ' ',
-        amount: 100,
-        currency: 'RUB',
+      role: 'QA',
+      image: 'https://lh3.googleusercontent.com/a-/AOh14GgAFjJ88BP1eaBIwZ5CH2tNVkZvn7RR8Ov7Cp-sGQ=s96-c',
+      operations: {
+        create: [
+          {
+            type: 'INCOME',
+            category: 'SALARY',
+            title: 'TEST',
+            amount: 10,
+            currency: 'RUB',
+          },
+          {
+            type: 'INCOME',
+            category: 'SALARY',
+            title: 'TEST2',
+            amount: 100,
+            currency: 'RUB',
+          },
+          {
+            type: 'INCOME',
+            category: 'SALARY',
+            title: 'TEST3',
+            amount: 1000,
+            currency: 'RUB',
+          },
+        ],
       },
-    ],
+    },
   })
 }
 

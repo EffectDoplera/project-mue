@@ -4,6 +4,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// добавить
+// generator nexusPrisma {
+//   provider = "nexus-prisma"
+//}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,40 +24,51 @@ enum Currency {
   EUR
 }
 
+enum Role {
+  USER
+  ADMIN
+  QA
+}
+
 model Operation {
-  id         Int           @id @default(autoincrement())
+  id         String        @id @default(uuid())
   title      String
   type       OperationType
   category   String
-  amount     Decimal       @db.Money
+  amount     Decimal
   currency   Currency      @default(RUB)
   date       DateTime      @default(now())
   commentary String?
-  owner      User?         @relation(fields: [ownerId], references: [id])
-  ownerId    Int?
-  createdAt  DateTime      @default(now()) @map(name: "created_at")
-  updatedAt  DateTime      @default(now()) @map(name: "updated_at")
+
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   @@map(name: "operations")
 }
 
 model User {
-  id            Int         @id @default(autoincrement())
+  id            String    @id @default(uuid())
   name          String?
-  email         String?     @unique
-  emailVerified DateTime?   @map(name: "email_verified")
+  email         String?   @unique
+  emailVerified DateTime? @map(name: "email_verified")
   image         String?
-  createdAt     DateTime    @default(now()) @map(name: "created_at")
-  updatedAt     DateTime    @updatedAt @map(name: "updated_at")
-  operations    Operation[]
+  role          Role      @default(USER)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  operations Operation[]
 
   @@map(name: "users")
 }
 
 model Account {
-  id                 Int       @id @default(autoincrement())
+  id                 String    @id @default(uuid())
   compoundId         String    @unique @map(name: "compound_id")
-  userId             Int       @map(name: "user_id")
+  userId             String    @map(name: "user_id")
   providerType       String    @map(name: "provider_type")
   providerId         String    @map(name: "provider_id")
   providerAccountId  String    @map(name: "provider_account_id")
@@ -60,7 +76,7 @@ model Account {
   accessToken        String?   @map(name: "access_token")
   accessTokenExpires DateTime? @map(name: "access_token_expires")
   createdAt          DateTime  @default(now()) @map(name: "created_at")
-  updatedAt          DateTime  @default(now()) @map(name: "updated_at")
+  updatedAt          DateTime  @updatedAt @map(name: "updated_at")
 
 
   @@index([providerAccountId], name: "providerAccountId")
@@ -70,8 +86,8 @@ model Account {
 }
 
 model Session {
-  id           Int      @id @default(autoincrement())
-  userId       Int      @map(name: "user_id")
+  id           String   @id @default(uuid())
+  userId       String   @map(name: "user_id")
   expires      DateTime
   sessionToken String   @unique @map(name: "session_token")
   accessToken  String   @unique @map(name: "access_token")
