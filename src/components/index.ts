@@ -1,4 +1,4 @@
-export { MoneyCard } from './MoneyCard'
+export { MoneyCard } from 'components/MoneyCard/MoneyCard'
 export { Char } from './Char'
 export { default as TransactionModal } from './TransactionModal'
 export { Transactions } from './Transactions'
