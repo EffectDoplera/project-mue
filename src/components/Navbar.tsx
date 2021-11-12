@@ -1,11 +1,25 @@
-import { AccountCircle } from '@mui/icons-material'
-import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
-import { useAuth } from 'hooks'
+import { Logout } from '@mui/icons-material'
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+  Toolbar,
+  Typography,
+  ListItemIcon,
+} from '@mui/material'
+import { signOut, useSession } from 'next-auth/client'
 import { MouseEvent, useState } from 'react'
+import Image from 'next/image'
+import { getFirstCharWithUpperCase } from 'utils/helpers'
 
 export default function Navbar() {
-  const { isAuthenticated, logout } = useAuth()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [session] = useSession()
 
   const handleMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -22,18 +36,21 @@ export default function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {process.env.NEXT_PUBLIC_APP_NAME}
           </Typography>
-          {isAuthenticated && (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
+
+          {session?.user && (
+            <Stack direction={'row'} alignItems={'center'} gap={1}>
+              <IconButton size="small" sx={{ ml: 2 }} onClick={handleMenu}>
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {session.user?.image ? (
+                    <Image src={session.user?.image} width={32} height={32} layout={'fixed'} alt={'Your photo'} />
+                  ) : session.user?.name ? (
+                    getFirstCharWithUpperCase(session.user?.name)
+                  ) : (
+                    getFirstCharWithUpperCase(session.user?.email || 'P')
+                  )}
+                </Avatar>
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -41,17 +58,63 @@ export default function Navbar() {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                keepMounted
                 transformOrigin={{
                   vertical: 'top',
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    mt: 5,
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
               >
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem onClick={() => console.log('NAVIGATE TO PROFILE')}>
+                  <Stack>
+                    <Typography component="div" sx={{ flexGrow: 1 }}>
+                      {`Signed in as`}
+                    </Typography>
+                    <Typography component="div" sx={{ flexGrow: 1 }}>
+                      {session.user.name ?? session.user.email}
+                    </Typography>
+                  </Stack>
+                </MenuItem>
+
+                <Divider />
+
+                <MenuItem onClick={() => console.log('NAVIGATE TO PROFILE')}>
+                  <Stack direction={'row'} alignItems={'center'} gap={1}>
+                    <Avatar sx={{ width: 24, height: 24 }} />
+                    <Typography>Profile</Typography>
+                  </Stack>
+                </MenuItem>
+
+                <Divider />
+                <MenuItem onClick={() => signOut()}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Sign Out
+                </MenuItem>
               </Menu>
-            </div>
+            </Stack>
           )}
         </Toolbar>
       </AppBar>
