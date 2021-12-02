@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar } from '@mui/material'
+import { AppBar, Toolbar } from '@mui/material'
 import { useSession } from 'next-auth/client'
 import { FC } from 'react'
 import { LogoSection } from './LogoSection'
@@ -8,14 +8,12 @@ export const Header: FC = () => {
   const [session] = useSession()
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: 'linear-gradient(-90deg, #819ffd, #9b63f8)', color: '#fff' }}>
-        <Toolbar>
-          <LogoSection />
+    <AppBar position="sticky" sx={{ backgroundColor: '#fff', color: 'black', p: 1 }} elevation={0}>
+      <Toolbar>
+        <LogoSection />
 
-          {session?.user && <ProfileSection />}
-        </Toolbar>
-      </AppBar>
-    </Box>
+        {session?.user && <ProfileSection />}
+      </Toolbar>
+    </AppBar>
   )
 }
