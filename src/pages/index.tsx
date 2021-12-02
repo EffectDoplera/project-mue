@@ -1,13 +1,10 @@
-import { TabContext } from '@mui/lab'
-import { OperationType } from 'core/enums'
-import { MainLayout } from 'layouts'
-import { DashboardModule } from 'modules'
-import { GetServerSideProps, NextPage } from 'next'
-import { getSession } from 'next-auth/client'
-import { NexusGenObjects } from 'nexus-typegen'
-import React, { useCallback, useState } from 'react'
-import { initializeApollo } from 'lib/apollo'
 import { gql } from 'apollo-server-micro'
+import { MainLayout } from 'layouts'
+import { initializeApollo } from 'lib/apollo'
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
+import { getSession } from 'next-auth/client'
+import { ApiRoutes } from 'router'
+import { Dashboard } from 'views'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const apolloClient = initializeApollo()
@@ -15,7 +12,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   if (!session) {
     res.statusCode = 403
-    return { props: { operations: [] } }
+
+    return {
+      redirect: {
+        destination: ApiRoutes.LOGIN,
+        permanent: false,
+      },
+    }
   }
 
   const { data } = await apolloClient.query({
@@ -36,26 +39,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   return {
     props: {
       operations: data.operations,
-    },
+    } as Props,
   }
 }
 type Props = {
-  operations: NexusGenObjects['Operation'][]
+  operations: any[]
 }
 
-const Dashboard: NextPage<Props> = ({ operations }) => {
-  const [tabValue, setTabValue] = useState(OperationType.INCOME)
-  console.log(operations)
-
-  const handleChange = useCallback((event: React.SyntheticEvent, newValue: OperationType) => setTabValue(newValue), [])
-
+const DashboardPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ operations }) => {
   return (
     <MainLayout>
-      <TabContext value={tabValue}>
-        <DashboardModule changeTransactionContext={handleChange} />
-      </TabContext>
+      <Dashboard />
     </MainLayout>
   )
 }
 
-export default Dashboard
+export default DashboardPage
