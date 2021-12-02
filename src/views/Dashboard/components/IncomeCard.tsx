@@ -2,7 +2,7 @@ import { ArrowUpward, AccountBalanceWallet } from '@mui/icons-material'
 import { Avatar, Box, Grid, Typography } from '@mui/material'
 import { useTheme, styled } from '@mui/material/styles'
 
-import { MainCard } from 'components/ui/MainCard'
+import { MainCard } from 'components/MainCard'
 import { FC } from 'react'
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({

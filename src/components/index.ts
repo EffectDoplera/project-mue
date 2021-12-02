@@ -1,7 +1,3 @@
-export { MoneyCard } from 'components/MoneyCard/MoneyCard'
 export { Char } from './Char'
-export { default as TransactionModal } from './TransactionModal'
 export { Transactions } from './Transactions'
 export { TransactionAction } from './TransactionAction'
-export { default as Navbar } from './Navbar'
-export { default as Loader } from './Loader'

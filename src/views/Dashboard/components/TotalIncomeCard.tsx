@@ -2,7 +2,7 @@ import { styled, useTheme } from '@mui/material/styles'
 import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import { TableChartOutlined } from '@mui/icons-material'
 import { FC } from 'react'
-import { MainCard } from 'components/ui/MainCard'
+import { MainCard } from 'components/MainCard'
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,

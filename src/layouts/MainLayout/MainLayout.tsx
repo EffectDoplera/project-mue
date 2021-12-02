@@ -1,5 +1,4 @@
 import { styled } from '@mui/material/styles'
-import { MainCard } from 'components/ui/MainCard'
 import { FC } from 'react'
 
 import { Header } from './Header'
