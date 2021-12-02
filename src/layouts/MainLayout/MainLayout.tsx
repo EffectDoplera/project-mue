@@ -1,15 +1,17 @@
 import React, { FC } from 'react'
 import { useAppSelector } from 'hooks'
 import { selectIsLoading } from 'store/globalSlice'
-import { Loader, Navbar } from 'components'
+import { Loader } from 'components'
 import { Box, Container } from '@mui/material'
+
+import { Header } from './Header'
 
 const MainLayout: FC = ({ children }) => {
   const isLoading = useAppSelector(selectIsLoading)
 
   return (
     <>
-      <Navbar />
+      <Header />
       <Container>{isLoading ? <Loader /> : children}</Container>
       <Box height={50} />
     </>
