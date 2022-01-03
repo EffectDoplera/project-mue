@@ -8,19 +8,42 @@ enum Currency {
   USD
 }
 
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
 type Mutation {
   """Create new operation for current user"""
-  createOperation(amount: String!, category: String!, currency: Currency!, title: String!, type: OperationType!): OperationUpdateResponse
+  createOperation(data: OperationCreateInput!): Operation!
 }
 
 type Operation {
-  amount: String
-  category: String
-  currency: Currency
-  id: String
-  owner: [User]
-  title: String
-  type: OperationType
+  amount: Float!
+  category: String!
+  commentary: String
+  currency: Currency!
+  date: DateTime!
+  id: String!
+  owner: User!
+  ownerId: String!
+  title: String!
+  type: String!
+}
+
+type OperationCategory {
+  id: String!
+  title: String!
+}
+
+input OperationCreateInput {
+  amount: Float!
+  category: String!
+  commentary: String
+  currency: Currency! = RUB
+  date: DateTime!
+  title: String!
+  type: OperationType! = EXPENSE
 }
 
 enum OperationType {
@@ -28,20 +51,25 @@ enum OperationType {
   INCOME
 }
 
-type OperationUpdateResponse {
-  operation: Operation
+type Query {
+  operationCategories: [OperationCategory]!
+  operations: [Operation]!
+  operationsSum: Int!
+  users: [User]!
 }
 
-type Query {
-  operations: [Operation]!
-  users: [User]!
+enum Role {
+  ADMIN
+  QA
+  USER
 }
 
 type User {
   email: String
-  email_verified: String
-  id: String
+  email_verified: DateTime
+  id: String!
   image: String
   name: String
-  operations: [Operation]
+  operations: [Operation!]!
+  role: Role!
 }

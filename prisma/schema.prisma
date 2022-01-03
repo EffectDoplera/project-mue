@@ -1,13 +1,8 @@
-// schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
-
-// добавить
-// generator nexusPrisma {
-//   provider = "nexus-prisma"
-//}
 
 generator client {
   provider = "prisma-client-js"
@@ -31,36 +26,43 @@ enum Role {
 }
 
 model Operation {
-  id         String        @id @default(uuid())
-  title      String
-  type       OperationType
-  category   String
-  amount     Decimal
-  currency   Currency      @default(RUB)
-  date       DateTime      @default(now())
-  commentary String?
-
-  owner   User   @relation(fields: [ownerId], references: [id])
-  ownerId String
-
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id          String            @id @default(uuid())
+  title       String
+  type        OperationType
+  amount      Float
+  currency    Currency          @default(RUB)
+  date        DateTime          @default(now())
+  commentary  String?
+  categoryRef OperationCategory @relation(fields: [category], references: [title])
+  category    String
+  owner       User              @relation(fields: [ownerId], references: [id])
+  ownerId     String
+  createdAt   DateTime          @default(now()) @map(name: "created_at")
+  updatedAt   DateTime          @updatedAt @map(name: "updated_at")
 
   @@map(name: "operations")
 }
 
-model User {
-  id            String    @id @default(uuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map(name: "email_verified")
-  image         String?
-  role          Role      @default(USER)
-
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
-
+model OperationCategory {
+  id         String      @id @default(uuid())
+  title      String      @unique
   operations Operation[]
+  createdAt  DateTime    @default(now()) @map(name: "created_at")
+  updatedAt  DateTime    @updatedAt @map(name: "updated_at")
+
+  @@map(name: "operation_categories")
+}
+
+model User {
+  id            String      @id @default(uuid())
+  name          String?
+  email         String?     @unique
+  emailVerified DateTime?   @map(name: "email_verified")
+  image         String?
+  role          Role        @default(USER)
+  operations    Operation[]
+  createdAt     DateTime    @default(now()) @map(name: "created_at")
+  updatedAt     DateTime    @updatedAt @map(name: "updated_at")
 
   @@map(name: "users")
 }
