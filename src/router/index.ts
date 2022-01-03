@@ -3,3 +3,8 @@ export enum PageRoutes {
   LOGIN = '/login',
   SIGN_UP = '/signup',
 }
+
+export enum ApiRoutes {
+  LOGIN = '/api/auth/signin',
+  GRAPHQL = '/api/graphql',
+}
