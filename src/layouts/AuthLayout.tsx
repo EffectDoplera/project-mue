@@ -18,7 +18,6 @@ const useStyles = makeStyles({
 
 const AuthLayout: FC = ({ children }) => {
   const styles = useStyles()
-  // const isLoading = useAppSelector(selectIsLoading)
 
   return (
     <>

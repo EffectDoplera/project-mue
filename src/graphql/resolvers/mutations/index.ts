@@ -7,11 +7,11 @@ export const createOperation = mutationField('createOperation', {
   },
   resolve: (_, args, ctx) =>
     ctx.prisma.operation.create({
-      // FIXME
       data: {
         ...args.input,
-        ownerId: ctx.session?.user.id,
-        category: 'HEALTH',
-      } as any,
+        // FIXME
+        // ownerId: ctx.session?.user.id,
+        ownerId: 'f43e28e4-05a7-4f23-afe1-56170de2628e',
+      },
     }),
 })

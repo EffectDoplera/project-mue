@@ -1,38 +1,40 @@
+import { useMutation, useQuery } from '@apollo/client'
 import { DatePicker, LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import { Autocomplete, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material'
-import { CreateTransactionDto } from 'core/domain'
-import { OperationType } from 'core/enums'
+import { Currency, OperationType } from 'core/enums'
 import { useFormik } from 'formik'
-import { useAppDispatch, useTransactionSelector } from 'hooks'
+import { INITIAL_VALUES_EXPENSE } from 'forms/NewOperation/NewOperation.config'
+import { CREATE_OPERATION } from 'graphql/mutations'
+import { QUERY_ALL_OPERATION_CATEGORIES } from 'graphql/querys'
+import { NexusGenObjects } from 'types'
 import { FC } from 'react'
-import { capitalizeFirstChar } from 'utils/helpers'
 import { CreateTransactionSchema } from 'utils/validation'
-import { INITIAL_VALUES_EXPENSE, INITIAL_VALUES_INCOMES } from './CreateTransaction.config'
 
 interface CreateTransactionFormProps {
   onFinish: () => void
 }
 
-const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => {
-  const dispatch = useAppDispatch()
-
-  const { transactionOptions: expenseCategories, createForCurrentUser, transactionType } = useTransactionSelector()
-
-  const CreateTransactionHandler = async (values: CreateTransactionDto) => {
-    dispatch(createForCurrentUser(values))
-    onFinish()
-  }
-
-  const getFormTitle = () => `New ${capitalizeFirstChar(transactionType)}`
-
-  const getInitialValues = () =>
-    transactionType === OperationType.INCOME ? INITIAL_VALUES_INCOMES : INITIAL_VALUES_EXPENSE
+export const NewOperation: FC<CreateTransactionFormProps> = ({ onFinish }) => {
+  const [createOperation] = useMutation(CREATE_OPERATION)
+  const { data, loading } = useQuery(QUERY_ALL_OPERATION_CATEGORIES)
 
   const formik = useFormik({
-    initialValues: getInitialValues(),
+    initialValues: INITIAL_VALUES_EXPENSE,
     validationSchema: CreateTransactionSchema,
-    onSubmit: CreateTransactionHandler,
+    onSubmit: async ({ amount, title, category, date }) => {
+      await createOperation({
+        variables: {
+          amount,
+          category,
+          currency: Currency.RUB,
+          title,
+          type: OperationType.EXPENSE,
+          date,
+        },
+      }).catch((e) => console.log(e))
+      onFinish()
+    },
   })
 
   return (
@@ -44,7 +46,7 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
       width={{ xs: 300, sm: 500 }}
       alignItems="center"
     >
-      <Typography variant="h3">{getFormTitle()}</Typography>
+      <Typography variant="h3">{'New Expense'}</Typography>
 
       <TextField
         label="Title"
@@ -61,13 +63,13 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
 
       <TextField
         label="Amount"
-        id="value"
-        name="value"
+        id="amount"
+        name="amount"
         type="number"
-        value={formik.values.value}
+        value={formik.values.amount}
         onChange={formik.handleChange}
-        error={formik.touched.value && Boolean(formik.errors.value)}
-        helperText={formik.errors.value ?? ' '}
+        error={formik.touched.amount && Boolean(formik.errors.amount)}
+        helperText={formik.errors.amount ?? ' '}
         onBlur={formik.handleBlur}
         fullWidth
         required
@@ -86,14 +88,16 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
       </LocalizationProvider>
 
       <Autocomplete
-        disablePortal
         id="category"
-        options={expenseCategories}
+        isOptionEqualToValue={(option, value) => option.title === value.title}
+        getOptionLabel={(option) => option.title}
+        options={loading ? [] : (data?.allCategories as NexusGenObjects['OperationCategory'][])}
+        loading={loading}
         fullWidth
         renderInput={(params) => (
           <TextField
             {...params}
-            label="OperationType"
+            label="Category"
             name="category"
             onSelect={formik.handleChange}
             value={formik.values.category}
@@ -107,12 +111,12 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
 
       <TextField
         label="Comment"
-        id="comment"
-        name="comment"
-        value={formik.values.comment}
-        error={formik.touched.comment && Boolean(formik.errors.comment)}
+        id="commentary"
+        name="commentary"
+        value={formik.values.commentary}
+        error={formik.touched.commentary && Boolean(formik.errors.commentary)}
         onChange={formik.handleChange}
-        helperText={formik.errors.comment ?? ' '}
+        helperText={formik.errors.commentary ?? ' '}
         fullWidth
       />
 
@@ -122,5 +126,3 @@ const CreateTransactionForm: FC<CreateTransactionFormProps> = ({ onFinish }) => 
     </Stack>
   )
 }
-
-export default CreateTransactionForm

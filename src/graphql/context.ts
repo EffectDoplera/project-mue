@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import prisma from 'db/prisma'
+import prisma from 'lib/prisma'
 import { DefaultSession } from 'next-auth'
 import { getSession } from 'next-auth/client'
 import { NextApiRequest, NextApiResponse } from 'next'

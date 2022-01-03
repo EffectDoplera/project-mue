@@ -1,6 +1,5 @@
 import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { useAuth } from 'hooks'
 import { AuthLayout } from 'layouts'
 import { NextPage } from 'next'
 import Link from 'next/link'
@@ -11,15 +10,13 @@ interface IFormFields {
   password: string
 }
 
-const Login: NextPage = () => {
-  const { signIn } = useAuth()
-
+const SignIn: NextPage = () => {
   const formik = useFormik<IFormFields>({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: signIn,
+    onSubmit: () => {},
   })
 
   return (
@@ -65,4 +62,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default SignIn

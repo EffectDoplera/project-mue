@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
@@ -12,8 +12,8 @@
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "lint-all": "yarn run check-format && yarn run lint && yarn run check-types && yarn run build",
-    "generate": "npm -s run generate:nexus && npm -s run generate:prisma",
-    "generate:nexus": "ts-node --transpile-only src/graphql/schema",
+    "generate": "yarn run generate:nexus && yarn run generate:prisma",
+    "generate:nexus": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/graphql/schema.ts",
     "generate:prisma": "prisma generate"
   },
   "dependencies": {
@@ -28,7 +28,6 @@
     "@mui/styles": "^5.0.2",
     "@nexus/schema": "^0.20.1",
     "@prisma/client": "^3.4.2",
-    "@reduxjs/toolkit": "^1.6.2",
     "@welldone-software/why-did-you-render": "^6.2.1",
     "apollo-server-micro": "^3.5.0",
     "date-fns": "^2.23.0",
@@ -44,7 +43,6 @@
     "nexus-prisma": "^0.34.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-redux": "^7.2.6",
     "recharts": "^2.1.6",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"

@@ -12,9 +12,10 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 interface TotalIncomeCardProps {
   isLoading: boolean
+  operationsSum: number
 }
 
-export const TotalIncomeCard: FC<TotalIncomeCardProps> = ({ isLoading }) => {
+export const TotalIncomeCard: FC<TotalIncomeCardProps> = ({ operationsSum }) => {
   const theme = useTheme()
 
   return (
@@ -43,7 +44,7 @@ export const TotalIncomeCard: FC<TotalIncomeCardProps> = ({ isLoading }) => {
               }}
               primary={
                 <Typography variant="h4" sx={{ color: '#fff' }}>
-                  $203k
+                  $ {operationsSum}
                 </Typography>
               }
               secondary={

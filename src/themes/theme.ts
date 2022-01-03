@@ -1,5 +1,5 @@
 import { grey } from '@mui/material/colors'
-import { createTheme, ThemeOptions } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -9,6 +9,20 @@ declare module '@mui/material/styles' {
   // allow configuration using `createTheme`
   interface PaletteOptions {
     neutral?: PaletteOptions['primary']
+  }
+
+  interface Typography {
+    commonAvatar: {
+      cursor: string
+      borderRadius: string
+    }
+  }
+
+  interface TypographyOptions {
+    commonAvatar: {
+      cursor: string
+      borderRadius: string
+    }
   }
 }
 
@@ -42,7 +56,7 @@ declare module '@mui/material/styles' {
 // })
 
 export const theme = () => {
-  const themeOptions: ThemeOptions = {
+  const themeOptions = {
     direction: 'ltr',
     palette: {
       primary: {
@@ -139,6 +153,10 @@ export const theme = () => {
       },
       button: {
         textTransform: 'capitalize',
+      },
+      commonAvatar: {
+        cursor: 'pointer',
+        borderRadius: '8px',
       },
     },
   }

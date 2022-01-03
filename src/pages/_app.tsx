@@ -1,18 +1,14 @@
+import { ApolloProvider } from '@apollo/client'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
+import { useApollo } from 'lib/apollo'
+import { Provider as AuthProvider } from 'next-auth/client'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import React, { FC } from 'react'
-import { Provider } from 'react-redux'
-import { store } from 'store/store'
-import theme from 'themes/theme'
-import { Provider as AuthProvider } from 'next-auth/client'
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from 'lib/apollo'
 import createEmotionCache from 'themes/createEmotionCache'
-
-// import '../../scripts/wdyr'
+import theme from 'themes/theme'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -23,10 +19,7 @@ interface MyAppProps extends AppProps {
 
 const MyApp: FC<MyAppProps> = ({ Component, pageProps, emotionCache = clientSideEmotionCache }) => {
   const apolloClient = useApollo()
-  /*
-   * TODO: Использовать паттерн getLayout для согласования состояния страницы при изменении различных layout'ов
-   *  https://nextjs.org/docs/basic-features/layouts#per-page-layouts
-   */
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -35,12 +28,10 @@ const MyApp: FC<MyAppProps> = ({ Component, pageProps, emotionCache = clientSide
       </Head>
       <AuthProvider session={pageProps.session}>
         <ApolloProvider client={apolloClient}>
-          <Provider store={store}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </Provider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
         </ApolloProvider>
       </AuthProvider>
     </CacheProvider>

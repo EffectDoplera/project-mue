@@ -2,6 +2,16 @@
 ### Do not make changes to this file directly
 
 
+input CreateOperationInput {
+  amount: Float!
+  category: String!
+  commentary: String
+  currency: Currency! = RUB
+  date: DateTime!
+  title: String!
+  type: OperationType! = EXPENSE
+}
+
 enum Currency {
   EUR
   RUB
@@ -14,36 +24,22 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
-  """Create new operation for current user"""
-  createOperation(data: OperationCreateInput!): Operation!
+  createOperation(input: CreateOperationInput!): Operation
 }
 
 type Operation {
   amount: Float!
-  category: String!
   commentary: String
   currency: Currency!
   date: DateTime!
-  id: String!
-  owner: User!
-  ownerId: String!
+  id: ID!
   title: String!
   type: String!
 }
 
 type OperationCategory {
-  id: String!
+  id: ID!
   title: String!
-}
-
-input OperationCreateInput {
-  amount: Float!
-  category: String!
-  commentary: String
-  currency: Currency! = RUB
-  date: DateTime!
-  title: String!
-  type: OperationType! = EXPENSE
 }
 
 enum OperationType {
@@ -52,10 +48,10 @@ enum OperationType {
 }
 
 type Query {
-  operationCategories: [OperationCategory]!
-  operations: [Operation]!
-  operationsSum: Int!
-  users: [User]!
+  allCategories: [OperationCategory!]!
+  operations: [Operation!]
+  sumAllOperations: Int!
+  users: [User!]
 }
 
 enum Role {
@@ -67,7 +63,7 @@ enum Role {
 type User {
   email: String
   email_verified: DateTime
-  id: String!
+  id: ID!
   image: String
   name: String
   operations: [Operation!]!

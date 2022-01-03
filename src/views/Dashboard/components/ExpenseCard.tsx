@@ -7,30 +7,29 @@ import { FC } from 'react'
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   background: `linear-gradient(-90deg, ${theme.palette.secondary.dark}, ${theme.palette.secondary.light})`,
-  color: '#fff',
+  color: theme.palette.getContrastText(theme.palette.secondary.dark),
   overflow: 'hidden',
 }))
 
-interface IncomeCardProps {
+interface ExpenseCardProps {
   isLoading: boolean
   amount: number
 }
 
-export const IncomeCard: FC<IncomeCardProps> = ({ isLoading, amount }) => {
+export const ExpenseCard: FC<ExpenseCardProps> = ({ isLoading, amount }) => {
   const theme = useTheme()
 
   return (
-    <CardWrapper title={'Title'}>
+    <CardWrapper>
       <Box sx={{ p: 2.25 }}>
-        <Grid container direction="column">
+        <Grid container direction="column" gap={1}>
           <Grid item>
             <Grid container justifyContent="space-between">
               <Grid item>
                 <Avatar
                   variant="rounded"
                   sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    mt: 1,
+                    backgroundColor: theme.palette.warning.main,
                   }}
                 >
                   <AccountBalanceWallet />
@@ -38,42 +37,28 @@ export const IncomeCard: FC<IncomeCardProps> = ({ isLoading, amount }) => {
               </Grid>
             </Grid>
           </Grid>
+
           <Grid item>
-            <Grid container alignItems="center">
+            <Grid container alignItems="center" spacing={1}>
               <Grid item>
-                <Typography
-                  sx={{
-                    fontSize: '2.125rem',
-                    fontWeight: 500,
-                    mr: 1,
-                    mt: 1.75,
-                    mb: 0.75,
-                  }}
-                >
-                  ${amount}
-                </Typography>
+                <Typography variant={'h4'}>₽{amount}</Typography>
               </Grid>
+
               <Grid item>
                 <Avatar
                   sx={{
                     cursor: 'pointer',
-                    backgroundColor: theme.palette.primary.dark,
+                    backgroundColor: theme.palette.success.main,
                   }}
                 >
-                  <ArrowUpward fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
+                  <ArrowUpward sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
                 </Avatar>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item sx={{ mb: 1.25 }}>
-            <Typography
-              sx={{
-                fontSize: '1rem',
-                fontWeight: 500,
-              }}
-            >
-              Total Earning
-            </Typography>
+
+          <Grid item>
+            <Typography variant={'h6'}>Total Expense</Typography>
           </Grid>
         </Grid>
       </Box>
