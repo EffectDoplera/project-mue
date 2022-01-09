@@ -13,4 +13,4 @@ export const TRANSACTION_TITLE = Yup.string().max(30, 'Too Long!').required('Tit
 
 export const TRANSACTION_VALUE = Yup.number().required('Value is required')
 
-export const TRANSACTION_CATEGORY = Yup.string().max(30, 'Too Long!').required('Category is required')
+export const TRANSACTION_CATEGORY = Yup.string().max(30, 'Too Long!').required('OperationType is required')

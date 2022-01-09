@@ -16,6 +16,6 @@ export const SignUpSchema = Yup.object().shape({
 
 export const CreateTransactionSchema = Yup.object().shape({
   title: TRANSACTION_TITLE,
-  value: TRANSACTION_VALUE,
+  amount: TRANSACTION_VALUE,
   category: TRANSACTION_CATEGORY,
 })

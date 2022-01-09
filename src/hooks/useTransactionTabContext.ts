@@ -1,8 +1,8 @@
 import { useTabContext } from '@mui/lab'
-import { CategoryType } from 'core/enums'
+import { OperationType } from 'core/enums'
 
-export const useTransactionTabContext = (): CategoryType => {
-  const { value } = useTabContext() ?? { value: CategoryType.INCOME }
+export const useTransactionTabContext = (): OperationType => {
+  const { value } = useTabContext() ?? { value: OperationType.INCOME }
 
-  return value as CategoryType
+  return value as OperationType
 }

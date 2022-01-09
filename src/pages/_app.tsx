@@ -1,34 +1,40 @@
+import { ApolloProvider } from '@apollo/client'
+import { CacheProvider, EmotionCache } from '@emotion/react'
 import CssBaseline from '@mui/material/CssBaseline'
-import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { useApollo } from 'lib/apollo'
+import { Provider as AuthProvider } from 'next-auth/client'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import React, { FC } from 'react'
-import { Provider } from 'react-redux'
-import { store } from 'store/store'
-import theme from 'theme'
+import createEmotionCache from 'themes/createEmotionCache'
+import theme from 'themes/theme'
 
-// import '../../scripts/wdyr'
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache()
 
-const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
-  /*
-   * TODO: Использовать паттерн getLayout для согласования состояния страницы при изменении различных layout'ов
-   *  https://nextjs.org/docs/basic-features/layouts#per-page-layouts
-   */
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache
+}
+
+const MyApp: FC<MyAppProps> = ({ Component, pageProps, emotionCache = clientSideEmotionCache }) => {
+  const apolloClient = useApollo()
+
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
-        <title>Project Mue</title>
+        <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <Provider store={store}>
-        <StyledEngineProvider injectFirst>
+      <AuthProvider session={pageProps.session}>
+        <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <Component {...pageProps} />
           </ThemeProvider>
-        </StyledEngineProvider>
-      </Provider>
-    </>
+        </ApolloProvider>
+      </AuthProvider>
+    </CacheProvider>
   )
 }
 

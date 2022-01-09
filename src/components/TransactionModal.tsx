@@ -1,6 +1,5 @@
-import { Button, Modal, Paper, Stack } from '@mui/material'
+import { Button, Modal, Paper } from '@mui/material'
 import { TransactionAction } from 'components/TransactionAction'
-import { CreateTransactionForm } from 'forms/CreateTransactionForm'
 import { useTransactionTabContext } from 'hooks'
 import { FC, memo } from 'react'
 
@@ -34,11 +33,12 @@ const TransactionsModal: FC<TransactionsModalProps> = ({ open, setOpen }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Stack alignItems="center" justifyContent="center" direction="column" gap={2} sx={style}>
-          <Paper>
-            <CreateTransactionForm onFinish={handleClose} />
-          </Paper>
-        </Stack>
+        <Paper>MODAL</Paper>
+        {/*<Stack alignItems="center" justifyContent="center" direction="column" gap={2} sx={style}>*/}
+        {/*  <Paper>*/}
+        {/*    <CreateTransactionForm onFinish={handleClose} />*/}
+        {/*  </Paper>*/}
+        {/*</Stack>*/}
       </Modal>
     </>
   )

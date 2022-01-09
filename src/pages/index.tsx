@@ -1,22 +1,32 @@
-import { TabContext } from '@mui/lab'
-import { CategoryType } from 'core/enums'
 import { MainLayout } from 'layouts'
-import { DashboardModule } from 'modules'
-import { NextPage } from 'next'
-import React, { useCallback, useState } from 'react'
+import { GetServerSideProps, NextPage } from 'next'
+import { getSession } from 'next-auth/client'
+import { ApiRoutes } from 'router'
+import { Dashboard } from 'views'
 
-const Dashboard: NextPage = () => {
-  const [tabValue, setTabValue] = useState(CategoryType.INCOME)
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getSession({ req })
 
-  const handleChange = useCallback((event: React.SyntheticEvent, newValue: CategoryType) => setTabValue(newValue), [])
+  if (!session) {
+    res.statusCode = 403
 
-  return (
-    <MainLayout>
-      <TabContext value={tabValue}>
-        <DashboardModule changeTransactionContext={handleChange} />
-      </TabContext>
-    </MainLayout>
-  )
+    return {
+      redirect: {
+        destination: ApiRoutes.LOGIN,
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
 
-export default Dashboard
+const DashboardPage: NextPage = () => (
+  <MainLayout>
+    <Dashboard />
+  </MainLayout>
+)
+
+export default DashboardPage

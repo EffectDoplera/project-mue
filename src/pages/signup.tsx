@@ -1,6 +1,5 @@
 import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import { useAuth } from 'hooks'
 import { AuthLayout } from 'layouts'
 import { NextPage } from 'next'
 import Link from 'next/link'
@@ -14,8 +13,6 @@ interface IFormFields {
 }
 
 const Signup: NextPage = () => {
-  const { signUp } = useAuth()
-
   const formik = useFormik<IFormFields>({
     initialValues: {
       email: '',
@@ -23,7 +20,7 @@ const Signup: NextPage = () => {
       confirmPassword: '',
     },
     validationSchema: SignUpSchema,
-    onSubmit: signUp,
+    onSubmit: async () => ({}),
   })
 
   return (

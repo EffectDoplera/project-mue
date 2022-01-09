@@ -1,19 +1,13 @@
 import { List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import TransactionIcon from 'components/Transactions/TransactionIcon'
-import { useTransactionSelector } from 'hooks'
+import { WithEmptyPlaceHolder } from 'hoc/withEmptyPlaceHolder'
 import { FC } from 'react'
 
-export const Transactions: FC = () => {
-  const { transactions } = useTransactionSelector()
-
-  if (!transactions.length) {
-    return <Typography variant="h6">This list is still empty</Typography>
-  }
-
-  return (
+export const Transactions: FC<{ transactions: any[] }> = ({ transactions }) => (
+  <WithEmptyPlaceHolder dataSource={transactions}>
     <List dense>
-      {transactions.map(({ category, value, _id }) => (
-        <ListItem key={_id}>
+      {transactions.map(({ category, amount, id, currency }) => (
+        <ListItem key={id}>
           <ListItemAvatar>
             <TransactionIcon category={category} />
           </ListItemAvatar>
@@ -21,12 +15,12 @@ export const Transactions: FC = () => {
             primary={category}
             secondary={
               <Typography variant="h6">
-                {value} {'RUB'}
+                {amount} {currency}
               </Typography>
             }
           />
         </ListItem>
       ))}
     </List>
-  )
-}
+  </WithEmptyPlaceHolder>
+)
