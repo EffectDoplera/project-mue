@@ -29,12 +29,18 @@ type Mutation {
 
 type Operation {
   amount: Float!
+  category: String!
   commentary: String
   currency: Currency!
   date: DateTime!
   id: ID!
   title: String!
   type: String!
+}
+
+type OperationByCategory {
+  amount: Float
+  category: String!
 }
 
 type OperationCategory {
@@ -51,6 +57,7 @@ type Query {
   allCategories: [OperationCategory!]!
   operations: [Operation!]
   sumAllOperations: Int!
+  sumAllOperationsByCategory: [OperationByCategory!]!
   users: [User!]
 }
 

@@ -1,1 +1,1 @@
-export * from './OperationCategory'
+export * from 'graphql/querys/Operation'

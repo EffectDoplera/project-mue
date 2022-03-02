@@ -33,8 +33,17 @@ export const Operation = objectType({
     t.string('type')
     t.float('amount')
     t.field('currency', { type: 'Currency' })
+    t.string('category')
     t.date('date')
     t.nullable.string('commentary')
+  },
+})
+
+export const OperationByCategory = objectType({
+  name: 'OperationByCategory',
+  definition(t) {
+    t.string('category')
+    t.nullable.float('amount')
   },
 })
 

@@ -1,4 +1,5 @@
 import { list, nonNull, nullable, queryField } from 'nexus'
+import { NexusGenObjects } from 'types'
 
 // Users
 export const allUsers = queryField('users', {
@@ -28,4 +29,18 @@ export const sumAllOperations = queryField('sumAllOperations', {
 export const allCategories = queryField('allCategories', {
   type: nonNull(list(nonNull('OperationCategory'))),
   resolve: (_parent, _args, ctx) => ctx.prisma.operationCategory.findMany(),
+})
+
+export const sumAllOperationsByCategory = queryField('sumAllOperationsByCategory', {
+  type: nonNull(list(nonNull('OperationByCategory'))),
+  resolve: async (_parent, _args, ctx) => {
+    const data = await ctx.prisma.operation.groupBy({
+      by: ['category'],
+      _sum: {
+        amount: true,
+      },
+    })
+
+    return data.map((res) => ({ category: res.category, amount: res._sum.amount }))
+  },
 })

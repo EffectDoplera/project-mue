@@ -59,12 +59,17 @@ export interface NexusGenObjects {
   Mutation: {};
   Operation: { // root type
     amount: number; // Float!
+    category: string; // String!
     commentary?: string | null; // String
     currency: NexusGenEnums['Currency']; // Currency!
     date: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     title: string; // String!
     type: string; // String!
+  }
+  OperationByCategory: { // root type
+    amount?: number | null; // Float
+    category: string; // String!
   }
   OperationCategory: { // root type
     id: string; // ID!
@@ -97,12 +102,17 @@ export interface NexusGenFieldTypes {
   }
   Operation: { // field return type
     amount: number; // Float!
+    category: string; // String!
     commentary: string | null; // String
     currency: NexusGenEnums['Currency']; // Currency!
     date: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     title: string; // String!
     type: string; // String!
+  }
+  OperationByCategory: { // field return type
+    amount: number | null; // Float
+    category: string; // String!
   }
   OperationCategory: { // field return type
     id: string; // ID!
@@ -112,6 +122,7 @@ export interface NexusGenFieldTypes {
     allCategories: NexusGenRootTypes['OperationCategory'][]; // [OperationCategory!]!
     operations: NexusGenRootTypes['Operation'][] | null; // [Operation!]
     sumAllOperations: number; // Int!
+    sumAllOperationsByCategory: NexusGenRootTypes['OperationByCategory'][]; // [OperationByCategory!]!
     users: NexusGenRootTypes['User'][] | null; // [User!]
   }
   User: { // field return type
@@ -131,12 +142,17 @@ export interface NexusGenFieldTypeNames {
   }
   Operation: { // field return type name
     amount: 'Float'
+    category: 'String'
     commentary: 'String'
     currency: 'Currency'
     date: 'DateTime'
     id: 'ID'
     title: 'String'
     type: 'String'
+  }
+  OperationByCategory: { // field return type name
+    amount: 'Float'
+    category: 'String'
   }
   OperationCategory: { // field return type name
     id: 'ID'
@@ -146,6 +162,7 @@ export interface NexusGenFieldTypeNames {
     allCategories: 'OperationCategory'
     operations: 'Operation'
     sumAllOperations: 'Int'
+    sumAllOperationsByCategory: 'OperationByCategory'
     users: 'User'
   }
   User: { // field return type name

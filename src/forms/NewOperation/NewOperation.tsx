@@ -6,9 +6,9 @@ import { Currency, OperationType } from 'core/enums'
 import { useFormik } from 'formik'
 import { INITIAL_VALUES_EXPENSE } from 'forms/NewOperation/NewOperation.config'
 import { CREATE_OPERATION } from 'graphql/mutations'
-import { QUERY_ALL_OPERATION_CATEGORIES } from 'graphql/querys'
-import { NexusGenObjects } from 'types'
+import { QUERY_ALL_OPERATION_CATEGORIES, QUERY_ALL_OPERATIONS } from 'graphql/querys'
 import { FC } from 'react'
+import { NexusGenObjects } from 'types'
 import { CreateTransactionSchema } from 'utils/validation'
 
 interface CreateTransactionFormProps {
@@ -16,7 +16,13 @@ interface CreateTransactionFormProps {
 }
 
 export const NewOperation: FC<CreateTransactionFormProps> = ({ onFinish }) => {
-  const [createOperation] = useMutation(CREATE_OPERATION)
+  const [createOperation] = useMutation(CREATE_OPERATION, {
+    refetchQueries: [
+      {
+        query: QUERY_ALL_OPERATIONS,
+      },
+    ],
+  })
   const { data, loading } = useQuery(QUERY_ALL_OPERATION_CATEGORIES)
 
   const formik = useFormik({

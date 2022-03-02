@@ -20,6 +20,7 @@ const GET_ALL_OPERATIONS = gql`
       currency
       date
       commentary
+      category
     }
     sumAllOperations
   }
